@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 R Basics | The R Handbook for ESM Students</title>
+  <meta name="description" content="This is an handbook to help UTK Evaluation, Statistics, and Measruement students master R." />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 R Basics | The R Handbook for ESM Students" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is an handbook to help UTK Evaluation, Statistics, and Measruement students master R." />
+  <meta name="github-repo" content="acircleda/RESMHandbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 R Basics | The R Handbook for ESM Students" />
+  
+  <meta name="twitter:description" content="This is an handbook to help UTK Evaluation, Statistics, and Measruement students master R." />
+  
+
+<meta name="author" content="Anthony Schmidt" />
+
+
+<meta name="date" content="2020-04-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="data-preparation-and-cleaning-in-r-datacleaning.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2</b> R Basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-basics.html"><a href="r-basics.html#installing-r"><i class="fa fa-check"></i><b>2.1</b> Installing R</a></li>
+<li class="chapter" data-level="2.2" data-path="r-basics.html"><a href="r-basics.html#installing-rstudio"><i class="fa fa-check"></i><b>2.2</b> Installing RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#rstudio-features"><i class="fa fa-check"></i><b>2.3</b> RStudio Features</a></li>
+<li class="chapter" data-level="2.4" data-path="r-basics.html"><a href="r-basics.html#setting-up-rstudio"><i class="fa fa-check"></i><b>2.4</b> Setting up RStudio</a></li>
+<li class="chapter" data-level="2.5" data-path="r-basics.html"><a href="r-basics.html#r-files"><i class="fa fa-check"></i><b>2.5</b> R Files</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="r-basics.html"><a href="r-basics.html#r---r-scripts"><i class="fa fa-check"></i><b>2.5.1</b> .R - R Scripts</a></li>
+<li class="chapter" data-level="2.5.2" data-path="r-basics.html"><a href="r-basics.html#rproj---r-projects"><i class="fa fa-check"></i><b>2.5.2</b> .rproj - R Projects</a></li>
+<li class="chapter" data-level="2.5.3" data-path="r-basics.html"><a href="r-basics.html#rdata---r-data-files"><i class="fa fa-check"></i><b>2.5.3</b> .RData - R Data Files</a></li>
+<li class="chapter" data-level="2.5.4" data-path="r-basics.html"><a href="r-basics.html#rmd---r-markdown"><i class="fa fa-check"></i><b>2.5.4</b> .RMD - R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="r-basics.html"><a href="r-basics.html#installing-packages"><i class="fa fa-check"></i><b>2.6</b> Installing Packages</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="r-basics.html"><a href="r-basics.html#cran"><i class="fa fa-check"></i><b>2.6.1</b> CRAN</a></li>
+<li class="chapter" data-level="2.6.2" data-path="r-basics.html"><a href="r-basics.html#github"><i class="fa fa-check"></i><b>2.6.2</b> Github</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="r-basics.html"><a href="r-basics.html#loading-packages"><i class="fa fa-check"></i><b>2.7</b> Loading Packages</a></li>
+<li class="chapter" data-level="2.8" data-path="r-basics.html"><a href="r-basics.html#importing-data"><i class="fa fa-check"></i><b>2.8</b> Importing Data</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="r-basics.html"><a href="r-basics.html#reading-in-a-csv"><i class="fa fa-check"></i><b>2.8.1</b> Reading in a CSV</a></li>
+<li class="chapter" data-level="2.8.2" data-path="r-basics.html"><a href="r-basics.html#reading-in-an-excel-file"><i class="fa fa-check"></i><b>2.8.2</b> Reading in an Excel file</a></li>
+<li class="chapter" data-level="2.8.3" data-path="r-basics.html"><a href="r-basics.html#reading-in-an-spss-data-file"><i class="fa fa-check"></i><b>2.8.3</b> Reading in an SPSS data file</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="r-basics.html"><a href="r-basics.html#rstudio-tips-to-help-write-efficient-code"><i class="fa fa-check"></i><b>2.9</b> RStudio Tips to Help Write Efficient Code</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="r-basics.html"><a href="r-basics.html#commenting"><i class="fa fa-check"></i><b>2.9.1</b> Commenting</a></li>
+<li class="chapter" data-level="2.9.2" data-path="r-basics.html"><a href="r-basics.html#sectioning-scripts"><i class="fa fa-check"></i><b>2.9.2</b> Sectioning Scripts</a></li>
+<li class="chapter" data-level="2.9.3" data-path="r-basics.html"><a href="r-basics.html#data-object-names"><i class="fa fa-check"></i><b>2.9.3</b> Data Object Names</a></li>
+<li class="chapter" data-level="2.9.4" data-path="r-basics.html"><a href="r-basics.html#shortcuts"><i class="fa fa-check"></i><b>2.9.4</b> Shortcuts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html"><i class="fa fa-check"></i><b>3</b> Data Preparation and Cleaning in R {datacleaning}</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#viewing-your-data"><i class="fa fa-check"></i><b>3.1</b> Viewing Your Data</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-rstudio-environment"><i class="fa fa-check"></i><b>3.1.1</b> Using the RStudio Environment</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-names-function"><i class="fa fa-check"></i><b>3.1.2</b> Using the names() function</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-head-function"><i class="fa fa-check"></i><b>3.1.3</b> Using the head() function</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-skimr-package"><i class="fa fa-check"></i><b>3.1.4</b> Using the skimr package</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#frequencies"><i class="fa fa-check"></i><b>3.2</b> Frequencies</a></li>
+<li class="chapter" data-level="3.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#spotting-coding-mistakes"><i class="fa fa-check"></i><b>3.3</b> Spotting Coding Mistakes</a></li>
+<li class="chapter" data-level="3.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#modifying-data"><i class="fa fa-check"></i><b>3.4</b> Modifying Data</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#recoding"><i class="fa fa-check"></i><b>3.4.1</b> Recoding</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reverse-coding"><i class="fa fa-check"></i><b>3.4.2</b> Reverse coding</a></li>
+<li class="chapter" data-level="3.4.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#creating-new-variables-with-mutate"><i class="fa fa-check"></i><b>3.4.3</b> Creating new variables with mutate()</a></li>
+<li class="chapter" data-level="3.4.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#combining-variables"><i class="fa fa-check"></i><b>3.4.4</b> Combining variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#descirptives"><i class="fa fa-check"></i><b>3.5</b> Descirptives</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#mean"><i class="fa fa-check"></i><b>3.5.1</b> Mean</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#median"><i class="fa fa-check"></i><b>3.5.2</b> Median</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-summarize-function"><i class="fa fa-check"></i><b>3.5.3</b> Using the summarize() function</a></li>
+<li class="chapter" data-level="3.5.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#section"><i class="fa fa-check"></i><b>3.5.4</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#installing-packages-1"><i class="fa fa-check"></i><b>3.6</b> Installing Packages</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#cran-1"><i class="fa fa-check"></i><b>3.6.1</b> CRAN</a></li>
+<li class="chapter" data-level="3.6.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#github-1"><i class="fa fa-check"></i><b>3.6.2</b> Github</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#r-files-1"><i class="fa fa-check"></i><b>3.7</b> R Files</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#r---r-scripts-1"><i class="fa fa-check"></i><b>3.7.1</b> .R - R Scripts</a></li>
+<li class="chapter" data-level="3.7.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rproj---r-projects-1"><i class="fa fa-check"></i><b>3.7.2</b> .rproj - R Projects</a></li>
+<li class="chapter" data-level="3.7.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rdata---r-data-files-1"><i class="fa fa-check"></i><b>3.7.3</b> .RData - R Data Files</a></li>
+<li class="chapter" data-level="3.7.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rmd---r-markdown-1"><i class="fa fa-check"></i><b>3.7.4</b> .RMD - R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#loading-packages-importing-data"><i class="fa fa-check"></i><b>3.8</b> Loading Packages &amp; Importing Data</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reading-in-a-csv-1"><i class="fa fa-check"></i><b>3.8.1</b> Reading in a CSV</a></li>
+<li class="chapter" data-level="3.8.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reading-in-an-excel-file-1"><i class="fa fa-check"></i><b>3.8.2</b> Reading in an Excel file</a></li>
+<li class="chapter" data-level="3.8.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reading-in-an-spss-data-file-1"><i class="fa fa-check"></i><b>3.8.3</b> Reading in an SPSS data file</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rstudio-tips-to-help-write-efficient-code-1"><i class="fa fa-check"></i><b>3.9</b> RStudio Tips to Help Write Efficient Code</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The R Handbook for ESM Students</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-basics" class="section level1">
+<h1><span class="header-section-number">2</span> R Basics</h1>
+<p>This chapter will introduce you to installing R, becoming familiar with the RStudio environment, installing packages, and loading data.</p>
+<div id="installing-r" class="section level2">
+<h2><span class="header-section-number">2.1</span> Installing R</h2>
+<p>Your adventure with R begins with downloading and installing the required software, which is free! This will first require you to install <strong>R</strong>, which is the underlying language and software we will be working with. R is available for Windows and Max OS.</p>
+<p><strong>You can download R here: <a href="https://cran.rstudio.com/">https://cran.rstudio.com/</a>.</strong></p>
+<ul>
+<li><p>For Windows users, you will want to download R Base. <a href="https://cran.rstudio.com/bin/windows/base/">Here is a direct link with further instructions</a>.</p></li>
+<li><p>For Mac users, you will <a href="https://cran.rstudio.com/bin/macosx/">follow the directions here</a>.</p></li>
+</ul>
+</div>
+<div id="installing-rstudio" class="section level2">
+<h2><span class="header-section-number">2.2</span> Installing RStudio</h2>
+<p>Once R is installed, you will download and install <strong>RStudio</strong>. This is the environment in which you will work with R. RStudio is also available for Windows and Mac users.</p>
+<p><strong>You can download RStudio here: <a href="https://rstudio.com/products/rstudio/download/#download">https://rstudio.com/products/rstudio/download/#download</a>.</strong></p>
+</div>
+<div id="rstudio-features" class="section level2">
+<h2><span class="header-section-number">2.3</span> RStudio Features</h2>
+<div class="figure">
+<img src="images/01-rstudioenvironment.jpg" alt="RStudio Default Environment" />
+<p class="caption"><em>RStudio Default Environment</em></p>
+</div>
+<p>The RStudio environment is organized into four panes:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Source</strong> - The source is where you will write and execute your code. This is your script or syntax.</p></li>
+<li><strong>Console</strong> - The console displays output, warnings, and more.
+<ul>
+<li>The console is where you will see the output of your code. For example, if you run a script to calculate a mean in the source, the mean will appear in the console.</li>
+<li>The console will also show any error messages or warnings. These will appear in red.</li>
+<li>Any packages that you will install should be written here, not in your code. This is because you will only install a package once. If it is in your script and you run all of your script, it will try to install the packages multiple times.</li>
+</ul></li>
+<li><p><strong>Environment</strong> - The environment is mainly used to show the data frames and other files you have loaded. It will tell you the datafile name, how many rows (<em>obs.</em>) and how many columns (<em>variables</em>).</p></li>
+<li><strong>Files, Plots, Packages, Help, and Viewer</strong>
+<ul>
+<li>The Files tab will show local files in your R Project.</li>
+<li>The Plots tab will show any visualizations you have created.</li>
+<li>The Packages tab will allow you to see, load, and unload any packages you have installed.
+++ We will usually load packages using the <code>library()</code> function.</li>
+<li>The Help tab will show explanations and examples of functions.
+++ We can ask for help in the console by using <code>?</code>. For example, <code>?mean</code> will give additional information about the <code>mean()</code> function.</li>
+<li>Viewer is used for any webpages that get rendered through your code.</li>
+</ul></li>
+</ol>
+</div>
+<div id="setting-up-rstudio" class="section level2">
+<h2><span class="header-section-number">2.4</span> Setting up RStudio</h2>
+<p>Once RStudio is installed, I recommend setting it up so that the environment is more comfortable to work in.</p>
+<p>One way to do this is to reconfigure the panes so that they are easier to navigate.</p>
+<p>At the top of RStudio, click on <strong>Tools &gt; Global Options</strong> and select <strong>Pane Layout</strong>. Change your options to the ones in the image below. This will allow you to read your output right next to your script. You can also easily minimize your environment, as you will not need to look there very often.</p>
+<div class="figure">
+<img src="images/01-panelayout.jpg" alt="Pane Layout" />
+<p class="caption"><em>Pane Layout</em></p>
+</div>
+<p>Next, you can switch the colors of R to something more comfortable for your eyes. A darker background reduces the amount of light hitting your eyes and can lessen eye strain.</p>
+<p>At the top of RStudio, click on <strong>Tools &gt; Global Options</strong>. Select <strong>Apperance</strong> on the left-hand side. Under <strong>RStudio Theme</strong>, you can change the colors. I have my own RStudio Theme as <em>Modern</em>. It is a dark-blue background with white text.</p>
+<div class="figure">
+<img src="images/01-rstudiocolors.jpg" alt="Changing R Studio Colors" />
+<p class="caption"><em>Changing R Studio Colors</em></p>
+</div>
+<p>Changing your theme to <em>Modern</em> and switching your panes as I recommended will make your RStudio look like this:</p>
+<div class="figure">
+<img src="images/01-myrstudio.jpg" alt="A More Comfortable RStudio" />
+<p class="caption"><em>A More Comfortable RStudio</em></p>
+</div>
+<hr />
+</div>
+<div id="r-files" class="section level2">
+<h2><span class="header-section-number">2.5</span> R Files</h2>
+<p>Before working with R, there are several different R filetypes that you should learn about.</p>
+<div id="r---r-scripts" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> .R - R Scripts</h3>
+<p>Files that end in .R are your basic R scripts. You can create a single R script for your project, or create one for each phase, i.e., a data cleaning script, a script for RQ1, a script for RQ2, etc.</p>
+</div>
+<div id="rproj---r-projects" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> .rproj - R Projects</h3>
+<p>R Projects are very important to utilize. Without create an R Project, you will need to include a file path to your working directory and run this code every time you start your file.</p>
+<p>To set a working directory, you would write the following in your <strong>source</strong> pane, inside the R script. You would then highlight the code or place your cursor somewhere inside the code and click <strong>Run</strong> at the top right of the <strong>Source</strong> pane, or Click <em>Ctrl+Enter</em> (or on a Mac, <strong>Cmd+Eneter</strong>).</p>
+<p><code>setwd("C:/path/to/your/directory")</code></p>
+<p><em>Quotes, correct capitalization, and forward slashes are important here.</em></p>
+<p>If you move your files to a new directory, you will have to rewrite this command or nothing in your script will run.</p>
+<p>R Projects avoid this. Any file that is in the same folder as the .Rproj R Project file is automatically linked to the R Script. That means you can create a folder with your project, move that folder anywhere or give it to anyone, and when they double-click the .Rproj folder, it will work!</p>
+<p>Any subdirectories will still need to use a short path name, i.e., <code>read_csv("subfolder/file.csv")</code>, but this is much simpler than utilizing the long path name.</p>
+<p>To create an R Project, simply go to <strong>File &gt; New Project…</strong>. You will see the following screen:</p>
+<div class="figure">
+<img src="images/01-newproject1.JPG" alt="New Project Menu" />
+<p class="caption"><em>New Project Menu</em></p>
+</div>
+<ul>
+<li>If you want to create a new directory, select <strong>New Directory</strong>. On the next screen, choose <strong>New Project</strong>, locate where you want to put your project, and click <strong>Create Project</strong></li>
+<li>If you have a directory already and you just want to make it into a project, click <strong>Existing Directory</strong></li>
+<li>The <strong>Version Control</strong> option is useful if you will be placing your project on Github (see section on <a href="r-basics.html#github">Github</a>).</li>
+</ul>
+<p>There is a small issue with R Projects if you save them in Dropbox on your local machine. As Dropbox is constantly trying to sync your files to the cloud, it causes some interference with RStudio. You will see this message flash every 10 mins or so. It is nothing serious, just annoying. Click OK (or press the spacebar) and continue working. This <a href="https://community.rstudio.com/t/mostly-resolved-dropbox-box-sync-google-drive-etc/6098">forum post may provide a solution to the problem</a>.</p>
+<div class="figure">
+<img src="images/01-rstudiowarning.JPG" alt="Annoying Message" />
+<p class="caption"><em>Annoying Message</em></p>
+</div>
+</div>
+<div id="rdata---r-data-files" class="section level3">
+<h3><span class="header-section-number">2.5.3</span> .RData - R Data Files</h3>
+<p>As you begin working in R, you will inevitably have a number of dataframes saved to your <strong>Environment</strong> pane. These may be datasources you loaded, dataframes you created, or raw data, cleaned data, analyses, models, etc. While you could simply re-run your script, you can also save everything in your Envrionemnt to an R Data file. When you load the R Data file, all of those dataframes will reload. An additional bonus is that these files are smaller due to compression!</p>
+<p>This is particularly useful if you are creating the dataframes in once script and will use them in another script.</p>
+<p>To save your Envrionment to an R Data file, you have a few options. You can run these in your script or in the console. That’s up to you.</p>
+<div id="save-.rds" class="section level4">
+<h4><span class="header-section-number">2.5.3.1</span> Save .RDS</h4>
+<p>This allows you to save a <strong>single</strong> object in the environment:</p>
+<pre><code># Save an object to a file
+saveRDS(object, file = &quot;my_data.rds&quot;)
+
+# Restore the object
+readRDS(file = &quot;my_data.rds&quot;)</code></pre>
+</div>
+<div id="save-.rdata" class="section level4">
+<h4><span class="header-section-number">2.5.3.2</span> Save .RData</h4>
+<p>This allows you to save specific objects:</p>
+<pre><code># Saving on object in RData format
+save(data1, file = &quot;data.RData&quot;)
+
+# Save multiple objects
+save(data1, data2, file = &quot;data.RData&quot;)
+
+# To load the data again
+load(&quot;data.RData&quot;)</code></pre>
+</div>
+<div id="save-your-entire-workspace" class="section level4">
+<h4><span class="header-section-number">2.5.3.3</span> Save your entire workspace</h4>
+<p>You can save your entire environment:</p>
+<pre><code># Save all objects
+save.image(file = &quot;my_work_space.RData&quot;)
+
+# Load your environment
+load(&quot;my_work_space.RData&quot;)</code></pre>
+</div>
+</div>
+<div id="rmd---r-markdown" class="section level3">
+<h3><span class="header-section-number">2.5.4</span> .RMD - R Markdown</h3>
+<p>R Markdown combines R and document or webpage authoring in a single file. R Markdown is useful if you want to write code and a report, render that report to a Word file, a PDF, or publish it online at <a href="http://www.rpubs.com">RPubs</a>. However, it is beyond the scope of this handbook. Please see the <a href="https://bookdown.org/yihui/rmarkdown/">free, online R Markdown book, <em>R Markdown: The Definitive Guide</em></a>.</p>
+<hr />
+</div>
+</div>
+<div id="installing-packages" class="section level2">
+<h2><span class="header-section-number">2.6</span> Installing Packages</h2>
+<p>Many packages come pre-loaded. Packages perform different jobs in R. Packages allow you to use specific functions in R.</p>
+<p>For example, the <code>psych</code> package contains functions to perform various statistical analyses. It contains functions such as <code>cohen.d()</code> to calculate Cohen’s <em>d</em>, <code>cor.plot()</code> to create a correlation plot, or <code>describe()</code> to describe data.</p>
+<div id="cran" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> CRAN</h3>
+<p>CRAN is the official R package repository. To install a CRAN package, you simply use the <code>install.packages()</code> function. The package name is entered in “quotes” inside the parentheses. Package names are case sensitive. The example below shows how to install the <code>tidyverse</code> package, a package you will use often. This should be entered into the <strong>console</strong> not the <strong>source/script</strong> pane.</p>
+<p>Enter the following into the <strong>console</strong> and hit <strong>enter</strong>:</p>
+<p><code>install.packages("tidyverse)</code></p>
+</div>
+<div id="github" class="section level3">
+<h3><span class="header-section-number">2.6.2</span> Github</h3>
+<p>One reason R is a popular statistical programming language is because it is open source. That means anyone can make and distribute a package of useful functions. Many packages can be found on Github, an online platform for software development. If you wish to install a package from Github, first, you’ll need to install the <code>devtools</code> package:</p>
+<p>Enter the following into the <strong>console</strong> and hit <strong>enter</strong>:</p>
+<p><code>install.packages("devtools")</code></p>
+<p>After installation, you can begin installing packages from Github:</p>
+<p>Enter the following into the <strong>console</strong> and hit <strong>enter</strong>"
+<code>devtools::install_github("waffle")</code></p>
+<p><strong>A note on ::</strong></p>
+<blockquote>
+<p>You may notice this command started with <code>devtools::</code>. What does <code>::</code> mean? We can use the double colons when we want to use a function from a package but don’t want to load the package. For example, we could have loaded the <code>devtools</code> package and then used the <code>install_github()</code> function, but that would be two steps and require more memory for the loading of <code>devtools</code>. Instead, we have just one step and less memory usage!</p>
+</blockquote>
+</div>
+</div>
+<div id="loading-packages" class="section level2">
+<h2><span class="header-section-number">2.7</span> Loading Packages</h2>
+<p>To load packages, we use the <code>library()</code> function It’s good practice to write all the packages you load at the <strong>top</strong> of the R script. If you are writing a script and realize you need to load a new package, add it in at the top. This way, when you go to run your script again, all packages are loaded first before anything else gets processed.</p>
+<p>A typical R script might look like this at the <strong>top</strong>:</p>
+<pre><code>library(tidyverse)
+library(psych)
+library(ggplot2)</code></pre>
+<p>To run such a command, you would select the entire block of text and hit run (Ctrl/Cmd+Enter).</p>
+</div>
+<div id="importing-data" class="section level2">
+<h2><span class="header-section-number">2.8</span> Importing Data</h2>
+<p>In this section, we will learn how to import data in different formats.</p>
+<p>To practice these and other skills in this handbook, you first need to create an R Project. Follow the steps above to create an <strong>“R ESM Handbook Practice”</strong> project.</p>
+<p><strong>A note on organization</strong></p>
+<blockquote>
+<p>I highly recommend placing raw data files inside a “data” folder in your R Project. This will keep your directories organized and easy to navigate.</p>
+</blockquote>
+<div id="reading-in-a-csv" class="section level3">
+<h3><span class="header-section-number">2.8.1</span> Reading in a CSV</h3>
+<p>CSV files are quite common. While they look like standard Excel files, they are simply text files with columns separated by commas (and sometimes tabs).</p>
+<div id="load-a-local-csv-file" class="section level4">
+<h4><span class="header-section-number">2.8.1.1</span> Load a Local CSV File</h4>
+<p>To load a csv file, we will use the <code>read_csv()</code> command.</p>
+<p>Download the following CSV file and save it within your <em>data</em> forlder in your <strong>“R ESM Handbook Practice”</strong> R Project.</p>
+<p><strong><a href="/data-files/01/2019%20English%20R%20Community%20Survey%20Responses.csv">Download the “2019 English R Community Survey Responses.csv” file.</a></strong></p>
+<p>Use the following command in your script and run it:</p>
+<p><code>read_csv("data/2019 English R Community Survey Responses.csv")</code></p>
+<p>If you noticed, you got a lot of text output in your console. That’s not very useful, is it?</p>
+<p>We need to save this information to a data object in the environment. To do that we will use the <code>&lt;-</code> arrow operator.</p>
+<p>Try this again:</p>
+<p><code>rsurvey_csv &lt;- read_csv("data/2019 English R Community Survey Responses.csv")</code></p>
+<p>Now you will see the data was saved to the environment. It should say: rsurvey_csv and have 1838 obs. (rows or individual cases) and 52 variables (columns).</p>
+<p><strong>A note about &lt;-</strong></p>
+<blockquote>
+<p>In R, <code>&lt;-</code> is the most common assignment operator. You can also use the equal sign <code>=</code>, but that has several other uses whereas <code>&lt;-</code> only has one - to assign data to an object.</p>
+</blockquote>
+</div>
+<div id="load-a-csv-file-from-the-internet" class="section level4">
+<h4><span class="header-section-number">2.8.1.2</span> Load a CSV File from the Internet</h4>
+<p>You can load data directly from the internet using the same function as before. Just use a web address instead of the file path.</p>
+<pre><code>rsurvey_csv_from_net &lt;- read.csv(&quot;https://github.com/rstudio/learning-r-survey/blob/master/2019/data/2019%20English%20R%20Community%20Survey%20Responses%20.csv?raw=true)</code></pre>
+<p>For more information, use the <code>?read.csv</code> help command.</p>
+</div>
+</div>
+<div id="reading-in-an-excel-file" class="section level3">
+<h3><span class="header-section-number">2.8.2</span> Reading in an Excel file</h3>
+<p>Download the following Excel file and save it within your <em>data</em> forlder in your <strong>“R ESM Handbook Practice”</strong> R Project.</p>
+<p><strong><a href="/data-files/01/2019%20English%20R%20Community%20Survey%20Responses.xlsx">Download the “2019 English R Community Survey Responses.xlsx” file.</a></strong></p>
+<p>To read in an Excel file, we need to first download and install the <code>readxl</code> package.</p>
+<p>In the <strong>console</strong>, use the following command:</p>
+<p><code>install.packages("readxl")</code></p>
+<p>After it downloads and installs, we can use the <code>library()</code> function to <strong>load</strong> the <code>readxl</code> package.</p>
+<p>Write and run:</p>
+<p><code>library(readxl)</code></p>
+<p>Now we can load the Excel file with the <code>read_excel()</code> function:</p>
+<p><code>rsurvey_excel &lt;- read_excel("data/2019 English R Community Survey Responses.xlsx")</code></p>
+<p>If your Excel file has a number of different worksheets, we could also specify which sheet you want to load with:</p>
+<p><code>rsurvey_excel &lt;- read_excel("data/2019 English R Community Survey Responses.xlsx", sheet="Form Responses 1")</code></p>
+<p>Note that the quotation marks are around the file path name and the sheet name.</p>
+<p>For more information, use the <code>?read_excel</code> help command.</p>
+</div>
+<div id="reading-in-an-spss-data-file" class="section level3">
+<h3><span class="header-section-number">2.8.3</span> Reading in an SPSS data file</h3>
+<p>Download the following SPSS file and save it within your <em>data</em> forlder in your <strong>“R ESM Handbook Practice”</strong> R Project.</p>
+<p><strong><a href="/data-files/01/2019%20English%20R%20Community%20Survey%20Responses.sav">Download the “2019 English R Community Survey Responses.sav” file.</a></strong></p>
+<p>SPSS .sav files can be read into R using the <code>foreign</code> package.</p>
+<p>In the <strong>console</strong>, use the following command:</p>
+<p><code>install.packages("foreign")</code></p>
+<p>After it downloads and installs, use the <code>library()</code> function to load the package. Add this line near the top of your script:</p>
+<p><code>library(foreign)</code></p>
+<p>Now we can load the SPSS file with the <code>read.spss()</code> function. However, we need to specify a few parameters in our code.</p>
+<p>Take a look at the <code>?read.spss</code> function. We can specify a lot of parameters:</p>
+<pre><code>read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
+          max.value.labels = Inf, trim.factor.names = FALSE,
+          trim_values = TRUE, reencode = NA, use.missings = to.data.frame, 
+          sub = &quot;.&quot;, add.undeclared.levels = c(&quot;sort&quot;, &quot;append&quot;, &quot;no&quot;),
+          duplicated.value.labels = c(&quot;append&quot;, &quot;condense&quot;),
+          duplicated.value.labels.infix = &quot;_duplicated_&quot;, ...)</code></pre>
+<p>For our purposes, we will simply use SPSS’s value labels and make sure it loads to a dataframe (by default, it loads as a list, which is much harder to work with). We can use the following code:</p>
+<pre><code>rsurvey_spss &lt;- read.spss(&quot;data/2019 English R Community Survey Responses.sav&quot;, 
+use.value.labels = TRUE, 
+to.data.frame = TRUE)</code></pre>
+<p>For more information, use the <code>?foreign</code> or <code>?read.spss</code> help commands.</p>
+</div>
+</div>
+<div id="rstudio-tips-to-help-write-efficient-code" class="section level2">
+<h2><span class="header-section-number">2.9</span> RStudio Tips to Help Write Efficient Code</h2>
+<div id="commenting" class="section level3">
+<h3><span class="header-section-number">2.9.1</span> Commenting</h3>
+<p>To stay organized, it is important to comment your code. To make a comment in your code, you can simply use the hashtag sign <code>#</code>. Here are some examples:</p>
+<pre><code># Load foreign package for SPSS
+library(foreign)</code></pre>
+<pre><code>library(foreign) # Load foreign package for SPSS</code></pre>
+<pre><code>rsurvey_spss &lt;- read.spss(&quot;data/2019 English R Community Survey Responses.sav&quot;, 
+use.value.labels = FALSE, #I don&#39;t need value labels
+to.data.frame = TRUE) #I don&#39;t want to work with a list!</code></pre>
+</div>
+<div id="sectioning-scripts" class="section level3">
+<h3><span class="header-section-number">2.9.2</span> Sectioning Scripts</h3>
+<p>If you add at least four <code>----</code> dashes after a comment, it creates a section in your script. You can then navigate to different sections using the dropdown menu at the bottom of the <strong>source</strong> pane.</p>
+<pre><code># Section 1 ----
+# Section 2 ----
+# Section 3 ----</code></pre>
+<div class="figure">
+<img src="images/01-sections.JPG" alt="Sections Example" />
+<p class="caption"><em>Sections Example</em></p>
+</div>
+</div>
+<div id="data-object-names" class="section level3">
+<h3><span class="header-section-number">2.9.3</span> Data Object Names</h3>
+<p>When you seek help online for R, you will notice a lot of articles use example data object names as <code>d</code>, <code>foo</code>, <code>bar</code>, or <code>mydata</code>. I do not recommend this. Instead, always try to give your data objects descriptive names, as we did above. This way, you can always figure out what your data objects refer to.</p>
+</div>
+<div id="shortcuts" class="section level3">
+<h3><span class="header-section-number">2.9.4</span> Shortcuts</h3>
+<p>RStudio has created a lot of different keyboard shortcuts. I highly recommend <a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts0">visiting this link to explore them</a>.</p>
+<p>To see some of them demonstrated, you can <a href="https://www.youtube.com/watch?v=D89TnL7NxjQ">watch this video</a>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-preparation-and-cleaning-in-r-datacleaning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

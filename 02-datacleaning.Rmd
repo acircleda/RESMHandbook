@@ -1,0 +1,77 @@
+# Data Preparation and Cleaning in R {datacleaning}
+
+This chapter will introduce you to viewing your data, summarizing your data, and cleaning your data following recommendations from the [*Brief Introduction to the 12 Steps of Data Cleaning*](https://www.slideshare.net/jamorrow/brief-introduction-to-the-12-steps-of-evaluagio) (Morrow, 2013)
+
+## Viewing Your Data
+
+
+### Using the RStudio Environment
+
+### Using the names() function
+
+### Using the head() function
+
+### Using the skimr package
+
+## Frequencies
+
+## Spotting Coding Mistakes
+
+## Modifying Data
+
+### Recoding
+
+### Reverse coding
+
+### Creating new variables with mutate()
+
+### Combining variables
+
+#### Numeric variables with mutate()
+
+#### String variables with paste0()
+
+## Descirptives
+
+### Mean
+
+### Median
+
+### Using the summarize() function
+
+### 
+
+
+Commenting and making sections
+
+
+## Installing Packages
+
+### CRAN
+
+### Github
+
+
+## R Files
+
+### .R - R Scripts
+
+### .rproj - R Projects
+
+### .RData - R Data Files
+
+### .RMD - R Markdown
+
+
+## Loading Packages & Importing Data
+
+### Reading in a CSV
+
+### Reading in an Excel file
+
+### Reading in an SPSS data file
+
+## RStudio Tips to Help Write Efficient Code
+
+Commenting and making sections
+Install packages in the console

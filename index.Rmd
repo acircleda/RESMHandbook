@@ -1,0 +1,16 @@
+--- 
+title: "The R Handbook for ESM Students"
+author: "Anthony Schmidt"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: acircleda/RESMHandbook
+description: "This is an handbook to help UTK Evaluation, Statistics, and Measruement students master R."
+---
+
+# Introduction
+Lorem

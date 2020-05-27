@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>The R Handbook for ESM Students</title>
   <meta name="description" content="This is an handbook to help UTK Evaluation, Statistics, and Measruement students master R." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="The R Handbook for ESM Students" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Anthony Schmidt" />
 
 
-<meta name="date" content="2020-04-22" />
+<meta name="date" content="2020-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -77,61 +77,107 @@
 <li class="chapter" data-level="2.5.3" data-path="r-basics.html"><a href="r-basics.html#rdata---r-data-files"><i class="fa fa-check"></i><b>2.5.3</b> .RData - R Data Files</a></li>
 <li class="chapter" data-level="2.5.4" data-path="r-basics.html"><a href="r-basics.html#rmd---r-markdown"><i class="fa fa-check"></i><b>2.5.4</b> .RMD - R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="r-basics.html"><a href="r-basics.html#installing-packages"><i class="fa fa-check"></i><b>2.6</b> Installing Packages</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="r-basics.html"><a href="r-basics.html#cran"><i class="fa fa-check"></i><b>2.6.1</b> CRAN</a></li>
-<li class="chapter" data-level="2.6.2" data-path="r-basics.html"><a href="r-basics.html#github"><i class="fa fa-check"></i><b>2.6.2</b> Github</a></li>
+<li class="chapter" data-level="2.6" data-path="r-basics.html"><a href="r-basics.html#r-data-structures"><i class="fa fa-check"></i><b>2.6</b> R Data Structures</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="r-basics.html"><a href="r-basics.html#vector"><i class="fa fa-check"></i><b>2.6.1</b> Vector</a></li>
+<li class="chapter" data-level="2.6.2" data-path="r-basics.html"><a href="r-basics.html#dataframe"><i class="fa fa-check"></i><b>2.6.2</b> Dataframe</a></li>
+<li class="chapter" data-level="2.6.3" data-path="r-basics.html"><a href="r-basics.html#tibble"><i class="fa fa-check"></i><b>2.6.3</b> Tibble</a></li>
+<li class="chapter" data-level="2.6.4" data-path="r-basics.html"><a href="r-basics.html#list"><i class="fa fa-check"></i><b>2.6.4</b> List</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="r-basics.html"><a href="r-basics.html#loading-packages"><i class="fa fa-check"></i><b>2.7</b> Loading Packages</a></li>
-<li class="chapter" data-level="2.8" data-path="r-basics.html"><a href="r-basics.html#importing-data"><i class="fa fa-check"></i><b>2.8</b> Importing Data</a><ul>
-<li class="chapter" data-level="2.8.1" data-path="r-basics.html"><a href="r-basics.html#reading-in-a-csv"><i class="fa fa-check"></i><b>2.8.1</b> Reading in a CSV</a></li>
-<li class="chapter" data-level="2.8.2" data-path="r-basics.html"><a href="r-basics.html#reading-in-an-excel-file"><i class="fa fa-check"></i><b>2.8.2</b> Reading in an Excel file</a></li>
-<li class="chapter" data-level="2.8.3" data-path="r-basics.html"><a href="r-basics.html#reading-in-an-spss-data-file"><i class="fa fa-check"></i><b>2.8.3</b> Reading in an SPSS data file</a></li>
+<li class="chapter" data-level="2.7" data-path="r-basics.html"><a href="r-basics.html#installing-packages"><i class="fa fa-check"></i><b>2.7</b> Installing Packages</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="r-basics.html"><a href="r-basics.html#cran"><i class="fa fa-check"></i><b>2.7.1</b> CRAN</a></li>
+<li class="chapter" data-level="2.7.2" data-path="r-basics.html"><a href="r-basics.html#github"><i class="fa fa-check"></i><b>2.7.2</b> Github</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="r-basics.html"><a href="r-basics.html#rstudio-tips-to-help-write-efficient-code"><i class="fa fa-check"></i><b>2.9</b> RStudio Tips to Help Write Efficient Code</a><ul>
-<li class="chapter" data-level="2.9.1" data-path="r-basics.html"><a href="r-basics.html#commenting"><i class="fa fa-check"></i><b>2.9.1</b> Commenting</a></li>
-<li class="chapter" data-level="2.9.2" data-path="r-basics.html"><a href="r-basics.html#sectioning-scripts"><i class="fa fa-check"></i><b>2.9.2</b> Sectioning Scripts</a></li>
-<li class="chapter" data-level="2.9.3" data-path="r-basics.html"><a href="r-basics.html#data-object-names"><i class="fa fa-check"></i><b>2.9.3</b> Data Object Names</a></li>
-<li class="chapter" data-level="2.9.4" data-path="r-basics.html"><a href="r-basics.html#shortcuts"><i class="fa fa-check"></i><b>2.9.4</b> Shortcuts</a></li>
+<li class="chapter" data-level="2.8" data-path="r-basics.html"><a href="r-basics.html#loading-packages"><i class="fa fa-check"></i><b>2.8</b> Loading Packages</a></li>
+<li class="chapter" data-level="2.9" data-path="r-basics.html"><a href="r-basics.html#importing-data"><i class="fa fa-check"></i><b>2.9</b> Importing Data</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="r-basics.html"><a href="r-basics.html#importing-a-csv"><i class="fa fa-check"></i><b>2.9.1</b> Importing a CSV</a></li>
+<li class="chapter" data-level="2.9.2" data-path="r-basics.html"><a href="r-basics.html#importing-an-excel-file"><i class="fa fa-check"></i><b>2.9.2</b> Importing an Excel file</a></li>
+<li class="chapter" data-level="2.9.3" data-path="r-basics.html"><a href="r-basics.html#importing-an-spss-data-file"><i class="fa fa-check"></i><b>2.9.3</b> Importing an SPSS data file</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="r-basics.html"><a href="r-basics.html#rstudio-tips-to-help-write-efficient-code"><i class="fa fa-check"></i><b>2.10</b> RStudio Tips to Help Write Efficient Code</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="r-basics.html"><a href="r-basics.html#commenting"><i class="fa fa-check"></i><b>2.10.1</b> Commenting</a></li>
+<li class="chapter" data-level="2.10.2" data-path="r-basics.html"><a href="r-basics.html#sectioning-scripts"><i class="fa fa-check"></i><b>2.10.2</b> Sectioning Scripts</a></li>
+<li class="chapter" data-level="2.10.3" data-path="r-basics.html"><a href="r-basics.html#data-object-names"><i class="fa fa-check"></i><b>2.10.3</b> Data Object Names</a></li>
+<li class="chapter" data-level="2.10.4" data-path="r-basics.html"><a href="r-basics.html#shortcuts"><i class="fa fa-check"></i><b>2.10.4</b> Shortcuts</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html"><i class="fa fa-check"></i><b>3</b> Data Preparation and Cleaning in R {datacleaning}</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#viewing-your-data"><i class="fa fa-check"></i><b>3.1</b> Viewing Your Data</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-rstudio-environment"><i class="fa fa-check"></i><b>3.1.1</b> Using the RStudio Environment</a></li>
-<li class="chapter" data-level="3.1.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-names-function"><i class="fa fa-check"></i><b>3.1.2</b> Using the names() function</a></li>
-<li class="chapter" data-level="3.1.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-head-function"><i class="fa fa-check"></i><b>3.1.3</b> Using the head() function</a></li>
-<li class="chapter" data-level="3.1.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-skimr-package"><i class="fa fa-check"></i><b>3.1.4</b> Using the skimr package</a></li>
+<li class="chapter" data-level="3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html"><i class="fa fa-check"></i><b>3</b> Data Preparation and Cleaning in R</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#introduction-to-the-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Introduction to the Tidyverse</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#extracting-a-variable"><i class="fa fa-check"></i><b>3.1.1</b> Extracting a variable</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#make-new-variables-columns"><i class="fa fa-check"></i><b>3.1.2</b> Make new variables (columns)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#frequencies"><i class="fa fa-check"></i><b>3.2</b> Frequencies</a></li>
-<li class="chapter" data-level="3.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#spotting-coding-mistakes"><i class="fa fa-check"></i><b>3.3</b> Spotting Coding Mistakes</a></li>
-<li class="chapter" data-level="3.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#modifying-data"><i class="fa fa-check"></i><b>3.4</b> Modifying Data</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#recoding"><i class="fa fa-check"></i><b>3.4.1</b> Recoding</a></li>
-<li class="chapter" data-level="3.4.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reverse-coding"><i class="fa fa-check"></i><b>3.4.2</b> Reverse coding</a></li>
-<li class="chapter" data-level="3.4.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#creating-new-variables-with-mutate"><i class="fa fa-check"></i><b>3.4.3</b> Creating new variables with mutate()</a></li>
-<li class="chapter" data-level="3.4.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#combining-variables"><i class="fa fa-check"></i><b>3.4.4</b> Combining variables</a></li>
+<li class="chapter" data-level="3.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#viewing-your-data"><i class="fa fa-check"></i><b>3.2</b> Viewing Your Data</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#the-rstudio-environment"><i class="fa fa-check"></i><b>3.2.1</b> The RStudio Environment</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#structure-of-data---str"><i class="fa fa-check"></i><b>3.2.2</b> Structure of Data - str()</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#variablecolumn-names---names"><i class="fa fa-check"></i><b>3.2.3</b> Variable/Column Names - names()</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#first-n-rows---head"><i class="fa fa-check"></i><b>3.2.4</b> First n Rows - head()</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#descirptives"><i class="fa fa-check"></i><b>3.5</b> Descirptives</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#mean"><i class="fa fa-check"></i><b>3.5.1</b> Mean</a></li>
-<li class="chapter" data-level="3.5.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#median"><i class="fa fa-check"></i><b>3.5.2</b> Median</a></li>
-<li class="chapter" data-level="3.5.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-summarize-function"><i class="fa fa-check"></i><b>3.5.3</b> Using the summarize() function</a></li>
-<li class="chapter" data-level="3.5.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#section"><i class="fa fa-check"></i><b>3.5.4</b> </a></li>
+<li class="chapter" data-level="3.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#renaming-variables"><i class="fa fa-check"></i><b>3.3</b> Renaming Variables</a></li>
+<li class="chapter" data-level="3.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#renaming-multiple-variables"><i class="fa fa-check"></i><b>3.4</b> Renaming Multiple Variables</a></li>
+<li class="chapter" data-level="3.5" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#cleaning-names-with-janitor"><i class="fa fa-check"></i><b>3.5</b> Cleaning Names with janitor</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#summary-stats---describe"><i class="fa fa-check"></i><b>3.5.1</b> Summary Stats - describe()</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#summary-stats---describeby"><i class="fa fa-check"></i><b>3.5.2</b> Summary Stats - describeBy()</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#summary-stats---summary"><i class="fa fa-check"></i><b>3.5.3</b> Summary Stats - summary()</a></li>
+<li class="chapter" data-level="3.5.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#summary-stats---skim"><i class="fa fa-check"></i><b>3.5.4</b> Summary Stats - skim()</a></li>
+<li class="chapter" data-level="3.5.5" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#crosstabs---table"><i class="fa fa-check"></i><b>3.5.5</b> Crosstabs - table()</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#installing-packages-1"><i class="fa fa-check"></i><b>3.6</b> Installing Packages</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#cran-1"><i class="fa fa-check"></i><b>3.6.1</b> CRAN</a></li>
-<li class="chapter" data-level="3.6.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#github-1"><i class="fa fa-check"></i><b>3.6.2</b> Github</a></li>
+<li class="chapter" data-level="3.6" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#keeping-and-dropping-variables"><i class="fa fa-check"></i><b>3.6</b> Keeping and Dropping Variables</a></li>
+<li class="chapter" data-level="3.7" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#keeping-and-dropping-rows"><i class="fa fa-check"></i><b>3.7</b> Keeping and Dropping Rows</a></li>
+<li class="chapter" data-level="3.8" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#more-frequencies-and-descriptives"><i class="fa fa-check"></i><b>3.8</b> More Frequencies and Descriptives</a></li>
+<li class="chapter" data-level="3.9" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#spotting-coding-mistakes"><i class="fa fa-check"></i><b>3.9</b> Spotting Coding Mistakes</a></li>
+<li class="chapter" data-level="3.10" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#modifying-data---mutate"><i class="fa fa-check"></i><b>3.10</b> Modifying Data - mutate()</a></li>
+<li class="chapter" data-level="3.11" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#reordering-categories---factor"><i class="fa fa-check"></i><b>3.11</b> Reordering Categories - factor()</a></li>
+<li class="chapter" data-level="3.12" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#clearing-whitespace-in-text---str_trim"><i class="fa fa-check"></i><b>3.12</b> Clearing Whitespace in Text - str_trim()</a></li>
+<li class="chapter" data-level="3.13" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#combining-categories---case_when"><i class="fa fa-check"></i><b>3.13</b> Combining Categories - case_when()</a></li>
+<li class="chapter" data-level="3.14" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#splitting-variables-with-split"><i class="fa fa-check"></i><b>3.14</b> Splitting variables with split()</a></li>
+<li class="chapter" data-level="3.15" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#descriptives"><i class="fa fa-check"></i><b>3.15</b> Descriptives</a><ul>
+<li class="chapter" data-level="3.15.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#mean---mean"><i class="fa fa-check"></i><b>3.15.1</b> Mean - mean()</a></li>
+<li class="chapter" data-level="3.15.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#median---median"><i class="fa fa-check"></i><b>3.15.2</b> Median - median()</a></li>
+<li class="chapter" data-level="3.15.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#using-the-summarize-function---summarize"><i class="fa fa-check"></i><b>3.15.3</b> Using the summarize() function - summarize()</a></li>
+<li class="chapter" data-level="3.15.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#analyzing-data-by-groups---group_by"><i class="fa fa-check"></i><b>3.15.4</b> Analyzing Data by Groups - group_by()</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#r-files-1"><i class="fa fa-check"></i><b>3.7</b> R Files</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#r---r-scripts-1"><i class="fa fa-check"></i><b>3.7.1</b> .R - R Scripts</a></li>
-<li class="chapter" data-level="3.7.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rproj---r-projects-1"><i class="fa fa-check"></i><b>3.7.2</b> .rproj - R Projects</a></li>
-<li class="chapter" data-level="3.7.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rdata---r-data-files-1"><i class="fa fa-check"></i><b>3.7.3</b> .RData - R Data Files</a></li>
-<li class="chapter" data-level="3.7.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rmd---r-markdown-1"><i class="fa fa-check"></i><b>3.7.4</b> .RMD - R Markdown</a></li>
+<li class="chapter" data-level="3.16" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#spotting-outliers"><i class="fa fa-check"></i><b>3.16</b> Spotting Outliers</a><ul>
+<li class="chapter" data-level="3.16.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#detecting-numerical-outliers"><i class="fa fa-check"></i><b>3.16.1</b> Detecting Numerical Outliers</a></li>
+<li class="chapter" data-level="3.16.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#detecting-outliers-with-z-scores"><i class="fa fa-check"></i><b>3.16.2</b> Detecting outliers with Z-scores</a></li>
+<li class="chapter" data-level="3.16.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#dealing-with-outliers"><i class="fa fa-check"></i><b>3.16.3</b> Dealing with Outliers</a></li>
 </ul></li>
-<li class="chapter" data-level="3.8" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#loading-packages-importing-data"><i class="fa fa-check"></i><b>3.8</b> Loading Packages &amp; Importing Data</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reading-in-a-csv-1"><i class="fa fa-check"></i><b>3.8.1</b> Reading in a CSV</a></li>
-<li class="chapter" data-level="3.8.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reading-in-an-excel-file-1"><i class="fa fa-check"></i><b>3.8.2</b> Reading in an Excel file</a></li>
-<li class="chapter" data-level="3.8.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reading-in-an-spss-data-file-1"><i class="fa fa-check"></i><b>3.8.3</b> Reading in an SPSS data file</a></li>
+<li class="chapter" data-level="3.17" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#assessing-normality"><i class="fa fa-check"></i><b>3.17</b> Assessing Normality</a><ul>
+<li class="chapter" data-level="3.17.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#histograms"><i class="fa fa-check"></i><b>3.17.1</b> Histograms</a></li>
+<li class="chapter" data-level="3.17.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#density-curve-plots"><i class="fa fa-check"></i><b>3.17.2</b> Density (Curve) Plots</a></li>
+<li class="chapter" data-level="3.17.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#qq-plots"><i class="fa fa-check"></i><b>3.17.3</b> QQ Plots</a></li>
+<li class="chapter" data-level="3.17.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#skewness-and-kurtosis"><i class="fa fa-check"></i><b>3.17.4</b> Skewness and Kurtosis</a></li>
+<li class="chapter" data-level="3.17.5" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#tests-of-normality"><i class="fa fa-check"></i><b>3.17.5</b> Tests of Normality</a></li>
+<li class="chapter" data-level="3.17.6" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#transforming-variables"><i class="fa fa-check"></i><b>3.17.6</b> Transforming Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="3.9" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rstudio-tips-to-help-write-efficient-code-1"><i class="fa fa-check"></i><b>3.9</b> RStudio Tips to Help Write Efficient Code</a></li>
+<li class="chapter" data-level="3.18" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#working-with-missing-data"><i class="fa fa-check"></i><b>3.18</b> Working with Missing Data</a></li>
+<li class="chapter" data-level="3.19" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#identifying-missing-data"><i class="fa fa-check"></i><b>3.19</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="3.19.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#per-variable"><i class="fa fa-check"></i><b>3.19.1</b> Per Variable</a></li>
+<li class="chapter" data-level="3.19.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#entire-data-frame"><i class="fa fa-check"></i><b>3.19.2</b> Entire Data Frame</a></li>
 </ul></li>
+<li class="chapter" data-level="3.20" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#dropping-missing-data"><i class="fa fa-check"></i><b>3.20</b> Dropping missing data</a></li>
+<li class="chapter" data-level="3.21" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#replacing-missing-data-with-0s"><i class="fa fa-check"></i><b>3.21</b> Replacing missing data with 0s</a></li>
+<li class="chapter" data-level="3.22" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#mean-imputation"><i class="fa fa-check"></i><b>3.22</b> Mean imputation</a></li>
+<li class="chapter" data-level="3.23" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#multiple-imputation"><i class="fa fa-check"></i><b>3.23</b> Multiple imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html"><i class="fa fa-check"></i><b>4</b> More Data Manipulation in R</a><ul>
+<li class="chapter" data-level="4.1" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#wide-and-long-data"><i class="fa fa-check"></i><b>4.1</b> Wide and Long Data</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#long-data"><i class="fa fa-check"></i><b>4.1.1</b> Long Data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#wide-data"><i class="fa fa-check"></i><b>4.1.2</b> Wide Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#pivoting-data-from-wide-to-long---pivot_longer"><i class="fa fa-check"></i><b>4.2</b> Pivoting data from wide to long - pivot_longer()</a></li>
+<li class="chapter" data-level="4.3" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#pivoting-data-from-long-to-wide---pivot_wider"><i class="fa fa-check"></i><b>4.3</b> Pivoting data from long to wide - pivot_wider()</a></li>
+<li class="chapter" data-level="4.4" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#joining-multiple-data-objects"><i class="fa fa-check"></i><b>4.4</b> Joining multiple data objects</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="statistics-in-r.html"><a href="statistics-in-r.html"><i class="fa fa-check"></i><b>5</b> Statistics in R</a><ul>
+<li class="chapter" data-level="5.1" data-path="statistics-in-r.html"><a href="statistics-in-r.html#t-tests"><i class="fa fa-check"></i><b>5.1</b> T-Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="statistics-in-r.html"><a href="statistics-in-r.html#chi-square"><i class="fa fa-check"></i><b>5.2</b> Chi Square</a></li>
+<li class="chapter" data-level="5.3" data-path="statistics-in-r.html"><a href="statistics-in-r.html#regression"><i class="fa fa-check"></i><b>5.3</b> Regression</a></li>
+<li class="chapter" data-level="5.4" data-path="statistics-in-r.html"><a href="statistics-in-r.html#anova"><i class="fa fa-check"></i><b>5.4</b> ANOVA</a></li>
+<li class="chapter" data-level="5.5" data-path="statistics-in-r.html"><a href="statistics-in-r.html#manova"><i class="fa fa-check"></i><b>5.5</b> MANOVA</a></li>
+<li class="chapter" data-level="5.6" data-path="statistics-in-r.html"><a href="statistics-in-r.html#ancova"><i class="fa fa-check"></i><b>5.6</b> ANCOVA</a></li>
+<li class="chapter" data-level="5.7" data-path="statistics-in-r.html"><a href="statistics-in-r.html#logistic-regression"><i class="fa fa-check"></i><b>5.7</b> Logistic Regression</a></li>
+<li class="chapter" data-level="5.8" data-path="statistics-in-r.html"><a href="statistics-in-r.html#factor-analysis"><i class="fa fa-check"></i><b>5.8</b> Factor Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="resouces.html"><a href="resouces.html"><i class="fa fa-check"></i><b>6</b> Resouces</a></li>
 </ul>
 
       </nav>
@@ -152,11 +198,12 @@
 <div id="header">
 <h1 class="title">The R Handbook for ESM Students</h1>
 <p class="author"><em>Anthony Schmidt</em></p>
-<p class="date"><em>2020-04-22</em></p>
+<p class="date"><em>2020-05-27</em></p>
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Lorem</p>
+<p>Welcome to the R Handbook for ESM Students. This handbook will be a hands-on guide to help you learn R. It will take you from install, to set up, from data cleaning to analysis.</p>
+<p>This guide uses real data to help you practice with R. Specifically, it uses survey data from the <a href="https://github.com/rstudio/learning-r-survey">RStudio Learning R Survey</a>.</p>
 
 </div>
             </section>

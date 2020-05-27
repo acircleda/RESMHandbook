@@ -4,7 +4,7 @@ This chapter will introduce you to installing R, becoming familiar with the RStu
 
 ## Installing R
 
-Your adventure with R begins with downloading and installing the required software, which is free! This will first require you to install **R**, which is the underlying language and software we will be working with. R is available for Windows and Max OS.
+Your adventure with R begins with downloading and installing the required software, which is free! This will first require you to install **R**, which is the underlying language and software we will be working with. R is available for Windows, Mac OS, and Linux.
 
 **You can download R here: [https://cran.rstudio.com/](https://cran.rstudio.com/).**
 
@@ -15,7 +15,7 @@ Your adventure with R begins with downloading and installing the required softwa
 
 ## Installing RStudio
 
-Once R is installed, you will download and install **RStudio**. This is the environment in which you will work with R. RStudio is also available for Windows and Mac users.
+Once R is installed, you will download and install **RStudio Desktop**. This is the environment (software program) in which you will work with R. RStudio is also available for Windows, Mac and various versions of Linux..
 
 **You can download RStudio here: [https://rstudio.com/products/rstudio/download/#download](https://rstudio.com/products/rstudio/download/#download).**
 
@@ -30,18 +30,20 @@ The RStudio environment is organized into four panes:
 2. **Console** - The console displays output, warnings, and more.
       + The console is where you will see the output of your code. For example, if you run a script to calculate a mean in the source, the mean will appear in the console.
       + The console will also show any error messages or warnings. These will appear in red.
-      + Any packages that you will install should be written here, not in your code. This is because you will only install a package once. If it is in your script and you run all of your script, it will try to install the packages multiple times.
+      + Any packages that you will install should be written here, not in your script. This is because you will only install a package once. If it is in your script and you run all of your script, it will try to install the packages multiple times.
+        + Note: You can also include the install command in your script (at the top) and use a `#` sign to comment it out so that it doesn't run when the script us run. This is useful if you are sharing a script and the other user may need to install the packages or if you may need to install them in the future.
+        + Whether you write it in the script or the console is a personal choice.
   
 3. **Environment** - The environment is mainly used to show the data frames and other files you have loaded. It will tell you the datafile name, how many rows (*obs.*) and how many columns (*variables*).
 
 1. **Files, Plots, Packages, Help, and Viewer**
       + The Files tab will show local files in your R Project.
       + The Plots tab will show any visualizations you have created.
-      + The Packages tab will allow you to see, load, and unload any packages you have installed.
-            ++ We will usually load packages using the `library()` function.
+      + The Packages tab will allow you to see, load, and unload any packages you have installed. You can also install packages through this tab.
+        + We will usually install packages using the `install.packages()` function and  load packages using the `library()` function.
       + The Help tab will show explanations and examples of functions.
-            ++ We can ask for help in the console by using `?`. For example, `?mean` will give additional information about the `mean()` function.
-      + Viewer is used for any webpages that get rendered through your code.
+        + We can ask for help in the console by using `?`. For example, `?mean` will give additional information about the `mean()` function.
+      + Viewer is used for any webpages that get produced through your code.
 
 
 ## Setting up RStudio
@@ -78,9 +80,9 @@ Files that end in .R are your basic R scripts. You can create a single R script 
 
 ### .rproj - R Projects
 
-R Projects are very important to utilize. Without create an R Project, you will need to include a file path to your working directory and run this code every time you start your file.
+R Projects are very important to utilize. Without creating an R Project, you will need to include a file path to your working directory and run this code every time you start your script.
 
-To set a working directory, you would write the following in your **source** pane, inside the R script. You would then highlight the code or place your cursor somewhere inside the code and click **Run** at the top right of the **Source** pane, or Click *Ctrl+Enter* (or on a Mac, **Cmd+Eneter**).
+To set a working directory, you would write the following in your **source** pane, inside the R script. You would then highlight the code or place your cursor somewhere inside the code and click **Run** at the top right of the **Source** pane, or Click *Ctrl+Enter* (or on a Mac, **Cmd+Enter**).
 
 `setwd("C:/path/to/your/directory")`
 
@@ -88,7 +90,9 @@ To set a working directory, you would write the following in your **source** pan
 
 If you move your files to a new directory, you will have to rewrite this command or nothing in your script will run.
 
-R Projects avoid this. Any file that is in the same folder as the .Rproj R Project file is automatically linked to the R Script. That means you can create a folder with your project, move that folder anywhere or give it to anyone, and when they double-click the .Rproj folder, it will work!
+You can also set a working directory through RStudio by going to **Session > Set Working Directory** and selecting one of the choices. You will have to do this every time you open the R script. 
+
+R Projects avoid all of this. Any file that is in the same folder as the .Rproj file is automatically linked to the R Script. That means you can create a folder with your project, move that folder anywhere or give it to anyone, and when they double-click the .Rproj file, it will work!
 
 Any subdirectories will still need to use a short path name, i.e., `read_csv("subfolder/file.csv")`, but this is much simpler than utilizing the long path name.
 
@@ -106,11 +110,11 @@ There is a small issue with R Projects if you save them in Dropbox on your local
 
 ### .RData - R Data Files
 
-As you begin working in R, you will inevitably have a number of dataframes saved to your **Environment** pane. These may be datasources you loaded, dataframes you created, or raw data, cleaned data, analyses, models, etc. While you could simply re-run your script, you can also save everything in your Envrionemnt to an R Data file. When you load the R Data file, all of those dataframes will reload. An additional bonus is that these files are smaller due to compression!
+As you begin working in R, you will inevitably have a number of dataframes saved to your **Environment** pane. These may be datasources you loaded, dataframes you created, or raw data, cleaned data, analyses, models, etc. While you could simply re-run your script, you can also save everything in your Environment to an R Data file. When you load the R Data file, all of those dataframes will reload. An additional bonus is that these files are smaller due to compression!
 
-This is particularly useful if you are creating the dataframes in once script and will use them in another script.
+This is particularly useful if you are creating the data frames in one script and will use them in another script.
 
-To save your Envrionment to an R Data file, you have a few options. You can run these in your script or in the console. That's up to you.
+To save your Environment to an R Data file, you have a few options. You can run these in your script or in the console. That's up to you.
 
 #### Save .RDS
 
@@ -156,6 +160,60 @@ R Markdown combines R and document or webpage authoring in a single file. R Mark
 
 -----
 
+## R Data Structures
+
+A number of different objects can exist in the RStudio environment. Here are a few definitions.
+
+### Vector
+
+Vectors are basically one single column of a data frame. All elements in this dimension must be the same type (e.g. integers, strings, logical elements like TRUE and FALSE).
+
+The following commands create vectors.
+
+```{r}
+name <- c("Mike", "Will", "Dustin", "Lucas", "Elle") 
+age <- c(20, 25, 30, 35, 40) 
+```
+
+**A note on c**
+
+> The `c` in the commands above mean to "combine" into a vector. It is used in many functions where you need to combine several items toegther.
+
+### Dataframe
+
+A data frame is the easiest type of data to work with. Consider it equivelent to an Excel spreadhseet. It has columns and rows. Each column can be a different type (character, factor, numeric, date).
+
+You can import data and it usually imports as a data frame, or you can make your own by combining vectors:
+
+```{r}
+dataframe_example <- data.frame(name=c("Thor", "Iron Man"),
+                                age=c(1000, 48),
+                                earth=c(FALSE, TRUE))
+dataframe_example
+
+```
+  
+
+### Tibble
+
+Tibbles are very similar to dataframes. They are often referred to when talking about `Tidyverse` packages or functions. Mostly, a tibble, when shown in the *console* will include its data type with it (character, factor, integer, etc.).
+
+```{r}
+tibble_example <- as_tibble(dataframe_example)
+
+tibble_example
+```
+
+[Read more about Tibbles here](https://blog.rstudio.com/2016/03/24/tibble-1-0-0/).
+
+
+### List
+ 
+A list is a collection of objects. For example, a list can hold multiple dataframes, or a vector, a matrix, etc. They are much more difficilt to work with.
+
+[Read more about lists here](https://www.tutorialspoint.com/r/r_lists.htm).
+
+
 ## Installing Packages
 
 Many packages come pre-loaded. Packages perform different jobs in R. Packages allow you to use specific functions in R. They allow R to do new things.
@@ -170,10 +228,14 @@ Enter the following into the **console** and hit **enter**:
 
 `install.packages("tidyverse)`
 
+You can also use R Studio to search for and install packages by clicking on the "Pacakges" tab and clicking "Insall". 
+
 
 ### Github
 
-One reason R is a popular statistical programming language is because it is open source. That means anyone can make and distribute a package of useful functions. Many packages can be found on Github, an online platform for software development. If you wish to install a package from Github, first, you'll need to install the `devtools` package:
+One reason R is a popular statistical programming language is because it is open source. That means anyone can make and distribute a package of useful functions. Many packages can be found on Github, an online platform for software development. Github is a great source for packages, but exercise caution as packages here may still be in development or may be beta versions not full tested and deployed.
+
+If you wish to install a package from Github, first, you'll need to install the `devtools` package:
 
 Enter the following into the **console** and hit **enter**:
 
@@ -192,7 +254,7 @@ Enter the following into the **console** and hit **enter**"
 
 ## Loading Packages
 
-To load packages, we use the `library()` function It's good practice to write all the packages you load at the **top** of the R script. If you are writing a script and realize you need to load a new package, add it in at the top. This way, when you go to run your script again, all packages are loaded first before anything else gets processed.
+To load packages, we use the `library()` function. It's good practice to write all the packages you load at the **top** of the R script. If you are writing a script and realize you need to load a new package, add it in at the top. This way, when you go to run your script again, all packages are loaded first before anything else gets processed.
 
 A typical R script might look like this at the **top**:
 
@@ -202,7 +264,7 @@ library(psych)
 library(ggplot2)
 ```
 
-To run such a command, you would select the entire block of text and hit run (Ctrl/Cmd+Enter).
+To run such a command, you would highlight the entire block of text and hit run (Ctrl/Cmd+Enter).
 
 ## Importing Data
 
@@ -214,15 +276,15 @@ To practice these and other skills in this handbook, you first need to create an
 
 > I highly recommend placing raw data files inside a "data" folder in your R Project. This will keep your directories organized and easy to navigate.
 
-### Reading in a CSV
+### Importing a CSV
 
 CSV files are quite common. While they look like standard Excel files, they are simply text files with columns separated by commas (and sometimes tabs).
 
-#### Load a Local CSV File
+#### Importing a Local CSV File
 
 To load a csv file, we will use the `read_csv()` command.
 
-Download the following CSV file and save it within your *data* forlder in your **"R ESM Handbook Practice"** R Project. 
+Download the following CSV file and save it within your *data* folder in your **"R ESM Handbook Practice"** R Project. 
 
 **[Download the "2019 English R Community Survey Responses.csv" file.](/data-files/01/2019 English R Community Survey Responses.csv)**
 
@@ -245,7 +307,7 @@ Now you will see the data was saved to the environment. It should say: rsurvey_c
 
 > In R, `<-` is the most common assignment operator. You can also use the equal sign `=`, but that has several other uses whereas `<-` only has one - to assign data to an object.
 
-#### Load a CSV File from the Internet
+#### Importing a CSV File from the Internet
 
 You can load data directly from the internet using the same function as before. Just use a web address instead of the file path.
 
@@ -255,7 +317,7 @@ rsurvey_csv_from_net <- read.csv("https://github.com/rstudio/learning-r-survey/b
 
 For more information, use the `?read.csv` help command.
 
-### Reading in an Excel file
+### Importing an Excel file
 
 Download the following Excel file and save it within your *data* forlder in your **"R ESM Handbook Practice"** R Project. 
 
@@ -285,44 +347,29 @@ Note that the quotation marks are around the file path name and the sheet name.
 
 For more information, use the `?read_excel` help command.
 
-### Reading in an SPSS data file
+### Importing an SPSS data file
 
-Download the following SPSS file and save it within your *data* forlder in your **"R ESM Handbook Practice"** R Project. 
+Download the following SPSS file and save it within your *data* folder in your **"R ESM Handbook Practice"** R Project. 
 
 **[Download the "2019 English R Community Survey Responses.sav" file.](/data-files/01/2019 English R Community Survey Responses.sav)**
 
-SPSS .sav files can be read into R using the `foreign` package.
+SPSS .sav files can be read into R using the `haven` package.
 
-In the **console**, use the following command:
+`haven` is part of the `tidyverse` suite of packages. You will learn about the `tidyverse` in a later section.  For now, you can install the `tidyverse` package in the **console**, using the following command:
 
-`install.packages("foreign")`
+`install.packages("tidyverse")`
 
 After it downloads and installs, use the `library()` function to load the package. Add this line near the top of your script:
 
-`library(foreign)`
+`library(haven)`
 
-Now we can load the SPSS file with the `read.spss()` function. However, we need to specify a few parameters in our code.
-
-Take a look at the `?read.spss` function. We can specify a lot of parameters:
+Now we can load the SPSS file with the `read_sav()`:
 
 ```
-read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
-          max.value.labels = Inf, trim.factor.names = FALSE,
-          trim_values = TRUE, reencode = NA, use.missings = to.data.frame, 
-          sub = ".", add.undeclared.levels = c("sort", "append", "no"),
-          duplicated.value.labels = c("append", "condense"),
-          duplicated.value.labels.infix = "_duplicated_", ...)
+rsurvey_spss <- read_.spss_sav("data/2019 English R Community Survey Responses.sav")
 ```
 
-For our purposes, we will simply use SPSS's value labels and make sure it loads to a dataframe (by default, it loads as a list, which is much harder to work with). We can use the following code:
-
-```
-rsurvey_spss <- read.spss("data/2019 English R Community Survey Responses.sav", 
-use.value.labels = TRUE, 
-to.data.frame = TRUE)
-```
-
-For more information, use the `?foreign` or `?read.spss` help commands.
+You can also import SAS and Stata files, too. For more information, use the `?haven` or `?read_.spss_sav` help commands. You can also visit the [haven website](https://haven.tidyverse.org/).
 
 ## RStudio Tips to Help Write Efficient Code
 

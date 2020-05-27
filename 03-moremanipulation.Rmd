@@ -1,0 +1,13 @@
+# More Data Manipulation in R
+
+## Wide and Long Data
+
+### Long Data
+
+### Wide Data
+
+## Pivoting data from wide to long - pivot_longer()
+
+## Pivoting data from long to wide - pivot_wider()
+
+## Joining multiple data objects

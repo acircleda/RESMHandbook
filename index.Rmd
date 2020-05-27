@@ -3,7 +3,8 @@ title: "The R Handbook for ESM Students"
 author: "Anthony Schmidt"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: word_document
+#output: bookdown::gitbook
 documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
@@ -13,4 +14,8 @@ description: "This is an handbook to help UTK Evaluation, Statistics, and Measru
 ---
 
 # Introduction
-Lorem
+
+Welcome to the R Handbook for ESM Students. This handbook will be a hands-on guide to help you learn R. It will take you from install, to set up, from data cleaning to analysis.
+
+This guide uses real data to help you practice with R. Specifically, it uses survey data from the [RStudio Learning R Survey](https://github.com/rstudio/learning-r-survey).
+

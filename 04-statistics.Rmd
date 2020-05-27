@@ -1,0 +1,17 @@
+# Statistics in R
+  
+## T-Tests
+
+## Chi Square
+
+## Regression
+
+## ANOVA
+
+## MANOVA
+
+## ANCOVA
+
+## Logistic Regression
+
+## Factor Analysis

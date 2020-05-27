@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 R Basics | The R Handbook for ESM Students</title>
   <meta name="description" content="This is an handbook to help UTK Evaluation, Statistics, and Measruement students master R." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 R Basics | The R Handbook for ESM Students" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Anthony Schmidt" />
 
 
-<meta name="date" content="2020-04-22" />
+<meta name="date" content="2020-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="data-preparation-and-cleaning-in-r-datacleaning.html"/>
+<link rel="next" href="data-preparation-and-cleaning-in-r.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,6 +52,68 @@
 
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 </head>
 
@@ -77,61 +139,107 @@
 <li class="chapter" data-level="2.5.3" data-path="r-basics.html"><a href="r-basics.html#rdata---r-data-files"><i class="fa fa-check"></i><b>2.5.3</b> .RData - R Data Files</a></li>
 <li class="chapter" data-level="2.5.4" data-path="r-basics.html"><a href="r-basics.html#rmd---r-markdown"><i class="fa fa-check"></i><b>2.5.4</b> .RMD - R Markdown</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="r-basics.html"><a href="r-basics.html#installing-packages"><i class="fa fa-check"></i><b>2.6</b> Installing Packages</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="r-basics.html"><a href="r-basics.html#cran"><i class="fa fa-check"></i><b>2.6.1</b> CRAN</a></li>
-<li class="chapter" data-level="2.6.2" data-path="r-basics.html"><a href="r-basics.html#github"><i class="fa fa-check"></i><b>2.6.2</b> Github</a></li>
+<li class="chapter" data-level="2.6" data-path="r-basics.html"><a href="r-basics.html#r-data-structures"><i class="fa fa-check"></i><b>2.6</b> R Data Structures</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="r-basics.html"><a href="r-basics.html#vector"><i class="fa fa-check"></i><b>2.6.1</b> Vector</a></li>
+<li class="chapter" data-level="2.6.2" data-path="r-basics.html"><a href="r-basics.html#dataframe"><i class="fa fa-check"></i><b>2.6.2</b> Dataframe</a></li>
+<li class="chapter" data-level="2.6.3" data-path="r-basics.html"><a href="r-basics.html#tibble"><i class="fa fa-check"></i><b>2.6.3</b> Tibble</a></li>
+<li class="chapter" data-level="2.6.4" data-path="r-basics.html"><a href="r-basics.html#list"><i class="fa fa-check"></i><b>2.6.4</b> List</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="r-basics.html"><a href="r-basics.html#loading-packages"><i class="fa fa-check"></i><b>2.7</b> Loading Packages</a></li>
-<li class="chapter" data-level="2.8" data-path="r-basics.html"><a href="r-basics.html#importing-data"><i class="fa fa-check"></i><b>2.8</b> Importing Data</a><ul>
-<li class="chapter" data-level="2.8.1" data-path="r-basics.html"><a href="r-basics.html#reading-in-a-csv"><i class="fa fa-check"></i><b>2.8.1</b> Reading in a CSV</a></li>
-<li class="chapter" data-level="2.8.2" data-path="r-basics.html"><a href="r-basics.html#reading-in-an-excel-file"><i class="fa fa-check"></i><b>2.8.2</b> Reading in an Excel file</a></li>
-<li class="chapter" data-level="2.8.3" data-path="r-basics.html"><a href="r-basics.html#reading-in-an-spss-data-file"><i class="fa fa-check"></i><b>2.8.3</b> Reading in an SPSS data file</a></li>
+<li class="chapter" data-level="2.7" data-path="r-basics.html"><a href="r-basics.html#installing-packages"><i class="fa fa-check"></i><b>2.7</b> Installing Packages</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="r-basics.html"><a href="r-basics.html#cran"><i class="fa fa-check"></i><b>2.7.1</b> CRAN</a></li>
+<li class="chapter" data-level="2.7.2" data-path="r-basics.html"><a href="r-basics.html#github"><i class="fa fa-check"></i><b>2.7.2</b> Github</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="r-basics.html"><a href="r-basics.html#rstudio-tips-to-help-write-efficient-code"><i class="fa fa-check"></i><b>2.9</b> RStudio Tips to Help Write Efficient Code</a><ul>
-<li class="chapter" data-level="2.9.1" data-path="r-basics.html"><a href="r-basics.html#commenting"><i class="fa fa-check"></i><b>2.9.1</b> Commenting</a></li>
-<li class="chapter" data-level="2.9.2" data-path="r-basics.html"><a href="r-basics.html#sectioning-scripts"><i class="fa fa-check"></i><b>2.9.2</b> Sectioning Scripts</a></li>
-<li class="chapter" data-level="2.9.3" data-path="r-basics.html"><a href="r-basics.html#data-object-names"><i class="fa fa-check"></i><b>2.9.3</b> Data Object Names</a></li>
-<li class="chapter" data-level="2.9.4" data-path="r-basics.html"><a href="r-basics.html#shortcuts"><i class="fa fa-check"></i><b>2.9.4</b> Shortcuts</a></li>
+<li class="chapter" data-level="2.8" data-path="r-basics.html"><a href="r-basics.html#loading-packages"><i class="fa fa-check"></i><b>2.8</b> Loading Packages</a></li>
+<li class="chapter" data-level="2.9" data-path="r-basics.html"><a href="r-basics.html#importing-data"><i class="fa fa-check"></i><b>2.9</b> Importing Data</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="r-basics.html"><a href="r-basics.html#importing-a-csv"><i class="fa fa-check"></i><b>2.9.1</b> Importing a CSV</a></li>
+<li class="chapter" data-level="2.9.2" data-path="r-basics.html"><a href="r-basics.html#importing-an-excel-file"><i class="fa fa-check"></i><b>2.9.2</b> Importing an Excel file</a></li>
+<li class="chapter" data-level="2.9.3" data-path="r-basics.html"><a href="r-basics.html#importing-an-spss-data-file"><i class="fa fa-check"></i><b>2.9.3</b> Importing an SPSS data file</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="r-basics.html"><a href="r-basics.html#rstudio-tips-to-help-write-efficient-code"><i class="fa fa-check"></i><b>2.10</b> RStudio Tips to Help Write Efficient Code</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="r-basics.html"><a href="r-basics.html#commenting"><i class="fa fa-check"></i><b>2.10.1</b> Commenting</a></li>
+<li class="chapter" data-level="2.10.2" data-path="r-basics.html"><a href="r-basics.html#sectioning-scripts"><i class="fa fa-check"></i><b>2.10.2</b> Sectioning Scripts</a></li>
+<li class="chapter" data-level="2.10.3" data-path="r-basics.html"><a href="r-basics.html#data-object-names"><i class="fa fa-check"></i><b>2.10.3</b> Data Object Names</a></li>
+<li class="chapter" data-level="2.10.4" data-path="r-basics.html"><a href="r-basics.html#shortcuts"><i class="fa fa-check"></i><b>2.10.4</b> Shortcuts</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html"><i class="fa fa-check"></i><b>3</b> Data Preparation and Cleaning in R {datacleaning}</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#viewing-your-data"><i class="fa fa-check"></i><b>3.1</b> Viewing Your Data</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-rstudio-environment"><i class="fa fa-check"></i><b>3.1.1</b> Using the RStudio Environment</a></li>
-<li class="chapter" data-level="3.1.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-names-function"><i class="fa fa-check"></i><b>3.1.2</b> Using the names() function</a></li>
-<li class="chapter" data-level="3.1.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-head-function"><i class="fa fa-check"></i><b>3.1.3</b> Using the head() function</a></li>
-<li class="chapter" data-level="3.1.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-skimr-package"><i class="fa fa-check"></i><b>3.1.4</b> Using the skimr package</a></li>
+<li class="chapter" data-level="3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html"><i class="fa fa-check"></i><b>3</b> Data Preparation and Cleaning in R</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#introduction-to-the-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Introduction to the Tidyverse</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#extracting-a-variable"><i class="fa fa-check"></i><b>3.1.1</b> Extracting a variable</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#make-new-variables-columns"><i class="fa fa-check"></i><b>3.1.2</b> Make new variables (columns)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#frequencies"><i class="fa fa-check"></i><b>3.2</b> Frequencies</a></li>
-<li class="chapter" data-level="3.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#spotting-coding-mistakes"><i class="fa fa-check"></i><b>3.3</b> Spotting Coding Mistakes</a></li>
-<li class="chapter" data-level="3.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#modifying-data"><i class="fa fa-check"></i><b>3.4</b> Modifying Data</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#recoding"><i class="fa fa-check"></i><b>3.4.1</b> Recoding</a></li>
-<li class="chapter" data-level="3.4.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reverse-coding"><i class="fa fa-check"></i><b>3.4.2</b> Reverse coding</a></li>
-<li class="chapter" data-level="3.4.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#creating-new-variables-with-mutate"><i class="fa fa-check"></i><b>3.4.3</b> Creating new variables with mutate()</a></li>
-<li class="chapter" data-level="3.4.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#combining-variables"><i class="fa fa-check"></i><b>3.4.4</b> Combining variables</a></li>
+<li class="chapter" data-level="3.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#viewing-your-data"><i class="fa fa-check"></i><b>3.2</b> Viewing Your Data</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#the-rstudio-environment"><i class="fa fa-check"></i><b>3.2.1</b> The RStudio Environment</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#structure-of-data---str"><i class="fa fa-check"></i><b>3.2.2</b> Structure of Data - str()</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#variablecolumn-names---names"><i class="fa fa-check"></i><b>3.2.3</b> Variable/Column Names - names()</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#first-n-rows---head"><i class="fa fa-check"></i><b>3.2.4</b> First n Rows - head()</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#descirptives"><i class="fa fa-check"></i><b>3.5</b> Descirptives</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#mean"><i class="fa fa-check"></i><b>3.5.1</b> Mean</a></li>
-<li class="chapter" data-level="3.5.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#median"><i class="fa fa-check"></i><b>3.5.2</b> Median</a></li>
-<li class="chapter" data-level="3.5.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#using-the-summarize-function"><i class="fa fa-check"></i><b>3.5.3</b> Using the summarize() function</a></li>
-<li class="chapter" data-level="3.5.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#section"><i class="fa fa-check"></i><b>3.5.4</b> </a></li>
+<li class="chapter" data-level="3.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#renaming-variables"><i class="fa fa-check"></i><b>3.3</b> Renaming Variables</a></li>
+<li class="chapter" data-level="3.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#renaming-multiple-variables"><i class="fa fa-check"></i><b>3.4</b> Renaming Multiple Variables</a></li>
+<li class="chapter" data-level="3.5" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#cleaning-names-with-janitor"><i class="fa fa-check"></i><b>3.5</b> Cleaning Names with janitor</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#summary-stats---describe"><i class="fa fa-check"></i><b>3.5.1</b> Summary Stats - describe()</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#summary-stats---describeby"><i class="fa fa-check"></i><b>3.5.2</b> Summary Stats - describeBy()</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#summary-stats---summary"><i class="fa fa-check"></i><b>3.5.3</b> Summary Stats - summary()</a></li>
+<li class="chapter" data-level="3.5.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#summary-stats---skim"><i class="fa fa-check"></i><b>3.5.4</b> Summary Stats - skim()</a></li>
+<li class="chapter" data-level="3.5.5" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#crosstabs---table"><i class="fa fa-check"></i><b>3.5.5</b> Crosstabs - table()</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#installing-packages-1"><i class="fa fa-check"></i><b>3.6</b> Installing Packages</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#cran-1"><i class="fa fa-check"></i><b>3.6.1</b> CRAN</a></li>
-<li class="chapter" data-level="3.6.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#github-1"><i class="fa fa-check"></i><b>3.6.2</b> Github</a></li>
+<li class="chapter" data-level="3.6" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#keeping-and-dropping-variables"><i class="fa fa-check"></i><b>3.6</b> Keeping and Dropping Variables</a></li>
+<li class="chapter" data-level="3.7" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#keeping-and-dropping-rows"><i class="fa fa-check"></i><b>3.7</b> Keeping and Dropping Rows</a></li>
+<li class="chapter" data-level="3.8" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#more-frequencies-and-descriptives"><i class="fa fa-check"></i><b>3.8</b> More Frequencies and Descriptives</a></li>
+<li class="chapter" data-level="3.9" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#spotting-coding-mistakes"><i class="fa fa-check"></i><b>3.9</b> Spotting Coding Mistakes</a></li>
+<li class="chapter" data-level="3.10" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#modifying-data---mutate"><i class="fa fa-check"></i><b>3.10</b> Modifying Data - mutate()</a></li>
+<li class="chapter" data-level="3.11" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#reordering-categories---factor"><i class="fa fa-check"></i><b>3.11</b> Reordering Categories - factor()</a></li>
+<li class="chapter" data-level="3.12" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#clearing-whitespace-in-text---str_trim"><i class="fa fa-check"></i><b>3.12</b> Clearing Whitespace in Text - str_trim()</a></li>
+<li class="chapter" data-level="3.13" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#combining-categories---case_when"><i class="fa fa-check"></i><b>3.13</b> Combining Categories - case_when()</a></li>
+<li class="chapter" data-level="3.14" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#splitting-variables-with-split"><i class="fa fa-check"></i><b>3.14</b> Splitting variables with split()</a></li>
+<li class="chapter" data-level="3.15" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#descriptives"><i class="fa fa-check"></i><b>3.15</b> Descriptives</a><ul>
+<li class="chapter" data-level="3.15.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#mean---mean"><i class="fa fa-check"></i><b>3.15.1</b> Mean - mean()</a></li>
+<li class="chapter" data-level="3.15.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#median---median"><i class="fa fa-check"></i><b>3.15.2</b> Median - median()</a></li>
+<li class="chapter" data-level="3.15.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#using-the-summarize-function---summarize"><i class="fa fa-check"></i><b>3.15.3</b> Using the summarize() function - summarize()</a></li>
+<li class="chapter" data-level="3.15.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#analyzing-data-by-groups---group_by"><i class="fa fa-check"></i><b>3.15.4</b> Analyzing Data by Groups - group_by()</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#r-files-1"><i class="fa fa-check"></i><b>3.7</b> R Files</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#r---r-scripts-1"><i class="fa fa-check"></i><b>3.7.1</b> .R - R Scripts</a></li>
-<li class="chapter" data-level="3.7.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rproj---r-projects-1"><i class="fa fa-check"></i><b>3.7.2</b> .rproj - R Projects</a></li>
-<li class="chapter" data-level="3.7.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rdata---r-data-files-1"><i class="fa fa-check"></i><b>3.7.3</b> .RData - R Data Files</a></li>
-<li class="chapter" data-level="3.7.4" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rmd---r-markdown-1"><i class="fa fa-check"></i><b>3.7.4</b> .RMD - R Markdown</a></li>
+<li class="chapter" data-level="3.16" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#spotting-outliers"><i class="fa fa-check"></i><b>3.16</b> Spotting Outliers</a><ul>
+<li class="chapter" data-level="3.16.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#detecting-numerical-outliers"><i class="fa fa-check"></i><b>3.16.1</b> Detecting Numerical Outliers</a></li>
+<li class="chapter" data-level="3.16.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#detecting-outliers-with-z-scores"><i class="fa fa-check"></i><b>3.16.2</b> Detecting outliers with Z-scores</a></li>
+<li class="chapter" data-level="3.16.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#dealing-with-outliers"><i class="fa fa-check"></i><b>3.16.3</b> Dealing with Outliers</a></li>
 </ul></li>
-<li class="chapter" data-level="3.8" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#loading-packages-importing-data"><i class="fa fa-check"></i><b>3.8</b> Loading Packages &amp; Importing Data</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reading-in-a-csv-1"><i class="fa fa-check"></i><b>3.8.1</b> Reading in a CSV</a></li>
-<li class="chapter" data-level="3.8.2" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reading-in-an-excel-file-1"><i class="fa fa-check"></i><b>3.8.2</b> Reading in an Excel file</a></li>
-<li class="chapter" data-level="3.8.3" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#reading-in-an-spss-data-file-1"><i class="fa fa-check"></i><b>3.8.3</b> Reading in an SPSS data file</a></li>
+<li class="chapter" data-level="3.17" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#assessing-normality"><i class="fa fa-check"></i><b>3.17</b> Assessing Normality</a><ul>
+<li class="chapter" data-level="3.17.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#histograms"><i class="fa fa-check"></i><b>3.17.1</b> Histograms</a></li>
+<li class="chapter" data-level="3.17.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#density-curve-plots"><i class="fa fa-check"></i><b>3.17.2</b> Density (Curve) Plots</a></li>
+<li class="chapter" data-level="3.17.3" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#qq-plots"><i class="fa fa-check"></i><b>3.17.3</b> QQ Plots</a></li>
+<li class="chapter" data-level="3.17.4" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#skewness-and-kurtosis"><i class="fa fa-check"></i><b>3.17.4</b> Skewness and Kurtosis</a></li>
+<li class="chapter" data-level="3.17.5" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#tests-of-normality"><i class="fa fa-check"></i><b>3.17.5</b> Tests of Normality</a></li>
+<li class="chapter" data-level="3.17.6" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#transforming-variables"><i class="fa fa-check"></i><b>3.17.6</b> Transforming Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="3.9" data-path="data-preparation-and-cleaning-in-r-datacleaning.html"><a href="data-preparation-and-cleaning-in-r-datacleaning.html#rstudio-tips-to-help-write-efficient-code-1"><i class="fa fa-check"></i><b>3.9</b> RStudio Tips to Help Write Efficient Code</a></li>
+<li class="chapter" data-level="3.18" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#working-with-missing-data"><i class="fa fa-check"></i><b>3.18</b> Working with Missing Data</a></li>
+<li class="chapter" data-level="3.19" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#identifying-missing-data"><i class="fa fa-check"></i><b>3.19</b> Identifying missing data</a><ul>
+<li class="chapter" data-level="3.19.1" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#per-variable"><i class="fa fa-check"></i><b>3.19.1</b> Per Variable</a></li>
+<li class="chapter" data-level="3.19.2" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#entire-data-frame"><i class="fa fa-check"></i><b>3.19.2</b> Entire Data Frame</a></li>
 </ul></li>
+<li class="chapter" data-level="3.20" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#dropping-missing-data"><i class="fa fa-check"></i><b>3.20</b> Dropping missing data</a></li>
+<li class="chapter" data-level="3.21" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#replacing-missing-data-with-0s"><i class="fa fa-check"></i><b>3.21</b> Replacing missing data with 0s</a></li>
+<li class="chapter" data-level="3.22" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#mean-imputation"><i class="fa fa-check"></i><b>3.22</b> Mean imputation</a></li>
+<li class="chapter" data-level="3.23" data-path="data-preparation-and-cleaning-in-r.html"><a href="data-preparation-and-cleaning-in-r.html#multiple-imputation"><i class="fa fa-check"></i><b>3.23</b> Multiple imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html"><i class="fa fa-check"></i><b>4</b> More Data Manipulation in R</a><ul>
+<li class="chapter" data-level="4.1" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#wide-and-long-data"><i class="fa fa-check"></i><b>4.1</b> Wide and Long Data</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#long-data"><i class="fa fa-check"></i><b>4.1.1</b> Long Data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#wide-data"><i class="fa fa-check"></i><b>4.1.2</b> Wide Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#pivoting-data-from-wide-to-long---pivot_longer"><i class="fa fa-check"></i><b>4.2</b> Pivoting data from wide to long - pivot_longer()</a></li>
+<li class="chapter" data-level="4.3" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#pivoting-data-from-long-to-wide---pivot_wider"><i class="fa fa-check"></i><b>4.3</b> Pivoting data from long to wide - pivot_wider()</a></li>
+<li class="chapter" data-level="4.4" data-path="more-data-manipulation-in-r.html"><a href="more-data-manipulation-in-r.html#joining-multiple-data-objects"><i class="fa fa-check"></i><b>4.4</b> Joining multiple data objects</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="statistics-in-r.html"><a href="statistics-in-r.html"><i class="fa fa-check"></i><b>5</b> Statistics in R</a><ul>
+<li class="chapter" data-level="5.1" data-path="statistics-in-r.html"><a href="statistics-in-r.html#t-tests"><i class="fa fa-check"></i><b>5.1</b> T-Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="statistics-in-r.html"><a href="statistics-in-r.html#chi-square"><i class="fa fa-check"></i><b>5.2</b> Chi Square</a></li>
+<li class="chapter" data-level="5.3" data-path="statistics-in-r.html"><a href="statistics-in-r.html#regression"><i class="fa fa-check"></i><b>5.3</b> Regression</a></li>
+<li class="chapter" data-level="5.4" data-path="statistics-in-r.html"><a href="statistics-in-r.html#anova"><i class="fa fa-check"></i><b>5.4</b> ANOVA</a></li>
+<li class="chapter" data-level="5.5" data-path="statistics-in-r.html"><a href="statistics-in-r.html#manova"><i class="fa fa-check"></i><b>5.5</b> MANOVA</a></li>
+<li class="chapter" data-level="5.6" data-path="statistics-in-r.html"><a href="statistics-in-r.html#ancova"><i class="fa fa-check"></i><b>5.6</b> ANCOVA</a></li>
+<li class="chapter" data-level="5.7" data-path="statistics-in-r.html"><a href="statistics-in-r.html#logistic-regression"><i class="fa fa-check"></i><b>5.7</b> Logistic Regression</a></li>
+<li class="chapter" data-level="5.8" data-path="statistics-in-r.html"><a href="statistics-in-r.html#factor-analysis"><i class="fa fa-check"></i><b>5.8</b> Factor Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="resouces.html"><a href="resouces.html"><i class="fa fa-check"></i><b>6</b> Resouces</a></li>
 </ul>
 
       </nav>
@@ -154,7 +262,7 @@
 <p>This chapter will introduce you to installing R, becoming familiar with the RStudio environment, installing packages, and loading data.</p>
 <div id="installing-r" class="section level2">
 <h2><span class="header-section-number">2.1</span> Installing R</h2>
-<p>Your adventure with R begins with downloading and installing the required software, which is free! This will first require you to install <strong>R</strong>, which is the underlying language and software we will be working with. R is available for Windows and Max OS.</p>
+<p>Your adventure with R begins with downloading and installing the required software, which is free! This will first require you to install <strong>R</strong>, which is the underlying language and software we will be working with. R is available for Windows, Mac OS, and Linux.</p>
 <p><strong>You can download R here: <a href="https://cran.rstudio.com/">https://cran.rstudio.com/</a>.</strong></p>
 <ul>
 <li><p>For Windows users, you will want to download R Base. <a href="https://cran.rstudio.com/bin/windows/base/">Here is a direct link with further instructions</a>.</p></li>
@@ -163,7 +271,7 @@
 </div>
 <div id="installing-rstudio" class="section level2">
 <h2><span class="header-section-number">2.2</span> Installing RStudio</h2>
-<p>Once R is installed, you will download and install <strong>RStudio</strong>. This is the environment in which you will work with R. RStudio is also available for Windows and Mac users.</p>
+<p>Once R is installed, you will download and install <strong>RStudio Desktop</strong>. This is the environment (software program) in which you will work with R. RStudio is also available for Windows, Mac and various versions of Linux..</p>
 <p><strong>You can download RStudio here: <a href="https://rstudio.com/products/rstudio/download/#download">https://rstudio.com/products/rstudio/download/#download</a>.</strong></p>
 </div>
 <div id="rstudio-features" class="section level2">
@@ -179,18 +287,26 @@
 <ul>
 <li>The console is where you will see the output of your code. For example, if you run a script to calculate a mean in the source, the mean will appear in the console.</li>
 <li>The console will also show any error messages or warnings. These will appear in red.</li>
-<li>Any packages that you will install should be written here, not in your code. This is because you will only install a package once. If it is in your script and you run all of your script, it will try to install the packages multiple times.</li>
+<li>Any packages that you will install should be written here, not in your script. This is because you will only install a package once. If it is in your script and you run all of your script, it will try to install the packages multiple times.
+<ul>
+<li>Note: You can also include the install command in your script (at the top) and use a <code>#</code> sign to comment it out so that it doesn’t run when the script us run. This is useful if you are sharing a script and the other user may need to install the packages or if you may need to install them in the future.</li>
+<li>Whether you write it in the script or the console is a personal choice.</li>
+</ul></li>
 </ul></li>
 <li><p><strong>Environment</strong> - The environment is mainly used to show the data frames and other files you have loaded. It will tell you the datafile name, how many rows (<em>obs.</em>) and how many columns (<em>variables</em>).</p></li>
 <li><strong>Files, Plots, Packages, Help, and Viewer</strong>
 <ul>
 <li>The Files tab will show local files in your R Project.</li>
 <li>The Plots tab will show any visualizations you have created.</li>
-<li>The Packages tab will allow you to see, load, and unload any packages you have installed.
-++ We will usually load packages using the <code>library()</code> function.</li>
+<li>The Packages tab will allow you to see, load, and unload any packages you have installed. You can also install packages through this tab.
+<ul>
+<li>We will usually install packages using the <code>install.packages()</code> function and load packages using the <code>library()</code> function.</li>
+</ul></li>
 <li>The Help tab will show explanations and examples of functions.
-++ We can ask for help in the console by using <code>?</code>. For example, <code>?mean</code> will give additional information about the <code>mean()</code> function.</li>
-<li>Viewer is used for any webpages that get rendered through your code.</li>
+<ul>
+<li>We can ask for help in the console by using <code>?</code>. For example, <code>?mean</code> will give additional information about the <code>mean()</code> function.</li>
+</ul></li>
+<li>Viewer is used for any webpages that get produced through your code.</li>
 </ul></li>
 </ol>
 </div>
@@ -225,12 +341,13 @@
 </div>
 <div id="rproj---r-projects" class="section level3">
 <h3><span class="header-section-number">2.5.2</span> .rproj - R Projects</h3>
-<p>R Projects are very important to utilize. Without create an R Project, you will need to include a file path to your working directory and run this code every time you start your file.</p>
-<p>To set a working directory, you would write the following in your <strong>source</strong> pane, inside the R script. You would then highlight the code or place your cursor somewhere inside the code and click <strong>Run</strong> at the top right of the <strong>Source</strong> pane, or Click <em>Ctrl+Enter</em> (or on a Mac, <strong>Cmd+Eneter</strong>).</p>
+<p>R Projects are very important to utilize. Without creating an R Project, you will need to include a file path to your working directory and run this code every time you start your script.</p>
+<p>To set a working directory, you would write the following in your <strong>source</strong> pane, inside the R script. You would then highlight the code or place your cursor somewhere inside the code and click <strong>Run</strong> at the top right of the <strong>Source</strong> pane, or Click <em>Ctrl+Enter</em> (or on a Mac, <strong>Cmd+Enter</strong>).</p>
 <p><code>setwd("C:/path/to/your/directory")</code></p>
 <p><em>Quotes, correct capitalization, and forward slashes are important here.</em></p>
 <p>If you move your files to a new directory, you will have to rewrite this command or nothing in your script will run.</p>
-<p>R Projects avoid this. Any file that is in the same folder as the .Rproj R Project file is automatically linked to the R Script. That means you can create a folder with your project, move that folder anywhere or give it to anyone, and when they double-click the .Rproj folder, it will work!</p>
+<p>You can also set a working directory through RStudio by going to <strong>Session &gt; Set Working Directory</strong> and selecting one of the choices. You will have to do this every time you open the R script.</p>
+<p>R Projects avoid all of this. Any file that is in the same folder as the .Rproj file is automatically linked to the R Script. That means you can create a folder with your project, move that folder anywhere or give it to anyone, and when they double-click the .Rproj file, it will work!</p>
 <p>Any subdirectories will still need to use a short path name, i.e., <code>read_csv("subfolder/file.csv")</code>, but this is much simpler than utilizing the long path name.</p>
 <p>To create an R Project, simply go to <strong>File &gt; New Project…</strong>. You will see the following screen:</p>
 <div class="figure">
@@ -250,9 +367,9 @@
 </div>
 <div id="rdata---r-data-files" class="section level3">
 <h3><span class="header-section-number">2.5.3</span> .RData - R Data Files</h3>
-<p>As you begin working in R, you will inevitably have a number of dataframes saved to your <strong>Environment</strong> pane. These may be datasources you loaded, dataframes you created, or raw data, cleaned data, analyses, models, etc. While you could simply re-run your script, you can also save everything in your Envrionemnt to an R Data file. When you load the R Data file, all of those dataframes will reload. An additional bonus is that these files are smaller due to compression!</p>
-<p>This is particularly useful if you are creating the dataframes in once script and will use them in another script.</p>
-<p>To save your Envrionment to an R Data file, you have a few options. You can run these in your script or in the console. That’s up to you.</p>
+<p>As you begin working in R, you will inevitably have a number of dataframes saved to your <strong>Environment</strong> pane. These may be datasources you loaded, dataframes you created, or raw data, cleaned data, analyses, models, etc. While you could simply re-run your script, you can also save everything in your Environment to an R Data file. When you load the R Data file, all of those dataframes will reload. An additional bonus is that these files are smaller due to compression!</p>
+<p>This is particularly useful if you are creating the data frames in one script and will use them in another script.</p>
+<p>To save your Environment to an R Data file, you have a few options. You can run these in your script or in the console. That’s up to you.</p>
 <div id="save-.rds" class="section level4">
 <h4><span class="header-section-number">2.5.3.1</span> Save .RDS</h4>
 <p>This allows you to save a <strong>single</strong> object in the environment:</p>
@@ -290,19 +407,66 @@ load(&quot;my_work_space.RData&quot;)</code></pre>
 <hr />
 </div>
 </div>
+<div id="r-data-structures" class="section level2">
+<h2><span class="header-section-number">2.6</span> R Data Structures</h2>
+<p>A number of different objects can exist in the RStudio environment. Here are a few definitions.</p>
+<div id="vector" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> Vector</h3>
+<p>Vectors are basically one single column of a data frame. All elements in this dimension must be the same type (e.g. integers, strings, logical elements like TRUE and FALSE).</p>
+<p>The following commands create vectors.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Mike&quot;</span>, <span class="st">&quot;Will&quot;</span>, <span class="st">&quot;Dustin&quot;</span>, <span class="st">&quot;Lucas&quot;</span>, <span class="st">&quot;Elle&quot;</span>) </a>
+<a class="sourceLine" id="cb4-2" title="2">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">40</span>) </a></code></pre></div>
+<p><strong>A note on c</strong></p>
+<blockquote>
+<p>The <code>c</code> in the commands above mean to “combine” into a vector. It is used in many functions where you need to combine several items toegther.</p>
+</blockquote>
+</div>
+<div id="dataframe" class="section level3">
+<h3><span class="header-section-number">2.6.2</span> Dataframe</h3>
+<p>A data frame is the easiest type of data to work with. Consider it equivelent to an Excel spreadhseet. It has columns and rows. Each column can be a different type (character, factor, numeric, date).</p>
+<p>You can import data and it usually imports as a data frame, or you can make your own by combining vectors:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">dataframe_example &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name=</span><span class="kw">c</span>(<span class="st">&quot;Thor&quot;</span>, <span class="st">&quot;Iron Man&quot;</span>),</a>
+<a class="sourceLine" id="cb5-2" title="2">                                <span class="dt">age=</span><span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">48</span>),</a>
+<a class="sourceLine" id="cb5-3" title="3">                                <span class="dt">earth=</span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb5-4" title="4">dataframe_example</a></code></pre></div>
+<pre><code>##       name  age earth
+## 1     Thor 1000 FALSE
+## 2 Iron Man   48  TRUE</code></pre>
+</div>
+<div id="tibble" class="section level3">
+<h3><span class="header-section-number">2.6.3</span> Tibble</h3>
+<p>Tibbles are very similar to dataframes. They are often referred to when talking about <code>Tidyverse</code> packages or functions. Mostly, a tibble, when shown in the <em>console</em> will include its data type with it (character, factor, integer, etc.).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">tibble_example &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(dataframe_example)</a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3">tibble_example</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   name       age earth
+##   &lt;fct&gt;    &lt;dbl&gt; &lt;lgl&gt;
+## 1 Thor      1000 FALSE
+## 2 Iron Man    48 TRUE</code></pre>
+<p><a href="https://blog.rstudio.com/2016/03/24/tibble-1-0-0/">Read more about Tibbles here</a>.</p>
+</div>
+<div id="list" class="section level3">
+<h3><span class="header-section-number">2.6.4</span> List</h3>
+<p>A list is a collection of objects. For example, a list can hold multiple dataframes, or a vector, a matrix, etc. They are much more difficilt to work with.</p>
+<p><a href="https://www.tutorialspoint.com/r/r_lists.htm">Read more about lists here</a>.</p>
+</div>
+</div>
 <div id="installing-packages" class="section level2">
-<h2><span class="header-section-number">2.6</span> Installing Packages</h2>
-<p>Many packages come pre-loaded. Packages perform different jobs in R. Packages allow you to use specific functions in R.</p>
+<h2><span class="header-section-number">2.7</span> Installing Packages</h2>
+<p>Many packages come pre-loaded. Packages perform different jobs in R. Packages allow you to use specific functions in R. They allow R to do new things.</p>
 <p>For example, the <code>psych</code> package contains functions to perform various statistical analyses. It contains functions such as <code>cohen.d()</code> to calculate Cohen’s <em>d</em>, <code>cor.plot()</code> to create a correlation plot, or <code>describe()</code> to describe data.</p>
 <div id="cran" class="section level3">
-<h3><span class="header-section-number">2.6.1</span> CRAN</h3>
+<h3><span class="header-section-number">2.7.1</span> CRAN</h3>
 <p>CRAN is the official R package repository. To install a CRAN package, you simply use the <code>install.packages()</code> function. The package name is entered in “quotes” inside the parentheses. Package names are case sensitive. The example below shows how to install the <code>tidyverse</code> package, a package you will use often. This should be entered into the <strong>console</strong> not the <strong>source/script</strong> pane.</p>
 <p>Enter the following into the <strong>console</strong> and hit <strong>enter</strong>:</p>
 <p><code>install.packages("tidyverse)</code></p>
+<p>You can also use R Studio to search for and install packages by clicking on the “Pacakges” tab and clicking “Insall”.</p>
 </div>
 <div id="github" class="section level3">
-<h3><span class="header-section-number">2.6.2</span> Github</h3>
-<p>One reason R is a popular statistical programming language is because it is open source. That means anyone can make and distribute a package of useful functions. Many packages can be found on Github, an online platform for software development. If you wish to install a package from Github, first, you’ll need to install the <code>devtools</code> package:</p>
+<h3><span class="header-section-number">2.7.2</span> Github</h3>
+<p>One reason R is a popular statistical programming language is because it is open source. That means anyone can make and distribute a package of useful functions. Many packages can be found on Github, an online platform for software development. Github is a great source for packages, but exercise caution as packages here may still be in development or may be beta versions not full tested and deployed.</p>
+<p>If you wish to install a package from Github, first, you’ll need to install the <code>devtools</code> package:</p>
 <p>Enter the following into the <strong>console</strong> and hit <strong>enter</strong>:</p>
 <p><code>install.packages("devtools")</code></p>
 <p>After installation, you can begin installing packages from Github:</p>
@@ -315,29 +479,29 @@ load(&quot;my_work_space.RData&quot;)</code></pre>
 </div>
 </div>
 <div id="loading-packages" class="section level2">
-<h2><span class="header-section-number">2.7</span> Loading Packages</h2>
-<p>To load packages, we use the <code>library()</code> function It’s good practice to write all the packages you load at the <strong>top</strong> of the R script. If you are writing a script and realize you need to load a new package, add it in at the top. This way, when you go to run your script again, all packages are loaded first before anything else gets processed.</p>
+<h2><span class="header-section-number">2.8</span> Loading Packages</h2>
+<p>To load packages, we use the <code>library()</code> function. It’s good practice to write all the packages you load at the <strong>top</strong> of the R script. If you are writing a script and realize you need to load a new package, add it in at the top. This way, when you go to run your script again, all packages are loaded first before anything else gets processed.</p>
 <p>A typical R script might look like this at the <strong>top</strong>:</p>
 <pre><code>library(tidyverse)
 library(psych)
 library(ggplot2)</code></pre>
-<p>To run such a command, you would select the entire block of text and hit run (Ctrl/Cmd+Enter).</p>
+<p>To run such a command, you would highlight the entire block of text and hit run (Ctrl/Cmd+Enter).</p>
 </div>
 <div id="importing-data" class="section level2">
-<h2><span class="header-section-number">2.8</span> Importing Data</h2>
+<h2><span class="header-section-number">2.9</span> Importing Data</h2>
 <p>In this section, we will learn how to import data in different formats.</p>
 <p>To practice these and other skills in this handbook, you first need to create an R Project. Follow the steps above to create an <strong>“R ESM Handbook Practice”</strong> project.</p>
 <p><strong>A note on organization</strong></p>
 <blockquote>
 <p>I highly recommend placing raw data files inside a “data” folder in your R Project. This will keep your directories organized and easy to navigate.</p>
 </blockquote>
-<div id="reading-in-a-csv" class="section level3">
-<h3><span class="header-section-number">2.8.1</span> Reading in a CSV</h3>
+<div id="importing-a-csv" class="section level3">
+<h3><span class="header-section-number">2.9.1</span> Importing a CSV</h3>
 <p>CSV files are quite common. While they look like standard Excel files, they are simply text files with columns separated by commas (and sometimes tabs).</p>
-<div id="load-a-local-csv-file" class="section level4">
-<h4><span class="header-section-number">2.8.1.1</span> Load a Local CSV File</h4>
+<div id="importing-a-local-csv-file" class="section level4">
+<h4><span class="header-section-number">2.9.1.1</span> Importing a Local CSV File</h4>
 <p>To load a csv file, we will use the <code>read_csv()</code> command.</p>
-<p>Download the following CSV file and save it within your <em>data</em> forlder in your <strong>“R ESM Handbook Practice”</strong> R Project.</p>
+<p>Download the following CSV file and save it within your <em>data</em> folder in your <strong>“R ESM Handbook Practice”</strong> R Project.</p>
 <p><strong><a href="/data-files/01/2019%20English%20R%20Community%20Survey%20Responses.csv">Download the “2019 English R Community Survey Responses.csv” file.</a></strong></p>
 <p>Use the following command in your script and run it:</p>
 <p><code>read_csv("data/2019 English R Community Survey Responses.csv")</code></p>
@@ -351,15 +515,15 @@ library(ggplot2)</code></pre>
 <p>In R, <code>&lt;-</code> is the most common assignment operator. You can also use the equal sign <code>=</code>, but that has several other uses whereas <code>&lt;-</code> only has one - to assign data to an object.</p>
 </blockquote>
 </div>
-<div id="load-a-csv-file-from-the-internet" class="section level4">
-<h4><span class="header-section-number">2.8.1.2</span> Load a CSV File from the Internet</h4>
+<div id="importing-a-csv-file-from-the-internet" class="section level4">
+<h4><span class="header-section-number">2.9.1.2</span> Importing a CSV File from the Internet</h4>
 <p>You can load data directly from the internet using the same function as before. Just use a web address instead of the file path.</p>
-<pre><code>rsurvey_csv_from_net &lt;- read.csv(&quot;https://github.com/rstudio/learning-r-survey/blob/master/2019/data/2019%20English%20R%20Community%20Survey%20Responses%20.csv?raw=true)</code></pre>
+<pre><code>rsurvey_csv_from_net &lt;- read.csv(&quot;https://github.com/rstudio/learning-r-survey/blob/master/2019/data/2019%20English%20R%20Community%20Survey%20Responses%20.csv?raw=true&quot;)</code></pre>
 <p>For more information, use the <code>?read.csv</code> help command.</p>
 </div>
 </div>
-<div id="reading-in-an-excel-file" class="section level3">
-<h3><span class="header-section-number">2.8.2</span> Reading in an Excel file</h3>
+<div id="importing-an-excel-file" class="section level3">
+<h3><span class="header-section-number">2.9.2</span> Importing an Excel file</h3>
 <p>Download the following Excel file and save it within your <em>data</em> forlder in your <strong>“R ESM Handbook Practice”</strong> R Project.</p>
 <p><strong><a href="/data-files/01/2019%20English%20R%20Community%20Survey%20Responses.xlsx">Download the “2019 English R Community Survey Responses.xlsx” file.</a></strong></p>
 <p>To read in an Excel file, we need to first download and install the <code>readxl</code> package.</p>
@@ -375,34 +539,24 @@ library(ggplot2)</code></pre>
 <p>Note that the quotation marks are around the file path name and the sheet name.</p>
 <p>For more information, use the <code>?read_excel</code> help command.</p>
 </div>
-<div id="reading-in-an-spss-data-file" class="section level3">
-<h3><span class="header-section-number">2.8.3</span> Reading in an SPSS data file</h3>
-<p>Download the following SPSS file and save it within your <em>data</em> forlder in your <strong>“R ESM Handbook Practice”</strong> R Project.</p>
+<div id="importing-an-spss-data-file" class="section level3">
+<h3><span class="header-section-number">2.9.3</span> Importing an SPSS data file</h3>
+<p>Download the following SPSS file and save it within your <em>data</em> folder in your <strong>“R ESM Handbook Practice”</strong> R Project.</p>
 <p><strong><a href="/data-files/01/2019%20English%20R%20Community%20Survey%20Responses.sav">Download the “2019 English R Community Survey Responses.sav” file.</a></strong></p>
-<p>SPSS .sav files can be read into R using the <code>foreign</code> package.</p>
-<p>In the <strong>console</strong>, use the following command:</p>
-<p><code>install.packages("foreign")</code></p>
+<p>SPSS .sav files can be read into R using the <code>haven</code> package.</p>
+<p><code>haven</code> is part of the <code>tidyverse</code> suite of packages. You will learn about the <code>tidyverse</code> in a later section. For now, you can install the <code>tidyverse</code> package in the <strong>console</strong>, using the following command:</p>
+<p><code>install.packages("tidyverse")</code></p>
 <p>After it downloads and installs, use the <code>library()</code> function to load the package. Add this line near the top of your script:</p>
-<p><code>library(foreign)</code></p>
-<p>Now we can load the SPSS file with the <code>read.spss()</code> function. However, we need to specify a few parameters in our code.</p>
-<p>Take a look at the <code>?read.spss</code> function. We can specify a lot of parameters:</p>
-<pre><code>read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
-          max.value.labels = Inf, trim.factor.names = FALSE,
-          trim_values = TRUE, reencode = NA, use.missings = to.data.frame, 
-          sub = &quot;.&quot;, add.undeclared.levels = c(&quot;sort&quot;, &quot;append&quot;, &quot;no&quot;),
-          duplicated.value.labels = c(&quot;append&quot;, &quot;condense&quot;),
-          duplicated.value.labels.infix = &quot;_duplicated_&quot;, ...)</code></pre>
-<p>For our purposes, we will simply use SPSS’s value labels and make sure it loads to a dataframe (by default, it loads as a list, which is much harder to work with). We can use the following code:</p>
-<pre><code>rsurvey_spss &lt;- read.spss(&quot;data/2019 English R Community Survey Responses.sav&quot;, 
-use.value.labels = TRUE, 
-to.data.frame = TRUE)</code></pre>
-<p>For more information, use the <code>?foreign</code> or <code>?read.spss</code> help commands.</p>
+<p><code>library(haven)</code></p>
+<p>Now we can load the SPSS file with the <code>read_sav()</code>:</p>
+<pre><code>rsurvey_spss &lt;- read_.spss_sav(&quot;data/2019 English R Community Survey Responses.sav&quot;)</code></pre>
+<p>You can also import SAS and Stata files, too. For more information, use the <code>?haven</code> or <code>?read_.spss_sav</code> help commands. You can also visit the <a href="https://haven.tidyverse.org/">haven website</a>.</p>
 </div>
 </div>
 <div id="rstudio-tips-to-help-write-efficient-code" class="section level2">
-<h2><span class="header-section-number">2.9</span> RStudio Tips to Help Write Efficient Code</h2>
+<h2><span class="header-section-number">2.10</span> RStudio Tips to Help Write Efficient Code</h2>
 <div id="commenting" class="section level3">
-<h3><span class="header-section-number">2.9.1</span> Commenting</h3>
+<h3><span class="header-section-number">2.10.1</span> Commenting</h3>
 <p>To stay organized, it is important to comment your code. To make a comment in your code, you can simply use the hashtag sign <code>#</code>. Here are some examples:</p>
 <pre><code># Load foreign package for SPSS
 library(foreign)</code></pre>
@@ -412,7 +566,7 @@ use.value.labels = FALSE, #I don&#39;t need value labels
 to.data.frame = TRUE) #I don&#39;t want to work with a list!</code></pre>
 </div>
 <div id="sectioning-scripts" class="section level3">
-<h3><span class="header-section-number">2.9.2</span> Sectioning Scripts</h3>
+<h3><span class="header-section-number">2.10.2</span> Sectioning Scripts</h3>
 <p>If you add at least four <code>----</code> dashes after a comment, it creates a section in your script. You can then navigate to different sections using the dropdown menu at the bottom of the <strong>source</strong> pane.</p>
 <pre><code># Section 1 ----
 # Section 2 ----
@@ -423,11 +577,11 @@ to.data.frame = TRUE) #I don&#39;t want to work with a list!</code></pre>
 </div>
 </div>
 <div id="data-object-names" class="section level3">
-<h3><span class="header-section-number">2.9.3</span> Data Object Names</h3>
+<h3><span class="header-section-number">2.10.3</span> Data Object Names</h3>
 <p>When you seek help online for R, you will notice a lot of articles use example data object names as <code>d</code>, <code>foo</code>, <code>bar</code>, or <code>mydata</code>. I do not recommend this. Instead, always try to give your data objects descriptive names, as we did above. This way, you can always figure out what your data objects refer to.</p>
 </div>
 <div id="shortcuts" class="section level3">
-<h3><span class="header-section-number">2.9.4</span> Shortcuts</h3>
+<h3><span class="header-section-number">2.10.4</span> Shortcuts</h3>
 <p>RStudio has created a lot of different keyboard shortcuts. I highly recommend <a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts0">visiting this link to explore them</a>.</p>
 <p>To see some of them demonstrated, you can <a href="https://www.youtube.com/watch?v=D89TnL7NxjQ">watch this video</a>.</p>
 
@@ -440,7 +594,7 @@ to.data.frame = TRUE) #I don&#39;t want to work with a list!</code></pre>
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-preparation-and-cleaning-in-r-datacleaning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-preparation-and-cleaning-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

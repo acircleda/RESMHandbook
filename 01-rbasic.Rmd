@@ -2,20 +2,22 @@
 
 This chapter will introduce you to installing R, becoming familiar with the RStudio environment, installing packages, and loading data.
 
-## Installing R
+## Installing and Customizing R
 
-Your adventure with R begins with downloading and installing the required software, which is free! This will first require you to install **R**, which is the underlying language and software we will be working with. R is available for Windows, Mac OS, and Linux.
+Your adventure with R begins with downloading and installing the required software, which is free! This will first require you to install **R**, which is the underlying language and software we will be working with. R is available for Windows, Mac OS, and Linux. In general, R is not computationally intensive and should not require a large amount of RAM nor extrmeley fast processor speeds. Consult [the proper FAQ](https://cran.rstudio.com/) for your system to learn more about computing requirements.
 
 **You can download R here: [https://cran.rstudio.com/](https://cran.rstudio.com/).**
 
-* For Windows users, you will want to download R Base. [Here is a direct link with further instructions](https://cran.rstudio.com/bin/windows/base/).
+* For Windows users, [here is a direct link with further instructions](https://cran.rstudio.com/bin/windows/base/).
 
 * For Mac users, you will [follow the directions here](https://cran.rstudio.com/bin/macosx/).
 
 
 ## Installing RStudio
 
-Once R is installed, you will download and install **RStudio Desktop**. This is the environment (software program) in which you will work with R. RStudio is also available for Windows, Mac and various versions of Linux..
+Base R is simply a command-line tool with few features. It's like programming in *Notepad*. **RStudio** is a software program that makes using R easy by giving you an integrated environemnt in which to program, see output, handle data objects, and more. When people talk about working in R, they most likely mean using R *through* RStudio.
+
+Fownload and install **RStudio Desktop**, which is free. RStudio is also available for Windows, Mac and various versions of Linux.
 
 **You can download RStudio here: [https://rstudio.com/products/rstudio/download/#download](https://rstudio.com/products/rstudio/download/#download).**
 
@@ -48,7 +50,7 @@ The RStudio environment is organized into four panes:
 
 ## Setting up RStudio
 
-Once RStudio is installed, I recommend setting it up so that the environment is more comfortable to work in.
+Once RStudio is installed, we recommend setting it up so that the environment is more comfortable to work in.
 
 One way to do this is to reconfigure the panes so that they are easier to navigate.
 
@@ -60,11 +62,11 @@ At the top of RStudio, click on **Tools > Global Options** and select **Pane Lay
 
 Next, you can switch the colors of R to something more comfortable for your eyes. A darker background reduces the amount of light hitting your eyes and can lessen eye strain.
 
-At the top of RStudio, click on **Tools > Global Options**. Select **Apperance** on the left-hand side. Under **RStudio Theme**, you can change the colors. I have my own RStudio Theme as *Modern*. It is a dark-blue background with white text.
+At the top of RStudio, click on **Tools > Global Options**. Select **Apperance** on the left-hand side. Under **RStudio Theme**, you can change the colors. Many use the RStudio theme  *Modern*. It is a dark-blue background with white text.
 
 ![*Changing R Studio Colors*](images/01-rstudiocolors.jpg)
 
-Changing your theme to *Modern* and switching your panes as I recommended will make your RStudio look like this:
+Changing your theme to *Modern* and switching your panes as we recommended will make your RStudio look like this:
 
 ![*A More Comfortable RStudio*](images/01-myrstudio.jpg)
 
@@ -104,7 +106,7 @@ To create an R Project, simply go to **File > New Project...**. You will see the
  * If you have a directory already and you just want to make it into a project, click **Existing Directory**
  * The **Version Control** option is useful if you will be placing your project on Github (see section on [Github](#github)).
  
-There is a small issue with R Projects if you save them in Dropbox on your local machine. As Dropbox is constantly trying to sync your files to the cloud, it causes some interference with RStudio. You will see this message flash every 10 mins or so. It is nothing serious, just annoying. Click OK (or press the spacebar) and continue working. This [forum post may provide a solution to the problem](https://community.rstudio.com/t/mostly-resolved-dropbox-box-sync-google-drive-etc/6098).
+There is a small issue with R Projects if you save them in Dropbox, Google Drive, or OneDrive on your local machine. As these programs are constantly trying to sync your files to the cloud, it causes some interference with RStudio. You will see this message flash every 10 mins or so. It is nothing serious, just annoying. Click OK (or press the spacebar) and continue working. This [forum post may provide a solution to the problem](https://community.rstudio.com/t/mostly-resolved-dropbox-box-sync-google-drive-etc/6098).
 
 ![*Annoying Message*](images/01-rstudiowarning.JPG)
 
@@ -121,10 +123,10 @@ To save your Environment to an R Data file, you have a few options. You can run 
 This allows you to save a **single** object in the environment:
 
 ```
-# Save an object to a file
+# Save an object to a file called "my_data.rds"
 saveRDS(object, file = "my_data.rds")
 
-# Restore the object
+# Load the object
 readRDS(file = "my_data.rds")
 ``` 
 
@@ -133,7 +135,7 @@ readRDS(file = "my_data.rds")
 This allows you to save specific objects:
 
 ```
-# Saving on object in RData format
+# Saving on object called "data1" in an RData file called "data"
 save(data1, file = "data.RData")
 
 # Save multiple objects
@@ -186,7 +188,6 @@ A data frame is the easiest type of data to work with. Consider it equivelent to
 You can import data and it usually imports as a data frame, or you can make your own by combining vectors:
 
 ```{r message=FALSE, warning=FALSE}
-library(tidyverse)
 dataframe_example <- data.frame(name=c("Thor", "Iron Man"),
                                 age=c(1000, 48),
                                 earth=c(FALSE, TRUE))
@@ -197,9 +198,10 @@ dataframe_example
 
 ### Tibble
 
-Tibbles are very similar to dataframes. They are often referred to when talking about `Tidyverse` packages or functions. Mostly, a tibble, when shown in the *console* will include its data type with it (character, factor, integer, etc.).
+Tibbles are very similar to dataframes. A a tibble, when shown in the *console* will include its data type with it (character, factor, integer, etc.). Tibbles are data objects used with the `tidyverse` set of packages ([learn more about the `tidyverse` here][Introduction to the Tidyverse])
 
 ```{r}
+library(tidyverse)
 tibble_example <- as_tibble(dataframe_example)
 
 tibble_example
@@ -247,7 +249,7 @@ After installation, you can begin installing packages from Github:
 Enter the following into the **console** and hit **enter**"
 `devtools::install_github("waffle")`
 
-**A note on ::**
+**A note on `::`**
 
 > You may notice this command started with `devtools::`. What does `::` mean? We can use the double colons when we want to use a function from a package but don't want to load the package. For example, we could have loaded the `devtools` package and then used the `install_github()` function, but that would be two steps and require more memory for the loading of `devtools`. Instead, we have just one step and less memory usage!
 
@@ -275,7 +277,7 @@ To practice these and other skills in this handbook, you first need to create an
 
 **A note on organization**
 
-> I highly recommend placing raw data files inside a "data" folder in your R Project. This will keep your directories organized and easy to navigate.
+> We highly recommend placing raw data files inside a "data" folder in your R Project. This will keep your directories organized and easy to navigate.
 
 ### Importing a CSV
 
@@ -283,28 +285,28 @@ CSV files are quite common. While they look like standard Excel files, they are 
 
 #### Importing a Local CSV File
 
-To load a csv file, we will use the `read_csv()` command.
+To load a csv file, we will use the `read.csv()` base R command.
 
 Download the following CSV file and save it within your *data* folder in your **"R ESM Handbook Practice"** R Project. 
 
-**[Download the "2019 English R Community Survey Responses.csv" file.](/data-files/01/2019 English R Community Survey Responses.csv)**
+**[Download the "2019 English R Community Survey Responses.csv" file.](/data/2019 English R Community Survey Responses.csv)**
 
 
 Use the following command in your script and run it:
 
-`read_csv("data/2019 English R Community Survey Responses.csv")`
+`read.csv("data/2019 English R Community Survey Responses.csv")`
 
 If you noticed, you got a lot of text output in your console. That's not very useful, is it?
 
-We need to save this information to a data object in the environment. To do that we will use the `<-` arrow operator.
+We need to save this information to a data object in the environment. To do that we will use the `<-` assignment operator.
 
 Try this again:
 
-`rsurvey_csv <- read_csv("data/2019 English R Community Survey Responses.csv")`
+`rsurvey_csv <- read.csv("data/2019 English R Community Survey Responses.csv")`
 
 Now you will see the data was saved to the environment. It should say: rsurvey_csv and have 1838 obs. (rows or individual cases) and 52 variables (columns).
 
-**A note about <-**
+**A note about `<-`**
 
 > In R, `<-` is the most common assignment operator. You can also use the equal sign `=`, but that has several other uses whereas `<-` only has one - to assign data to an object.
 
@@ -322,7 +324,7 @@ For more information, use the `?read.csv` help command.
 
 Download the following Excel file and save it within your *data* forlder in your **"R ESM Handbook Practice"** R Project. 
 
-**[Download the "2019 English R Community Survey Responses.xlsx" file.](/data-files/01/2019 English R Community Survey Responses.xlsx)**
+**[Download the "2019 English R Community Survey Responses.xlsx" file.](/data/2019 English R Community Survey Responses.xlsx)**
 
 To read in an Excel file, we need to first download and install the `readxl` package.
 
@@ -352,13 +354,13 @@ For more information, use the `?read_excel` help command.
 
 Download the following SPSS file and save it within your *data* folder in your **"R ESM Handbook Practice"** R Project. 
 
-**[Download the "2019 English R Community Survey Responses.sav" file.](/data-files/01/2019 English R Community Survey Responses.sav)**
+**[Download the "2019 English R Community Survey Responses.sav" file.](/data/2019 English R Community Survey Responses.sav)**
 
 SPSS .sav files can be read into R using the `haven` package.
 
-`haven` is part of the `tidyverse` suite of packages. You will learn about the `tidyverse` in a later section.  For now, you can install the `tidyverse` package in the **console**, using the following command:
+Install `haven` in the **console**, using the following command:
 
-`install.packages("tidyverse")`
+`install.packages("haven")`
 
 After it downloads and installs, use the `library()` function to load the package. Add this line near the top of your script:
 
@@ -367,10 +369,10 @@ After it downloads and installs, use the `library()` function to load the packag
 Now we can load the SPSS file with the `read_sav()`:
 
 ```
-rsurvey_spss <- read_.spss_sav("data/2019 English R Community Survey Responses.sav")
+rsurvey_spss <- read_sav("data/2019 English R Community Survey Responses.sav")
 ```
 
-You can also import SAS and Stata files, too. For more information, use the `?haven` or `?read_.spss_sav` help commands. You can also visit the [haven website](https://haven.tidyverse.org/).
+You can also import SAS and Stata files, too. For more information, use the `?haven` or `?read_sav` help commands. You can also visit the [haven website](https://haven.tidyverse.org/).
 
 ## RStudio Tips to Help Write Efficient Code
 
@@ -392,6 +394,13 @@ rsurvey_spss <- read.spss("data/2019 English R Community Survey Responses.sav",
 use.value.labels = FALSE, #I don't need value labels
 to.data.frame = TRUE) #I don't want to work with a list!
 ```
+
+```
+#uncomment - or highlight and run - to install
+# install.packages("easystats")
+```
+If you want to quickly comment or uncomment a chunk of text, you can use the shortcut **Shift+Ctrl+C** on Windows or **Cmd+Shift+C** on Mac.
+
 ### Sectioning Scripts
 
 If you add at least four `----` dashes after a comment, it creates a section in your script. You can then navigate to different sections using the dropdown menu at the bottom of the **source** pane.
@@ -406,10 +415,10 @@ If you add at least four `----` dashes after a comment, it creates a section in 
 
 ### Data Object Names
 
-When you seek help online for R, you will notice a lot of articles use example data object names as `d`, `foo`, `bar`, or `mydata`. I do not recommend this. Instead, always try to give your data objects descriptive names, as we did above. This way, you can always figure out what your data objects refer to.
+When you seek help online for R, you will notice a lot of articles use example data object names as `d`, `foo`, `bar`, or `mydata`. We do not recommend this. Instead, always try to give your data objects descriptive names, as we did above. This way, you can always figure out what your data objects refer to.
 
 ### Shortcuts
 
-RStudio has created a lot of different keyboard shortcuts. I highly recommend [visiting this link to explore them](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts0). 
+RStudio has created a lot of different keyboard shortcuts. We highly recommend [visiting this link to explore them](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts0). 
 
 To see some of them demonstrated, you can [watch this video](https://www.youtube.com/watch?v=D89TnL7NxjQ).

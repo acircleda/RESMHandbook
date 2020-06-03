@@ -77,9 +77,9 @@ There are several ways to view this data using the R Studio environment:
 
 ### Structure of Data - str()
 
-You can use `str()` (from base R) to view how your data is structured. That is, whether variables are numeric, characters, factors. If they are factors, you can also see what their levels are. I recommend using `str()` in the **console** not your script.
+You can use `str()` (from base R) to view how your data is structured. That is, whether variables are numeric, characters, factors. If they are factors, you can also see what their levels are. We recommend using `str()` in the **console** not your script.
 
-This is a very wide dataframe (52 variables/columns), so I will use the following code just to view the structure of the first 5 columns.
+This is a very wide dataframe (52 variables/columns), so we will use the following code just to view the structure of the first 5 columns.
 
 ```{r}
 str(raw_data[1:5])
@@ -215,13 +215,13 @@ names(renamed[2:3])
 You can also use `names()` to change the names of the data frame like this. You can use `c` to write a list of names and then apply it to the names of your data frame. The names are applied in the order they are written and any misisng names are set to `NA`:
 
 ```{r}
-names(raw_data) <- c("Q1", "Q2", "Q3")
+names(renamed) <- c("Q1", "Q2", "Q3")
 ```
 
 Let's check:
 ```{r}
 # new name
-names(raw_data[1:2])
+names(renamed[1:2])
 ```
 
 
@@ -239,21 +239,22 @@ qnames <- read_tsv("https://raw.githubusercontent.com/rstudio/learning-r-survey/
 Let's use the method above to make a copy of "raw_data" and then rename it:
 
 ```{r}
-# make a copy of the data frame
-renamed <- raw_data
+# make a copy of the data frame 
+rsurvey <- raw_data
 
 # rename the columns based on qnames
-names(renamed) <- names(qnames)
+names(rsurvey) <- names(qnames)
 ```
 
 Let's check
 
 ```{r}
-names(renamed[1:4])
+names(rsurvey[1:4])
 ```
 
 Note that renaming follows the order of the "qnames" data frame.
 
+Note also that we named the new data object "rsurvey". This is the beginning of our clean data set. We don't want to change anything in our original "raw_data" data frame.
 
 ## Cleaning Names with janitor
 
@@ -264,14 +265,14 @@ Let's make sure all the names are lowercase. This will make typing them in later
 Run the following code:
 
 ```{r}
-renamed <- renamed %>% 
+rsurvey <- rsurvey %>% 
   janitor::clean_names()
 ```
 
 Let's check:
 
 ```{r}
-names(renamed[1:10])
+names(rsurvey[1:10])
 ```
 
 The `clean_names()` function will do a number of things:
@@ -305,7 +306,7 @@ Load the `psych` package at the top of your script using `library(psych)`. Then,
 The following command describes the third variable (according to our `str()` function, that variable is numeric):
 
 ```{r}
-describe(renamed[1:5])
+describe(rsurvey[1:5])
 ```
 
 See more options using `?describe` in the **console**.
@@ -316,16 +317,16 @@ The `psych` package also provides `describeBy` (note the capital "B") to break a
 
 ```{r}
 #create an age variable
-renamed$age <- 2020-renamed$qyear_born
+rsurvey$age <- 2020-rsurvey$qyear_born
 
 #Describe experience by age
-describeBy(renamed$age, group=renamed$qr_experience, mat=TRUE)
+describeBy(rsurvey$age, group=rsurvey$qr_experience, mat=TRUE)
 ```
 
 What did we do?
 
-  * `renamed$age <-` - Assign whatever is after the `<-` to a new column, "age" in "renamed"
-  * `2020-renamed$qyear_born` - Subtract renamed$qyear_born from the current year, 2020.
+  * `rsurvey$age <-` - Assign whatever is after the `<-` to a new column, "age" in "rsurvey"
+  * `2020-rsurvey$qyear_born` - Subtract rsurvey$qyear_born from the current year, 2020.
   * `describeBy(age$age,` - The numeric variable
   * `group=age$qr_experience` - The grouping variable
   * `mat=TRUE)` - Show a matrix in the output instead of a more complicated list
@@ -338,7 +339,7 @@ The `summary()` function will give similar statistics as `describe()`, though wi
 The following `summary()` function calls columns 2 (a factor) and 3 (an integer)
 
 ```{r}
-summary(raw_data[2:3])
+summary(rsurvey[2:3])
 ```
 
 ### Summary Stats - skim()
@@ -354,7 +355,7 @@ Add ```library(skimr)``` to the top of your script after installation.
 Then, we can use the `skim()` function like this:
 
 ```{r}
-skim(raw_data[2:3])
+skim(rsurvey[2:3])
 ```
 
 
@@ -365,8 +366,19 @@ Base `R` provides the `table()` function to allow you to view a crosstabulation 
 We can use the code below to get a list of experience levels by country:
 
 ```{r}
-table(renamed$qcountry, renamed$qr_experience)
+table(rsurvey$qcountry, rsurvey$qr_experience)[1:5,]
 ```
+
+**A Note about `[ ]`
+
+>In the example above, [1:5,] was used. This tells R to take the crosstabs table and look at rows 1:5. Otherwise, there would have been nearly 100 rows of data printed. `[]` can be used to refer to a specific rows and columns. It specifies a column index. It is used like this:
+
+  * `data[1]` - gets the first column
+  * `data[1:5]` - gets columns 1 to 5
+  * `data[1,]` - gets the first row
+  * `data[1:5,]` - gets rows 1 to 5
+  * `data[1,1]` - gets the first row and first column
+  * `data[1:5,1:5]` - gets the first five rows and the first five columns
 
 
 ## Keeping and Dropping Variables
@@ -376,19 +388,19 @@ We can use `select()` from `tidyverse`'s `dplyr` package to keep specific variab
 **Keeping** variables:
 
 ```{r}
-keep <- renamed %>% select(qr_experience, qr_year)
+keep <- rsurvey %>% select(qr_experience, qr_year)
 ```
 
 To **drop** variables, use the *minus* sign.
 
 ```{r}
-dropped <- renamed %>% select(-qr_experience, -qr_year)
+dropped <- rsurvey %>% select(-qr_experience, -qr_year)
 ```
 
 For multiple variables, you can use commas for single columns and colons for a range of columns:
 
 ```{r}
-keep_multi <- renamed %>%
+keep_multi <- rsurvey %>%
   select(qr_experience, -qr_year, qr_difficulty:qobstacles_to_starting)
 
 ```
@@ -398,8 +410,8 @@ Note that `select` also places variables in the order specificed.
 Alternatively, you can do the same in base R with `subset`:
 
 ```
-keep <- subset(renamed, select = qr_experience)
-dropped <- subset(renamed, select = -qr_experience)
+keep <- subset(rsurvey, select = qr_experience)
+dropped <- subset(rsurvey, select = -qr_experience)
 ```
 
 `select` has more advanced functions such as `select_if` and `select_at`. See `?select` or `?select_if` for more information.
@@ -428,10 +440,10 @@ Let's use the `jmv` package the get some frequencies:
 
 We will use the `descriptives()` function. This will provide nice output. We will use the parameter `freq=TRUE` to get frequencies for factors.
 
-```{r message=TRUE, warning=FALSE}
+```{r message=FALSE, warning=FALSE}
 library("jmv")
 
-renamed %>%
+rsurvey %>%
   select(qr_experience, qr_year) %>%
   descriptives(freq = TRUE)
 ```
@@ -443,7 +455,7 @@ You may have noticed that the descriptives for "qr_year" had a minimum of 2. The
 Let's start by viewing all the data in this question. Since it is year data, let's arrange it from smallest to greatest and look at the first 10 observations.
 
 ```{r}
-renamed %>%
+rsurvey %>%
   select(qr_year) %>%
   arrange(qr_year) %>%
   head(n = 10)
@@ -451,7 +463,7 @@ renamed %>%
 
 Let's review what we did in the code:
 
-* `renamed %>%` tells R to use "renamed" and...
+* `rsurvey %>%` tells R to use "rsurvey" and...
 * `select(qr_year) %>%` select the "qr_year" variable and...
 * `arrange(qr_year) %>%` arrange the data based on the "qr_year" variable and...
 * `head(n = 10)` get the first 10 responses.
@@ -464,11 +476,11 @@ We have a variable, "qr_year" with five invalid cases. They should be years, but
 
 ```{r}
 #run this to change the variable
-renamed <- renamed %>%
+rsurvey <- rsurvey %>%
   mutate(qr_year2 = ifelse(qr_year < 1977, NA, qr_year))
 
 #run this to check
-renamed %>%
+rsurvey %>%
   select(qr_year, qr_year2) %>%
   arrange(qr_year) %>%
   head(n=10)
@@ -476,8 +488,8 @@ renamed %>%
 
 What we did:
 
-* `renamed <-` means we will save our fixed data to the renamed data object. Essentially, we are overwriting the data object that already exists.
-* `renamed %>%` tells R to use "renamed" and...
+* `rsurvey <-` means we will save our fixed data to the "rsurvey" data object. Essentially, we are overwriting the data object that already exists.
+* `rsurvey %>%` tells R to use "rsurvey" and...
 * `mutate(qr_year2` create a new variable, "qr_year2"
 * `=` which is equal to the following command
 * `ifelse(qr_year < 1977, NA, qr_year))` if qr_year is less than 1977, write NA, otherwise (`else`), write the year from qr_year
@@ -494,7 +506,7 @@ Let's run this code in the **console** to check. Since we are just checking, we 
 
 
 ```{r}
-renamed %>% count(qr_experience)
+rsurvey %>% count(qr_experience)
 ```
 
 You will see that 1 = "", which is missing data, 2 = "Beginner", 3 = "Expert", 4 = "Intermediate" and 5 = "None". If we were doing a statistical analysis without modifying our data, our results would be severely inaccurate.
@@ -502,7 +514,7 @@ You will see that 1 = "", which is missing data, 2 = "Beginner", 3 = "Expert", 4
 Let's recode this data. We will just do one variable as an example.
 
 ```{r}
-recoded <- renamed %>% 
+recoded <- rsurvey %>% 
   select(qr_experience) %>%
   mutate(qr_experience2 = factor(qr_experience,
         levels=c("None","Beginner", "Intermediate", "Expert", NA ))
@@ -519,7 +531,7 @@ Now our factors are in the correct order and if we wanted to do some statistical
 What did we do?
 
 * `recoded <-` creates a new data object. We could have overwritten our previous object, but this is to show you the result of recoding.
-* `renamed %>%` tells R to use the "renamed" data object and...
+* `rsurvey %>%` tells R to use the "rsurvey" data object and...
 * `select(qr_experience) %>%` means we are only going to keep this variable in our data (to make demonstration easier), and 
 * `mutate(` means we are going to make a change
 * `qr_experience2 =` we will create a new variable "qr_experience2" equal to the next command
@@ -530,19 +542,23 @@ What did we do?
 * `)` this final parentheses closes the `mutate` function. If you place your cursor after it, the corresponding opening parentheses will be highlighted. This is an easy way to check that you have closed all functions, useful for debugging problems.
   )
   
-```{r message=FALSE, warning=FALSE, include=FALSE}
-renamed <- renamed %>% 
+This works, so lets apply it to the real data set:
+
+```{r message=FALSE, warning=FALSE}
+rsurvey <- rsurvey %>% 
   mutate(qr_experience = factor(qr_experience,
         levels=c("None","Beginner", "Intermediate", "Expert", NA ))
   )
 ```
+
 ## Clearing Whitespace in Text - str_trim()
 
-On the Learning R survey, there was a question about what industry people were in. This resulted in 135 different responses. However, many of these can be combined to make several large groups. First, let's view the jobs.
+On the Learning R survey, there was a question about what industry people were in. This resulted in 135 different responses. However, many of these can be combined to make several large groups. First, let's view the jobs. To save space, only the first 10 are shown.
 
 ```{r}
-renamed %>%
-  count(qindustry)
+rsurvey %>%
+  count(qindustry) %>%
+  slice(1:20)
 ```
 
 The `count()` function counts *unique* values. However, you will notice that many are repeated. That is likely due to random whitespace in or around the text entries. We can use several functions `str_trim()` from `tidyverse`'s `stringr` package to fix this.
@@ -552,23 +568,24 @@ The `count()` function counts *unique* values. However, you will notice that man
 `str_trim()` removes whitespace from the start and end of a string. Let's also use make sure everything is lowercase using either base R's `tolower()` or `stringr`'s `str_to_lower()`. They both do the same thing. You can also use `str_squish` to remove **all** white space within a string.
 
 ```{r}
-renamed <- renamed %>%
+rsurvey <- rsurvey %>%
   mutate(qindustry = str_squish(tolower(qindustry)))
 ```
 
 Let's check. You can type this in the console. We will select only "qindustry" and "qindustry2" to compare them:
 
 ```{r}
-renamed %>%
-  count(qindustry)
+rsurvey %>%
+  count(qindustry) %>%
+  slice(1:10)
 ```
 
 Hmm. That reduced the number of unique values to 125. That is not ideal, but we have a few more tools we can use to fix this.
 
 First, what did we do?
 
-  * `renamed <- ` - saves the following commands to the "renamed" data object
-  * `renamed %>%` - means to use the renamed data object "and then"
+  * `rsurvey <- ` - saves the following commands to the "rsurvey" data object
+  * `rsurvey %>%` - means to use the "rsurvey" data object "and then"
   * `mutate(` - change the data
   * `qindustry = ` - make the column "qindustry" equal to the following
   * `str_squish(` - trim the whitespace in the following string
@@ -587,7 +604,7 @@ Looking through the list of jobs, there are some clear categories that we can co
 
 ```{r}
 # combine into "agriculture"
-renamed <- renamed %>%
+rsurvey <- rsurvey %>%
   mutate(
     industry = case_when(
       str_detect(qindustry, "agri") ~ "agriculture",
@@ -595,24 +612,27 @@ renamed <- renamed %>%
     )
   )
 
-# and check
-renamed %>% count(industry)
+# and check total number - it should
+rsurvey %>% 
+  select(industry) %>%
+  distinct() %>% #remove duplicates
+  count()
 ```
 We now have 123 rows. Let's see what we did, and then expand it:
 
-  * `renamed <-` - assign to the "renamed" object
-  * `renamed %>%` - use "renamed" and then
+  * `rsurvey <-` - assign to the "rsurvey" object
+  * `rsurvey %>%` - use "rsurvey" and then
   * `mutate(` - change or create a variable
   * `industry = case_when(` - create the variable "industry" when
   * `str_detect(qindustry, "agri")` - R detects "agri" in the "qindustry" columns"
   * `~ "agriculture",` - and rename them "agriculture"
   * `TRUE ~ qindustry` - everything else is named the name they have in "qindustry"
   
-Let's exand this to categorize as much as possible. To do this efficiently, I will run `renamed$industry` in the *console* and scroll through it as I create categories
+Let's exand this to categorize as much as possible. To do this efficiently, We will run `rsurvey$industry` in the *console* and scroll through it as we create categories
 
 ```{r}
 # combine into "agriculture"
-renamed <- renamed %>%
+rsurvey <- rsurvey %>%
   mutate(
     industry = case_when(
       str_detect(qindustry, "agri") ~ "agriculture",
@@ -629,7 +649,7 @@ renamed <- renamed %>%
   )
 
 # and check
-renamed %>% count(industry)
+rsurvey %>% count(industry)
 ```
 
 This code got out data down to 9 categories. The categories are neither perfect nor exhaustive, but they are functional. This is a lesson in working with open-ended data on surveys. A question like this should really have limited options, otherwise, there is a lot to clean!
@@ -652,7 +672,7 @@ What did we do differently?
 The Learning R survey contained a few check-all question types. Depending on the survey platform, these questions either create a new column for each choice or combine all choices in a single column. The Learning R survey did the latter. For example, the question "What applications do you use R for most? (check all that apply)" for the variable qused_for looks like this:
 
 ```{r}
-head(renamed$qused_for)
+head(rsurvey$qused_for)
 ```
 
 How can we work with this type of data? The first thing we can do is split the data so that choices are separated into columns. There are several functions we can use to do this. Normally, we can do this with `separate()` from `tidyverse`'s `tidyr` package. However, we need to know how many columns to split the data into.
@@ -662,7 +682,7 @@ We can use the following code to count how many commas appear in each row and th
 
 
 ```{r}
-renamed$qused_for %>%
+rsurvey$qused_for %>%
   str_count(pattern = ",") %>% 
   max()
 ```
@@ -670,7 +690,7 @@ renamed$qused_for %>%
 There is at least one row with 10 commas, meaning 11 items were selected. We can now use separate to separate the string.
 
 ```{r}
-renamed <- renamed %>%
+rsurvey <- rsurvey %>%
   separate(qused_for, sep = ",",
            into = paste0("use_", 1:11))
 ```
@@ -679,8 +699,8 @@ The original data object had 56 variables. The new data object now has 66. This 
 
 What did we do?
 
-  * `renamed <-` - assign the new resulting data to "renamed"
-  * `renamed %>%` - use renamed and then
+  * `rsurvey <-` - assign the new resulting data to "rsurvey"
+  * `rsurvey %>%` - use "rsurvey" and then
   * `separate(qused_for, sep = ",",` - separate "qused_for" by using the commas
   * `into = paste0("use_", 1:11))` - into 11 columns, with the name "use_" pasted to each column, from 1 to (:) 11.
     + Note: we could have written `into = c("use_1", "use_2"...)` but that would have taken a LONG time. Using `paste0()` is much faster.
@@ -697,7 +717,7 @@ This is a simple function to allows you to find the mean of data. You can use it
 
 ```{r} 
 #base R
-mean(renamed$age, na.rm = T)
+mean(rsurvey$age, na.rm = T)
 ```
 
 You should note that for both, what was returned was unexpected. For the base `R` sytnax, "NA" was returned. For the `tidyverse` syntax, an error was returned. Both of these occured because the column has `NA`s which cannot be calculated in the `mean()` function. We need to remove the `NA`s:
@@ -711,7 +731,7 @@ You should note that for both, what was returned was unexpected. For the base `R
 You can do the same calculation with the `median()` function:
 
 ```{r}
-median(renamed$age, na.rm = T)
+median(rsurvey$age, na.rm = T)
 ```
 
 ### Using the summarize() function - summarize()
@@ -719,7 +739,7 @@ median(renamed$age, na.rm = T)
 We can use the `tidyverse`'s `summarize()` function to do multiple descriptives in one command. `summarize()` is similar to `mutate()` in that it create new columns. However, instead of appending a column to a data frame, it literally summarizes and condenses all data into the number of columns specififed. Here is an example:
 
 ```{r}
-renamed %>%
+rsurvey %>%
   drop_na(age) %>%
   summarize(avg = mean(age),
             mid = median(age),
@@ -728,7 +748,7 @@ renamed %>%
 
 What did we do?
 
-  * `renamed %>%` - use "renamed" and then
+  * `rsurvey %>%` - use "rsurvey" and then
     + Note: We are not assigning this to anything because we are just exploring the data. There is no need to create a data object.
   * `drop_na(age) %>% ` - rather than write `na.rm=T` for each function, we will just drop all `NA`s for "age" first and then
   * `summarize(` - create a summary data frame
@@ -741,7 +761,7 @@ What did we do?
 What if we want to view the proportion of ages in the data set, or the ages broken down by group? We can use the `group_by()` function:
 
 ```{r}
-renamed %>%
+rsurvey %>%
   drop_na(age) %>%
   group_by(age) %>%
   summarize(n = n()) %>%
@@ -753,7 +773,7 @@ renamed %>%
 
 Here is what we did:
 
-  * `renamed %>%` - use "renamed" and then
+  * `rsurvey %>%` - use "rsurvey" and then
   * `drop_na(age) %>%` - drop the `NA`s based on "age" and then
   * `group_by(age) %>%` - group the data by "age" and then
   * `summarize(n = n()) %>%` - create a summary data frame that counts the sample size for each group and then
@@ -769,24 +789,24 @@ In this section, we will look at different ways to identify outliers in univaria
 We can use a simple scatterplot for numerical data.
 
 ```{r}
-plot(renamed$age)
+plot(rsurvey$age)
 ```
 
 We could also use a boxplot:
 
 ```{r}
-boxplot(renamed$age)
+boxplot(rsurvey$age)
 ```
 
 The graphs above shows that there are four possible outliers. These outliers have ages over 100. We can search for them in the data to see what is going on with them:
 
 ```{r}
-renamed %>%
+rsurvey %>%
   filter(age > 100) %>%
   select(age, qyear_born)
 ```
 
-I highly doubt these are serious responses, so we would need to deal with them in some way (see [Dealing with Outliers]).
+It's more than likely these are not serious responses, so we would need to deal with them in some way (see [Dealing with Outliers]).
 
 
 #### Detecting Categorical Outliers 
@@ -794,7 +814,7 @@ I highly doubt these are serious responses, so we would need to deal with them i
 We can also see if a category contains any numeric outliers based on another variable. For example, if we want to see if there are any age outliers for the experience variable, we can use a simple boxplot:
 
 ```{r}
-plot(age ~ qr_experience, data=renamed)
+plot(age ~ qr_experience, data=rsurvey)
 ```
 The graph above shows the four same extreme outliers. It also shows beginner, intermediate, and expert responses have some higher ages, but they don't suggest any surprising outliers, especially because each of the three have high ages.
 
@@ -802,7 +822,7 @@ What did we do?
 
   * `plot(` - make a plot
   * `age ~ qr_experience,` - plot age by (~) experience
-  * `data=renamed)` - from the "renamed" data frame
+  * `data=rsurvey)` - from the "rsurvey" data frame
 
 
 
@@ -813,22 +833,22 @@ One way to detect outliers is to standardize values and select values greater th
 There are many ways to create Z-scores in R. You could do it manually:
 
 ```{r}
-renamed$z_of_age <- (renamed$age - mean(renamed$age, na.rm=T))/sd(renamed$age, na.rm = T)
+rsurvey$z_of_age <- (rsurvey$age - mean(rsurvey$age, na.rm=T))/sd(rsurvey$age, na.rm = T)
 
 # to check
-summary(renamed$z_of_age)
+summary(rsurvey$z_of_age)
 ```
 
-But, we could also load a package and use a function to do it quickly. For example, the `psycho` package has a `standardize()` function.
+But, we could also load a package and use a function to do it quickly. For example, the `effectsize` package has a `standardize()` function.
 
 ```{r message=FALSE, warning=FALSE}
 # install package if needed
-# install.packages("psycho")
-library(psycho)
-renamed$z_of_age <- standardize(renamed$age)
+# install.packages("effectsize")
+
+rsurvey$z_of_age <- effectsize::standardize(rsurvey$age)
 
 # to check
-summary(renamed$z_of_age)
+summary(rsurvey$z_of_age)
 ```
 
 ### Dealing with Outliers
@@ -840,11 +860,11 @@ One thing you can do is "delete" your outliers. We will set outliers to `NA`.
 
 ```{r}
 # set ages over 100 to NA
-renamed <- renamed %>%
+rsurvey <- rsurvey %>%
   mutate(age2 = ifelse(age > 99, NA, age))
 
 # check if we made the correct change
-renamed %>%
+rsurvey %>%
   filter(qyear_born < 1901) %>%
   select(age2, qyear_born)
 
@@ -852,7 +872,7 @@ renamed %>%
 Let's look at the plot again:
 
 ```{r}
-plot(renamed$age2)
+plot(rsurvey$age2)
 ```
 
 There are no clear outliers for the "age" variable.
@@ -862,7 +882,7 @@ There are no clear outliers for the "age" variable.
 Rather than transforming that data, you could simply use `filter()` to temporarily remove it for some function. For example:
 
 ```{r}
-renamed %>%
+rsurvey %>%
   filter(age < 100) %>%
   with(plot(age))
 ```
@@ -870,7 +890,7 @@ renamed %>%
 In the formula above, `with()` is a base `R` function that uses the data from a `tidyverse` chain (functions with %>%). Using strictly base R would require more steps, including creating a new dataframe:
 
 ```{r}
-filtered <- subset(renamed, age < 99)
+filtered <- subset(rsurvey, age < 99)
 plot(filtered$age)
 ```
 
@@ -887,7 +907,7 @@ For example, the code below trims the top and bottom 2% of the data set and repl
 ```{r message=FALSE, warning=FALSE}
 library(psych)
 
-winsored <- renamed %>%
+winsored <- rsurvey %>%
   mutate(winsor = winsor(age, trim=.02, na.rm=T))
 
 # let's check
@@ -904,7 +924,7 @@ winsored %>%
 Normality can be visually assessed with a histogram. A quick histogram can be made using base `R`'s `hist()` function:
 
 ```{r}
-hist(renamed$age)
+hist(rsurvey$age)
 ```
 
 More advanced histograms can be made with ggplot. See [Data Visualization with ggplot]
@@ -914,7 +934,7 @@ More advanced histograms can be made with ggplot. See [Data Visualization with g
 You can also use a density plot to visually assess normality:
 
 ```{r}
-plot(density(renamed$age, na.rm=T))
+plot(density(rsurvey$age, na.rm=T))
 ```
 
 ### QQ Plots
@@ -922,7 +942,7 @@ plot(density(renamed$age, na.rm=T))
 A QQ plot can also be used to assess normality:
 
 ```{r}
-qqnorm(renamed$age)
+qqnorm(rsurvey$age)
 ```
 
 ### Skewness and Kurtosis
@@ -939,8 +959,8 @@ You can also use `skewness()` and `kurtosis()` functions from the `moments` pack
 
 library(moments)
 
-skewness(renamed$age, na.rm = T)
-kurtosis(renamed$age, na.rm = T)
+skewness(rsurvey$age, na.rm = T)
+kurtosis(rsurvey$age, na.rm = T)
 ```
 
 ### Tests of Normality
@@ -948,7 +968,7 @@ kurtosis(renamed$age, na.rm = T)
 Univariate tests of normality are also easily done in `R`. The `stats` package (included with `R`) contains both the Kolmogorov-Smirnov (K-S) test and the Shapiro-Wilk's test. The Shapiro-Wilk's test is more common and easier to compute in `R`:
 
 ```{r}
-shapiro.test(renamed$age)
+shapiro.test(rsurvey$age)
 ```
 
 The above p-value is significant at less than 0.05, signifying non-normality.
@@ -987,7 +1007,7 @@ You can use `is.na` to look at `NA` values:
 
 
 ```{r message=FALSE, warning=FALSE}
-mean(is.na(renamed$age))
+mean(is.na(rsurvey$age))
 ```
 
 
@@ -996,7 +1016,7 @@ This means that around 6% of the "age" variable is misisng.
 Conversely, you can also use `complete.cases` to see how many cases are *not* missing:
 
 ```{r}
-  mean(complete.cases(renamed$age))
+  mean(complete.cases(rsurvey$age))
 ```
 
 94% of the age variable is *not* missing.
@@ -1007,7 +1027,7 @@ Conversely, you can also use `complete.cases` to see how many cases are *not* mi
 We can look at an entire data frame by using `summarize_all`, part of the `summarize` family of verbs in `dplyr` (part of `tidyverse`).
 
 ```{r}
-missing <- renamed %>%
+missing <- rsurvey %>%
   summarize_all(funs(mean(is.na(.))))
 ```
 
@@ -1016,7 +1036,7 @@ This will produce a new data object where each column has 1 row, and that row is
 What we did:
 
   * `missing <- ` - assign everything to a new data frame (this step is optional and you could just explore everything in the console)
-  * `renamed %>% ` - use renamed and
+  * `rsurvey %>% ` - use "rsurvey" and
   * `summarize_all(` - summarize every column
   * `funs(` - use the following function ("funs") to summarize everything
   * `mean(is.na(.))))` - take the mean of missing data.
@@ -1066,7 +1086,7 @@ You can remove missing data by using `drop_na()`.
 If you use `drop_na()` without including columns in the `()`, it will drop rows that are missing values in any column. This will severely reduce your data frame. If we run the following code, it will drop everything and you will have 0 observations because every row has across has at least 1 missing value somewhere.
 
 ```{r}
-missing_dropped_all <- renamed %>%
+missing_dropped_all <- rsurvey %>%
   drop_na()
 
 head(missing_dropped_all[1:5])
@@ -1075,19 +1095,19 @@ head(missing_dropped_all[1:5])
 This is useful if you have selected (with `select()` or `subset()`) a single column or a small group of columns and you do want to drop any missing data, but in general, you may want to specify columns:
 
 ```{r}
-missing_dropped_some <- renamed %>%
+missing_dropped_some <- rsurvey %>%
   drop_na(age)
 ```
 
 This will remove all rows with misisng data in the age variable.
-Compared "renamed" to "missing_dropped_some" and you will see less observations.
+Compared "rsurvey" to "missing_dropped_some" and you will see less observations.
 
 ## Replacing missing data with 0s
 
 Sometimes missing data is meaningful and it would be useful in including them in various analyses. `NA` values are typically dropped from analyses, but we can include them by changing them to 0s. To do so, we can use `mutate()`:
 
 ```{r}
-zero_ages <- renamed %>%
+zero_ages <- rsurvey %>%
   mutate(age = ifelse(is.na(age), 0, age))
 
 ```
@@ -1096,7 +1116,7 @@ zero_ages <- renamed %>%
 Let's compare the mean age of our new data frame and our old one:
 
 ```{r}
-mean(renamed$age, na.rm=T) #note: you must remove NAs for this to run
+mean(rsurvey$age, na.rm=T) #note: you must remove NAs for this to run
 ```
 
 ```{r}
@@ -1109,7 +1129,7 @@ mean(zero_ages$age)
 **If warranted**, we can easily replace missing data with means (or medians) like so:
 
 ```{r}
-mean_imputation <- renamed %>%
+mean_imputation <- rsurvey %>%
   mutate(age = ifelse(is.na(age), mean(age, na.rm=T), age))
 
 mean(mean_imputation$age)

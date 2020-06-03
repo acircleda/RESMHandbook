@@ -1,0 +1,23 @@
+# Data Visualization
+
+## Data Visualization in Base R
+
+## Data Visualization with `ggplot`
+
+### Data
+
+### Aesthetics
+
+### Column Charts
+
+### Horizontal Column Charts
+
+### Dot Plots
+
+### Line Graphs
+
+### Colors
+
+### Labels
+
+### Multiple Plots

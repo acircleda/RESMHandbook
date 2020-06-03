@@ -1,0 +1,9 @@
+# Troubleshooting
+
+## Getting Help
+
+## Reproducible Examples (Reprex)
+
+## R Tools
+
+https://www.r-bloggers.com/common-r-programming-errors-faced-by-beginners/

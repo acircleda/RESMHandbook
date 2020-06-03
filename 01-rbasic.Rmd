@@ -185,7 +185,8 @@ A data frame is the easiest type of data to work with. Consider it equivelent to
 
 You can import data and it usually imports as a data frame, or you can make your own by combining vectors:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
 dataframe_example <- data.frame(name=c("Thor", "Iron Man"),
                                 age=c(1000, 48),
                                 earth=c(FALSE, TRUE))

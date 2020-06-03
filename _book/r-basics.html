@@ -24,7 +24,7 @@
 <meta name="author" content="Anthony Schmidt" />
 
 
-<meta name="date" content="2020-05-27" />
+<meta name="date" content="2020-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -283,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The RStudio environment is organized into four panes:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Source</strong> - The source is where you will write and execute your code. This is your script or syntax.</p></li>
-<li><strong>Console</strong> - The console displays output, warnings, and more.
+<li><p><strong>Console</strong> - The console displays output, warnings, and more.</p>
 <ul>
 <li>The console is where you will see the output of your code. For example, if you run a script to calculate a mean in the source, the mean will appear in the console.</li>
 <li>The console will also show any error messages or warnings. These will appear in red.</li>
@@ -294,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li><p><strong>Environment</strong> - The environment is mainly used to show the data frames and other files you have loaded. It will tell you the datafile name, how many rows (<em>obs.</em>) and how many columns (<em>variables</em>).</p></li>
-<li><strong>Files, Plots, Packages, Help, and Viewer</strong>
+<li><p><strong>Files, Plots, Packages, Help, and Viewer</strong></p>
 <ul>
 <li>The Files tab will show local files in your R Project.</li>
 <li>The Plots tab will show any visualizations you have created.</li>
@@ -316,18 +316,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>One way to do this is to reconfigure the panes so that they are easier to navigate.</p>
 <p>At the top of RStudio, click on <strong>Tools &gt; Global Options</strong> and select <strong>Pane Layout</strong>. Change your options to the ones in the image below. This will allow you to read your output right next to your script. You can also easily minimize your environment, as you will not need to look there very often.</p>
 <div class="figure">
-<img src="images/01-panelayout.jpg" alt="Pane Layout" />
+<img src="images/01-panelayout.JPG" alt="Pane Layout" />
 <p class="caption"><em>Pane Layout</em></p>
 </div>
 <p>Next, you can switch the colors of R to something more comfortable for your eyes. A darker background reduces the amount of light hitting your eyes and can lessen eye strain.</p>
 <p>At the top of RStudio, click on <strong>Tools &gt; Global Options</strong>. Select <strong>Apperance</strong> on the left-hand side. Under <strong>RStudio Theme</strong>, you can change the colors. I have my own RStudio Theme as <em>Modern</em>. It is a dark-blue background with white text.</p>
 <div class="figure">
-<img src="images/01-rstudiocolors.jpg" alt="Changing R Studio Colors" />
+<img src="images/01-rstudiocolors.JPG" alt="Changing R Studio Colors" />
 <p class="caption"><em>Changing R Studio Colors</em></p>
 </div>
 <p>Changing your theme to <em>Modern</em> and switching your panes as I recommended will make your RStudio look like this:</p>
 <div class="figure">
-<img src="images/01-myrstudio.jpg" alt="A More Comfortable RStudio" />
+<img src="images/01-myrstudio.JPG" alt="A More Comfortable RStudio" />
 <p class="caption"><em>A More Comfortable RStudio</em></p>
 </div>
 <hr />
@@ -425,10 +425,11 @@ load(&quot;my_work_space.RData&quot;)</code></pre>
 <h3><span class="header-section-number">2.6.2</span> Dataframe</h3>
 <p>A data frame is the easiest type of data to work with. Consider it equivelent to an Excel spreadhseet. It has columns and rows. Each column can be a different type (character, factor, numeric, date).</p>
 <p>You can import data and it usually imports as a data frame, or you can make your own by combining vectors:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">dataframe_example &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name=</span><span class="kw">c</span>(<span class="st">&quot;Thor&quot;</span>, <span class="st">&quot;Iron Man&quot;</span>),</a>
-<a class="sourceLine" id="cb5-2" title="2">                                <span class="dt">age=</span><span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">48</span>),</a>
-<a class="sourceLine" id="cb5-3" title="3">                                <span class="dt">earth=</span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb5-4" title="4">dataframe_example</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb5-2" title="2">dataframe_example &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name=</span><span class="kw">c</span>(<span class="st">&quot;Thor&quot;</span>, <span class="st">&quot;Iron Man&quot;</span>),</a>
+<a class="sourceLine" id="cb5-3" title="3">                                <span class="dt">age=</span><span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">48</span>),</a>
+<a class="sourceLine" id="cb5-4" title="4">                                <span class="dt">earth=</span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb5-5" title="5">dataframe_example</a></code></pre></div>
 <pre><code>##       name  age earth
 ## 1     Thor 1000 FALSE
 ## 2 Iron Man   48  TRUE</code></pre>
@@ -441,7 +442,7 @@ load(&quot;my_work_space.RData&quot;)</code></pre>
 <a class="sourceLine" id="cb7-3" title="3">tibble_example</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   name       age earth
-##   &lt;fct&gt;    &lt;dbl&gt; &lt;lgl&gt;
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;lgl&gt;
 ## 1 Thor      1000 FALSE
 ## 2 Iron Man    48 TRUE</code></pre>
 <p><a href="https://blog.rstudio.com/2016/03/24/tibble-1-0-0/">Read more about Tibbles here</a>.</p>

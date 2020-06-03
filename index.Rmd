@@ -1,6 +1,6 @@
 --- 
 title: "The R Handbook for ESM Students"
-author: "Anthony Schmidt"
+author: ""
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: word_document

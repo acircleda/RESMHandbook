@@ -15,3 +15,5 @@
 ## Logistic Regression
 
 ## Factor Analysis
+
+## Power Analysis

@@ -1,0 +1,3 @@
+# bookdown::gitbook:
+#   includes:
+#     before_body: coverimage.html

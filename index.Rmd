@@ -1,11 +1,9 @@
 --- 
-title: |
-  ![](cover_image.png)
-
-author: ""
+title: <span style="color:#FF8200">R Handbook for ESM Students</span>
+author: "Evaluation, Statistics, and Measurement - University of Tennessee, Knoxville"
 date: "Last Updated `r Sys.Date()`"
 site: bookdown::bookdown_site
-# output: word_document\
+# output: word_document
 output: bookdown::gitbook
 documentclass: book
 bibliography: [book.bib]
@@ -15,7 +13,6 @@ github-repo: acircleda/RESMHandbook
 description: "This is a handbook to help UTK Evaluation, Statistics, and Measruement students master R."
 ---
 
-We embed a `css` code chunk here.
 
 ```{css, echo=FALSE}
 p {
@@ -23,7 +20,10 @@ p {
 }
 ```
 
+![](cover_image.jpg)
+
 # Introduction {-}
+
 
 Welcome to the R Handbook for ESM Students. This handbook is a hands-on guide to help you learn R. It will take you from installation, to set up, from data cleaning to analysis, visualizing, and reporting.
 

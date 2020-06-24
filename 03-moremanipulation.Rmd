@@ -1,13 +1,311 @@
 # More Data Manipulation in R
 
+```{r package_setup2, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+This chapter extends some of the data cleaning and data wrangling skills from Chapter 2.
+It uses uses survey data from the [RStudio Learning R Survey](https://github.com/rstudio/learning-r-survey). You can access this data, which includes all transformations and cleanings from Chapter 2, [here]("data/rsurvey.RData").
+
+You can load the data as follows:
+
+```{r}
+load("data/rsurvey.RData")
+```
+
 ## Wide and Long Data
 
-### Long Data
+Data typically comes in two formats: wide and long. 
 
-### Wide Data
+A **wide** dataset has each individual's data in separate columns. It is typically easy for humans to read. Here is a simple example:
+
+```{r echo=FALSE}
+tribble(
+ ~country, ~avgtemp.1994, ~avgtemp.1995, ~avgtemp.1996,
+ "Sweden",            6,            5,            7,
+ "Denmark",            6,            8,            8,
+ "Norway",            3,           11,            7
+) -> wide_example
+
+wide_example %>% gt::gt()
+```
+
+A **long** dataset, each variable has its own column, and each observation has its own row. In the wide dataset above, *country*, *year*, and *temperature* are three variables. In a long dataset, it would look like this:
+
+```{r echo=FALSE}
+tribble(
+  ~country, ~year, ~avgtemp,
+ "Sweden", 1994,       6,
+ "Denmark", 1994,       6,
+ "Norway", 1994,       3,
+ "Sweden", 1995,       5,
+ "Denmark", 1995,       8,
+ "Norway", 1995,      11,
+ "Sweden", 1996,       7,
+ "Denmark", 1996,       8,
+ "Norway", 1996,       7
+) -> long_example
+
+long_example %>% gt::gt()
+```
+
+Long data is often referred to as tabular data and is more machine-readible than human-readible. It is also very similar to [Tidy data][Introduction to the Tidyverse].
 
 ## Pivoting data from wide to long - pivot_longer()
 
+We can easily transform data from wide to long with the `pivot_longer()` function from the `Tidyverse`. Here is a simple example:
+
+```{r}
+library(tidyverse)
+
+wide_example %>%
+  pivot_longer(avgtemp.1994:avgtemp.1996, names_to = "year", values_to = "avg.temp")
+```
+
+Here is what we did:
+
+  * `wide_example %>%` - use the wide example data and
+  * `pivot_longer(` - make it long
+  *  `avgtemp.1994:avgtemp.1996,` - the columns we want to change from wide to long
+  * `names_to = "year",` - take the column names from the wide data and put them into a column called "year"
+  * `values_to = "avg.temp")` - take the values from the wide data and put them into a column called "avg.temp"
+  
+
+### Pivoting survey data
+
+[Recall that we had a check-all question][Splitting variables with split()] in our survey that was a little bit messy. It is a good example of wide data:
+
+```{r}
+rsurvey %>%
+  select(use_1:use_11) %>% #select only the check-all questions
+  head(n = 8)
+```
+
+You will notice each column has different data, and there are many `NA`s. This means some checked 1 or 2 items and therefore have 10 or 11 `NA`s while others checked more items and have less `NA`s. This is a perfect example of data that we can pivot from wide to long and better organize it.
+
+
+```{r}
+rsurvey_use_long <- rsurvey %>%
+  rownames_to_column("id") %>%
+  select(id, use_1:use_11) %>%
+  pivot_longer(use_1:use_11, names_to = "use_number", values_to="use") %>%
+  mutate(use = ifelse(use == "", NA, use),
+         use = str_trim(use))
+
+rsurvey_use_long %>% head(n=10)
+```
+
+Here is what we did:
+
+  * `rsurvey_use_long <-` - For this example, we will pivot the data into an object called "rsurvey_use_long"
+  * `rsurvey %>%` - use the rsurvey data and
+  * `rownames_to_column("id") %>%` - In the wide dataset, each row is an individual, but we do not have a column of individual ids. This function will make a column of row numbers called "id". The first row will be "1", the second row will be "2", etc. Now, we have ids for each individual in the dataset. We will use this later/
+  * `select(id, use_1:use_11) %>%` - keep only the id column and the columns to pivot. We are removing them for this example, but you wouldn't do this if you wanted to keep the data in the "rsurvey" data object.
+  * `pivot_longer(` - change (pivot) it from wide to long
+  * `use_1:use_11,` - select the columns to pivot
+  * `names_to = "use_number"`, - take the multiple column names and put them in a single column called "use_number"
+  * `values_to="use") %>%` - take the values and put them in a column called "use"
+  * `mutate(use = ifelse(use == "", NA, use))` - make any empty text `NA` (some will be `NA` and others will just be "", which is treated as a character space)
+  * `drop_na(use)` - drop any `NA` values in the "use" column
+
+We could use this data to visualize and analyze, or we could include it back into the same format as the dataset by making it wide, with each column a dichotomous variable for each use, with the values `1` for "checked" and `0` for "not checked". We will do that in the next section.
+
+  
 ## Pivoting data from long to wide - pivot_wider()
 
+We can easily transform data from long to wide with the `pivot_wider()` function from the `Tidyverse`. Here is a simple example:
+
+```{r}
+library(tidyverse)
+
+long_example %>%
+  pivot_wider(names_from = year, values_from=avgtemp)
+```
+
+Here is what we did:
+
+  * `long_example %>%` - use the wide example data and
+  * `pivot_wide(` - make it long
+  * `names_from = year,` - choose the column from which our names should come from
+  * `values_from = avgtemp)` - choose the values for each new row
+  
+  
+Before we transform the data, we need to note that there is a problem. If we count the unique values in the dataset, we will find there are 158 different options whereas, [according to the survey](https://github.com/rstudio/learning-r-survey/blob/master/2019/Learning%20R%20Survey%20-%20Google%20Forms.pdf), there should be 11 + an "other" category.
+
+```{r}
+rsurvey_use_long %>%
+  distinct(use) %>% # find only unique values
+  count() # count unique values
+
+```
+
+This will cause a big problem if we pivot it. It will cause 158 additional columns to be created. The easiest way to deal with this issue is to use *only* the original categories and then create an other category. Here is what we can do:
+
+```{r}
+rsurvey_use_long <- rsurvey_use_long %>%
+  mutate(use_new = case_when(
+    str_detect(use, "Statistical analysis") ~ "Statistical analysis",
+    str_detect(use, "Data transformation") ~ "Data transformation",
+    str_detect(use, "Modeling") ~ "Modeling",
+    str_detect(use, "Visualization") ~ "Visualization",
+    str_detect(use, "Machine learning") ~ "Machine learning", 
+    str_detect(use, "Text processing") ~ "Text processing",
+    str_detect(use, "Genomics") ~ "Genomics",
+    str_detect(use, "Medicine") ~ "Medicine",
+    str_detect(use, "Survey analysis") ~ "Survey analysis",
+    str_detect(use, "Clinical trials") ~ "Clinical trials",
+    str_detect(use, "Financial analysis") ~ "Financial analysis",
+    is.na(use) ~ "NA",
+    TRUE ~ "Other"
+  ),
+  use_new = ifelse(is.na(use), NA, use_new),
+  use_other = ifelse(use_new == "Other", use, NA)
+  )
+    
+rsurvey_use_long %>%
+  distinct(use_new) %>% # find only unqiue values
+  count()
+
+```
+
+
+```{r}
+rsurvey_use_wide <- rsurvey_use_long %>%
+  group_by(id) %>%
+  count(use_new) %>%
+  ungroup %>%
+  pivot_wider(names_from = use_new, values_from = n, 
+              values_fill = list(n=0)) %>%
+  janitor::clean_names()
+  
+  
+```
+
+We can check if this worked if the number of observations in rsurvey is the same as our wide data:
+
+```{r}
+# check if the are the same
+# == means "equal to"
+count(rsurvey) == count(rsurvey_use_wide)
+```
+
+**What did we do?**
+
+  * `rsurvey_use_wide <-` - create a new data object (for demonstration / testing purposes) called "rsurvey_use_wide"
+  * `rsurvey_use_long %>%` - use the data from "rsurvey_use_long" and
+  * `group_by(id) %>%` - group it by each individual's id and
+  * `add_count(use_new) %>%` - count each use per individual - this will create a column of 1's, indicating they checked the item (recall that we deleted unchecked items)
+  * `ungroup %>%` - ungroup the data
+  * `pivot_wider(` - pivot the data wider
+  * `names_from = use, ` - take the names of the new rows from the "use" column
+  * `values_from = n,` - take the values (all 1s) from the "n" column
+  * `values_fill = list(n=0)) %>%` - create 0s for any columns that do not have a 1
+    + `values_fill` allows you to fill empty values
+    + `list(n=0)` - states to make empty values from n into zeroes
+  * `janitor::clean_names()` - use the janitor package to make the names lowercase and underlined for ease of typing later
+  
+Now that we have demonstrated how to fix the check-all questions, we can simplify the steps by *combining* `pivot_longer()` and `pivot_wider()` in the same script:
+
+```{r}
+rsurvey_check_all <- rsurvey %>%
+  rownames_to_column("id") %>%
+  select(id, use_1:use_11) %>%
+  pivot_longer(use_1:use_11, names_to = "use_number", values_to="use") %>%
+  mutate(use = ifelse(use == "", NA, use),
+         use = str_trim(use),
+         use_new = case_when(
+    str_detect(use, "Statistical analysis") ~ "Statistical analysis",
+    str_detect(use, "Data transformation") ~ "Data transformation",
+    str_detect(use, "Modeling") ~ "Modeling",
+    str_detect(use, "Visualization") ~ "Visualization",
+    str_detect(use, "Machine learning") ~ "Machine learning", 
+    str_detect(use, "Text processing") ~ "Text processing",
+    str_detect(use, "Genomics") ~ "Genomics",
+    str_detect(use, "Medicine") ~ "Medicine",
+    str_detect(use, "Survey analysis") ~ "Survey analysis",
+    str_detect(use, "Clinical trials") ~ "Clinical trials",
+    str_detect(use, "Financial analysis") ~ "Financial analysis",
+    is.na(use) ~ "NA",
+    TRUE ~ "Other"
+  ),
+  use_new = ifelse(is.na(use), NA, use_new),
+  use_other = ifelse(use_new == "Other", use, NA)
+  ) %>%
+  group_by(id) %>%
+  count(use_new) %>%
+  ungroup %>%
+  pivot_wider(names_from = use_new, values_from = n, 
+              values_fill = list(n=0)) %>%
+  janitor::clean_names()
+    
+head(rsurvey_check_all, n=10) %>%
+  gt::gt()
+```
+
 ## Joining multiple data objects
+
+This section will explain the different types of joins you can use in R to connect data objects together. Joins are kinds of merges where you add columns and/or rows from one data frame to another data frame by matching them on some variable or sets of variables.
+
+There are many different types of joins, including left joins, right joins, inner joins, semi joins, full joins, and anti joins. See [https://dplyr.tidyverse.org/reference/join.html](https://dplyr.tidyverse.org/reference/join.html) for more information.
+
+### Left Join
+
+Left joins typically connect rows in a second data frame to matching rows in the first data frame.
+
+Here is a simple example.
+
+**Main data frame**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+band_members
+```
+
+**Second data frame**
+```{r}
+band_instruments
+```
+
+We can connect the second data frame to the main data frame by joining on the column they have in common, "name". This will create a single, merged data frame as follows:
+
+```{r}
+band_members %>% left_join(band_instruments)
+
+```
+
+### Left Joining our Survey Data
+
+We have created a data frame called "rsurvey_check_all," which contains all our check-all questions and whether someone checked it (indicated by 1) or did not check it (indicated by 2). We can combined this with our original "rsurvey" data like this:
+
+```{r}
+rsurvey_joined <- rsurvey %>% 
+  rownames_to_column("id") %>%
+  left_join(rsurvey_check_all)
+```
+
+
+**What did we do?**
+
+  * `rsurvey_joined <- ` - save to a new data frame
+    + Note: this new data frame is created for demonstration purposes so you can compare the original to the joined data object. In reality, we would simply overwrite our existing data object like this: `rsurvey <-`
+  * `rsurvey %>% ` - use the "rsurvey" data and...
+  * `rownames_to_column("id") %>%` - make a column called "id" that is simply the number of each row. This creates the column we will join by ("rsurvey_check_all" already has this)
+  * `left_join(rsurvey_check_all)` - join "rsurvey" with "rsurvey_check_all".
+    + Note: because both data frames have an "id" column, `R` automatically joins them by this column. You can also specify:
+      + `left_join(rsurvey_check_all, by = "id)` or
+      + `left_join(df_name, by = c("col1" = "col2"))`if the columns have different names
+      
+To complete the rsurvey cleaning process, let's also join the "other" column from the check-all data:
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+rsurvey <- rsurvey %>% 
+  rownames_to_column("id") %>%
+  left_join(rsurvey_check_all)
+```
+
+
+```{r}
+rsurvey<- rsurvey %>%
+  left_join(rsurvey_use_long %>%
+              select(id, use_other) %>%
+              drop_na(use_other))
+```

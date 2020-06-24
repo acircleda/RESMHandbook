@@ -2,8 +2,6 @@
   
 ## T-Tests
 
-d
-
 ## Chi Square
 
 ## Regression

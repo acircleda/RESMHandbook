@@ -2,10 +2,11 @@
 
 ```{r package_setup2, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
+library(knitr)
 ```
 
 This chapter extends some of the data cleaning and data wrangling skills from Chapter 2.
-It uses uses survey data from the [RStudio Learning R Survey](https://github.com/rstudio/learning-r-survey). You can access this data, which includes all transformations and cleanings from Chapter 2, [here]("data/rsurvey.RData").
+It uses survey data from the [RStudio Learning R Survey](https://github.com/rstudio/learning-r-survey). You can access this data, which includes all transformations and cleanings from Chapter 2, [here]("data/rsurvey.RData").
 
 You can load the data as follows:
 
@@ -27,7 +28,7 @@ tribble(
  "Norway",            3,           11,            7
 ) -> wide_example
 
-wide_example %>% gt::gt()
+wide_example %>% kable()
 ```
 
 A **long** dataset, each variable has its own column, and each observation has its own row. In the wide dataset above, *country*, *year*, and *temperature* are three variables. In a long dataset, it would look like this:
@@ -46,10 +47,10 @@ tribble(
  "Norway", 1996,       7
 ) -> long_example
 
-long_example %>% gt::gt()
+long_example %>% kable()
 ```
 
-Long data is often referred to as tabular data and is more machine-readible than human-readible. It is also very similar to [Tidy data][Introduction to the Tidyverse].
+Long data is often referred to as tabular data and is more machine-readable than human-readable. It is also very similar to [Tidy data][Introduction to the Tidyverse].
 
 ## Pivoting data from wide to long - pivot_longer()
 
@@ -62,13 +63,13 @@ wide_example %>%
   pivot_longer(avgtemp.1994:avgtemp.1996, names_to = "year", values_to = "avg.temp")
 ```
 
-Here is what we did:
-
-  * `wide_example %>%` - use the wide example data and
-  * `pivot_longer(` - make it long
-  *  `avgtemp.1994:avgtemp.1996,` - the columns we want to change from wide to long
-  * `names_to = "year",` - take the column names from the wide data and put them into a column called "year"
-  * `values_to = "avg.temp")` - take the values from the wide data and put them into a column called "avg.temp"
+> **What does the code mean?**
+>
+>  * `wide_example %>%` - use the wide example data and
+>  * `pivot_longer(` - make it long
+>  *  `avgtemp.1994:avgtemp.1996,` - the columns we want to change from wide to long
+>  * `names_to = "year",` - take the column names from the wide data and put them into a column called "year"
+>  * `values_to = "avg.temp")` - take the values from the wide data and put them into a column called "avg.temp"
   
 
 ### Pivoting survey data
@@ -95,18 +96,18 @@ rsurvey_use_long <- rsurvey %>%
 rsurvey_use_long %>% head(n=10)
 ```
 
-Here is what we did:
-
-  * `rsurvey_use_long <-` - For this example, we will pivot the data into an object called "rsurvey_use_long"
-  * `rsurvey %>%` - use the rsurvey data and
-  * `rownames_to_column("id") %>%` - In the wide dataset, each row is an individual, but we do not have a column of individual ids. This function will make a column of row numbers called "id". The first row will be "1", the second row will be "2", etc. Now, we have ids for each individual in the dataset. We will use this later/
-  * `select(id, use_1:use_11) %>%` - keep only the id column and the columns to pivot. We are removing them for this example, but you wouldn't do this if you wanted to keep the data in the "rsurvey" data object.
-  * `pivot_longer(` - change (pivot) it from wide to long
-  * `use_1:use_11,` - select the columns to pivot
-  * `names_to = "use_number"`, - take the multiple column names and put them in a single column called "use_number"
-  * `values_to="use") %>%` - take the values and put them in a column called "use"
-  * `mutate(use = ifelse(use == "", NA, use))` - make any empty text `NA` (some will be `NA` and others will just be "", which is treated as a character space)
-  * `drop_na(use)` - drop any `NA` values in the "use" column
+> **What does the code mean?**
+>
+>  * `rsurvey_use_long <-` - For this example, we will pivot the data into an object called "rsurvey_use_long"
+>  * `rsurvey %>%` - use the rsurvey data and
+>  * `rownames_to_column("id") %>%` - In the wide dataset, each row is an individual, but we do not have a column of individual ids. This function >will make a column of row numbers called "id". The first row will be >"1", the second row will be "2", etc. Now, we have ids for each individual in the dataset. We will use this later/
+>  * `select(id, use_1:use_11) %>%` - keep only the id column and the columns to pivot. We are removing them for this example, but you wouldn't do this if you wanted to keep the data in the "rsurvey" data object.
+>  * `pivot_longer(` - change (pivot) it from wide to long
+>  * `use_1:use_11,` - select the columns to pivot
+>  * `names_to = "use_number"`, - take the multiple column names and put them in a single column called "use_number"
+>  * `values_to="use") %>%` - take the values and put them in a column called "use"
+>  * `mutate(use = ifelse(use == "", NA, use))` - make any empty text `NA` (some will be `NA` and others will just be "", which is treated as a character space)
+>  * `drop_na(use)` - drop any `NA` values in the "use" column
 
 We could use this data to visualize and analyze, or we could include it back into the same format as the dataset by making it wide, with each column a dichotomous variable for each use, with the values `1` for "checked" and `0` for "not checked". We will do that in the next section.
 
@@ -122,12 +123,12 @@ long_example %>%
   pivot_wider(names_from = year, values_from=avgtemp)
 ```
 
-Here is what we did:
-
-  * `long_example %>%` - use the wide example data and
-  * `pivot_wide(` - make it long
-  * `names_from = year,` - choose the column from which our names should come from
-  * `values_from = avgtemp)` - choose the values for each new row
+> **What does the code mean?**
+>
+>  * `long_example %>%` - use the wide example data and
+>  * `pivot_wide(` - make it long
+>  * `names_from = year,` - choose the column from which our names should come from
+>  * `values_from = avgtemp)` - choose the values for each new row
   
   
 Before we transform the data, we need to note that there is a problem. If we count the unique values in the dataset, we will find there are 158 different options whereas, [according to the survey](https://github.com/rstudio/learning-r-survey/blob/master/2019/Learning%20R%20Survey%20-%20Google%20Forms.pdf), there should be 11 + an "other" category.
@@ -189,20 +190,20 @@ We can check if this worked if the number of observations in rsurvey is the same
 count(rsurvey) == count(rsurvey_use_wide)
 ```
 
-**What did we do?**
+> **What does the code mean?**
 
-  * `rsurvey_use_wide <-` - create a new data object (for demonstration / testing purposes) called "rsurvey_use_wide"
-  * `rsurvey_use_long %>%` - use the data from "rsurvey_use_long" and
-  * `group_by(id) %>%` - group it by each individual's id and
-  * `add_count(use_new) %>%` - count each use per individual - this will create a column of 1's, indicating they checked the item (recall that we deleted unchecked items)
-  * `ungroup %>%` - ungroup the data
-  * `pivot_wider(` - pivot the data wider
-  * `names_from = use, ` - take the names of the new rows from the "use" column
-  * `values_from = n,` - take the values (all 1s) from the "n" column
-  * `values_fill = list(n=0)) %>%` - create 0s for any columns that do not have a 1
-    + `values_fill` allows you to fill empty values
-    + `list(n=0)` - states to make empty values from n into zeroes
-  * `janitor::clean_names()` - use the janitor package to make the names lowercase and underlined for ease of typing later
+>  * `rsurvey_use_wide <-` - create a new data object (for demonstration / testing purposes) called "rsurvey_use_wide"
+>  * `rsurvey_use_long %>%` - use the data from "rsurvey_use_long" and
+>  * `group_by(id) %>%` - group it by each individual's id and
+>  * `add_count(use_new) %>%` - count each use per individual - this will create a column of 1's, indicating they checked the item (recall that we deleted unchecked items)
+>  * `ungroup %>%` - ungroup the data
+>  * `pivot_wider(` - pivot the data wider
+>  * `names_from = use, ` - take the names of the new rows from the "use" column
+>  * `values_from = n,` - take the values (all 1s) from the "n" column
+>  * `values_fill = list(n=0)) %>%` - create 0s for any columns that do not have a 1
+>    + `values_fill` allows you to fill empty values
+>    + `list(n=0)` - states to make empty values from n into zeroes
+>  * `janitor::clean_names()` - use the janitor package to make the names lowercase and underlined for ease of typing later
   
 Now that we have demonstrated how to fix the check-all questions, we can simplify the steps by *combining* `pivot_longer()` and `pivot_wider()` in the same script:
 
@@ -239,7 +240,7 @@ rsurvey_check_all <- rsurvey %>%
   janitor::clean_names()
     
 head(rsurvey_check_all, n=10) %>%
-  gt::gt()
+  kable()
 ```
 
 ## Joining multiple data objects
@@ -265,7 +266,7 @@ band_members
 band_instruments
 ```
 
-We can connect the second data frame to the main data frame by joining on the column they have in common, "name". This will create a single, merged data frame as follows:
+We can connect the second data frame to the main (first) data frame by joining on the column they have in common, "name". This will create a single, merged data frame. Any unmatched data in the second data frame will *not* be in the merged data frame.
 
 ```{r}
 band_members %>% left_join(band_instruments)
@@ -274,25 +275,25 @@ band_members %>% left_join(band_instruments)
 
 ### Left Joining our Survey Data
 
-We have created a data frame called "rsurvey_check_all," which contains all our check-all questions and whether someone checked it (indicated by 1) or did not check it (indicated by 2). We can combined this with our original "rsurvey" data like this:
+We have created a data frame called "rsurvey_check_all," which contains all our check-all questions and whether someone checked it (indicated by 1) or did not check it (indicated by 0). We can combined this with our original "rsurvey" data like this:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 rsurvey_joined <- rsurvey %>% 
   rownames_to_column("id") %>%
   left_join(rsurvey_check_all)
 ```
 
 
-**What did we do?**
+> **What does the code mean?**
 
-  * `rsurvey_joined <- ` - save to a new data frame
-    + Note: this new data frame is created for demonstration purposes so you can compare the original to the joined data object. In reality, we would simply overwrite our existing data object like this: `rsurvey <-`
-  * `rsurvey %>% ` - use the "rsurvey" data and...
-  * `rownames_to_column("id") %>%` - make a column called "id" that is simply the number of each row. This creates the column we will join by ("rsurvey_check_all" already has this)
-  * `left_join(rsurvey_check_all)` - join "rsurvey" with "rsurvey_check_all".
-    + Note: because both data frames have an "id" column, `R` automatically joins them by this column. You can also specify:
-      + `left_join(rsurvey_check_all, by = "id)` or
-      + `left_join(df_name, by = c("col1" = "col2"))`if the columns have different names
+>  * `rsurvey_joined <- ` - save to a new data frame
+>    + Note: this new data frame is created for demonstration purposes so you can compare the original to the joined data object. In reality, we would simply overwrite our existing data object like this: `rsurvey <-`
+>  * `rsurvey %>% ` - use the "rsurvey" data and...
+>  * `rownames_to_column("id") %>%` - make a column called "id" that is simply the number of each row. This creates the column we will join by ("rsurvey_check_all" already has this)
+>  * `left_join(rsurvey_check_all)` - join "rsurvey" with "rsurvey_check_all".
+>    + Note: because both data frames have an "id" column, `R` automatically joins them by this column. You can also specify:
+>      + `left_join(rsurvey_check_all, by = "id)` or
+>      + `left_join(df_name, by = c("col1" = "col2"))`if the columns have different names
       
 To complete the rsurvey cleaning process, let's also join the "other" column from the check-all data:
 

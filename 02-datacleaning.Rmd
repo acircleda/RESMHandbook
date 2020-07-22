@@ -6,22 +6,23 @@ library(tidyverse)
 library(skimr)
 ```
 
-This chapter will introduce you to viewing your data, summarizing your data, and cleaning your data following recommendations from the [*Brief Introduction to the 12 Steps of Data Cleaning*](https://www.slideshare.net/jamorrow/brief-introduction-to-the-12-steps-of-evaluagio) (Morrow, 2013).
+This chapter will introduce you to viewing, summarizing , and cleaning data following recommendations from the [*Brief Introduction to the 12 Steps of Data Cleaning*](https://www.slideshare.net/jamorrow/brief-introduction-to-the-12-steps-of-evaluagio) (Morrow, 2013).
 
 ## Introduction to the Tidyverse
 
-The `Tidyverse` is a set of packages that make R easier to use. All the packages work together and share an underlying grammar and philosophy. That's right - philosophy. The `Tidyverse` operates on the assumption that data should be "tidy".
+The `tidyverse` is a set of packages that make R easier to use. All the packages work together and share an underlying grammar and philosophy. That's right - philosophy. The `tidyverse` operates on the assumption that data should be "tidy".
 
-According to Hadley Wickham,Chief Scientist at RStudio and one of the creators of the `Tidyverse`: 
+According to Hadley Wickham,Chief Scientist at RStudio and one of the creators of the `tidyverse`: 
 
 > Tidy data is a standard way of mapping the meaning of a dataset to its structure. A dataset is messy or tidy depending on how rows, columns and tables are matched up with observations, variables and types. In tidy data:
+>
 > 1. Each variable forms a column.
 > 2. Each observation forms a row.
 > 3. Each type of observational unit forms a table.
 
-You can read more in [*Tidy Data* from the Journal of Statistic Software](https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf).
+You can read more in [*Tidy Data*](https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf) from the Journal of Statistic Software.
 
-The `Tidyverse` not only helps keep data "tidy," but makes programming easier compared to the base R syntax. Compare:
+The `tidyverse` not only helps keep data "tidy," but makes programming easier compared to the base R syntax. Compare:
 
 ### Extracting a variable
 
@@ -51,7 +52,7 @@ iris$Sepal.Ratio <- iris$Sepal.Length/iris$Sepal.Width
 ```
 (see more examples [here](https://tavareshugo.github.io/data_carpentry_extras/base-r_tidyverse_equivalents/base-r_tidyverse_equivalents.html))
 
-Most of this handbook will use `Tidyverse` functions, as they are clearly easier to work with.
+Most of this handbook will use `tidyverse` functions.
 
 ## Viewing Your Data
 
@@ -69,33 +70,33 @@ We also added `fileEncoding = "UTF-8"` to make sure any text was formatted corre
 
 There are several ways to view this data using the R Studio environment:
 
-1. Type the name in the **console**.
-  + This is not useful for a large data frame.
-2. Double-click the data object in the **environment**.
-  + This will open up the dataframe in the **source** pane, and you can easily browse the data.
-  + You can do the same thing using the `view()` function, i.e. `view(raw_data)`.
+  1. Type the name in the **console**.
+      + This is not useful for a large data frame.
+  2. Double-click the data object in the **environment**.
+      + This will open up the data frame in the **source** pane, and you can easily browse the data.
+      + You can do the same thing using the `view()` function, i.e. `view(raw_data)`.
 
 ### Structure of Data - str()
 
 You can use `str()` (from base R) to view how your data is structured. That is, whether variables are numeric, characters, factors. If they are factors, you can also see what their levels are. We recommend using `str()` in the **console** not your script.
 
-This is a very wide dataframe (52 variables/columns), so we will use the following code just to view the structure of the first 5 columns.
+This is a very wide data frame (52 variables/columns), so we will use the following code just to view the structure of the first 5 columns.
 
 ```{r}
 str(raw_data[1:5])
 ```
 
-Here is what we did:
+> **What does the code mean?**
+>
+> * `str(raw_data)` tells R you want to look at the structure of the data object.
+> * `[1:5]` tells R you just want to look at columns 1 to 5
 
-* `str(raw_data)` tells R you want to look at the structure of the data object.
-* `[1:5]` tells R you just want to look at columns 1 to 5
+This is what the output means:
 
-Here is what the output means:
-
-1. "Timestamp" contains dates but is being read as a **factor**. Factors are like categories. Multiple data points can share a factor.
-  + This can be converted into a date later using the `lubridate` package
-2. "How.would.you.rate.your.level.of.experience.using.R." is also a factor. It has 5 levels or categories. "Beginner" is one level. The numbers after the list correspond to the levels of the factors. For example, "Beginner" might be 1 or 2 or 3. We will investigate this more later.
-3. "Compared.with.other...." has the class **integer** (int). This is a number. The first 10 numbers are all NA (missing).
+  1. `Timestamp` contains dates but is being read as a **factor**. Factors are like categories. Multiple data points can share a factor.
+      + This can be converted into a date later using the `lubridate` package
+  2. `How.would.you.rate.your.level.of.experience.using.R.` is also a factor. It has 5 levels or categories. "Beginner" is one level. The numbers after the list correspond to the levels of the factors. For example, "Beginner" might be 1 or 2 or 3. We will investigate this more later.
+  3. `Compared.with.other....` has the class **integer** (`int`). This is a number. The first 10 numbers are all missing (`NA`).
 
 If you just want to examine a single variable, you can use the **`$`** operator:
 
@@ -110,7 +111,7 @@ In the output, we can see:
   + `"", "Afghanistan",..:` - The first category is "" (i.e. missing), the second category is Afghanistan...and so on, in alphabetical order
   + `90 57 90 90 90` - These numbers represent the numbers (randomly) assigned to each category. 
 
-If you just want to see the class of a variable, you can use the `class` function:
+If you just want to see the class (type) of a variable, you can use the `class` function:
 
 ```{r}
 class(raw_data$What.year.did.you.first.start.learning.R.)
@@ -126,19 +127,19 @@ names(raw_data[1:5])
 
 ### First n Rows - head()
 
-The `head()` (from base R's `utils` package) function gives you a slightly more detailed look at your data. It will give you the column name and the first 10 data points (by default):
+The `head()` (from base R's `utils` package) function gives you a slightly more detailed look at your data. It will give you the column name and the first 6 data points (by default):
 
 ```{r}
-head(raw_data[1:5])
+head(raw_data[1:2])
 ```
 
 You can also request more or less data points per column:
 
 ```{r}
-head(raw_data[1:5], n = 3)
+head(raw_data[1:2], n = 3)
 ```
 
-Or you can request data from a single variable:
+Or you can request data from a single variable using `$`:
 
 ```{r}
 head(raw_data$How.likely.are.you.to.recommend.R.to.a.colleague..friend..or.family.member., n = 20)
@@ -158,12 +159,11 @@ R Studio provides us with a useful [code book](https://github.com/rstudio/learni
 
 A common way of renaming columns is to use the `rename()` function. This function is part of one of the most useful packages you will download and install: `tidyverse`.
 
-To begin, install tidyverse through the **console**: `install.packages("tidyverse")`. Then load it at the top of your script:
-`library(tidyverse)`. Don't forget to run this line of code!
+To begin, install tidyverse: `install.packages("tidyverse")`. Then load it at the top of your script: `library(tidyverse)`. Don't forget to run this line of code!
 
 The first column's name is already simple: *Timestamp*. So, let's rename the second column.
 
-First, let's get the column name (run this in the **console**:
+First, let's get the column name (run this in the **console** because it is part of data exploration and not your script/code):
 
 ```{r}
 names(raw_data[2])
@@ -184,14 +184,14 @@ Let's see the new name:
 names(renamed[1:2])
 ```
 
-So, what did we do?
+> **What does the code mean?**
+>
+> * `renamed <-` creates a new data object
+> * `raw_data` says which data object we are working with
+> * `%>%` is the pipe operator. This means something like "and then"
+> `rename("new_name" = "old name")` sets the name name and the old name. Note the quotation marks
 
-* `renamed <-` creates a new data object
-* `raw_data` says which data object we are working with
-* `%>%` is the pipe operator. This means something like "and"
-* `rename("new_name" = "old name")` sets the name name and the old name. Note the quotation marks
-
-We can read this line as a sentence: Create a data object, "renamed". Use the "raw_data" object and rename "new_name" from "old_name".
+We can read this code like a sentence: *Create a data object, "renamed". Use the "raw_data" object and rename "new_name" from "old_name".*
 
 
 ## Renaming Multiple Variables
@@ -212,7 +212,7 @@ Let's check:
 names(renamed[2:3])
 ```
 
-You can also use `names()` to change the names of the data frame like this. You can use `c` to write a list of names and then apply it to the names of your data frame. The names are applied in the order they are written and any misisng names are set to `NA`:
+You can also use `names()` to change the names of the data frame like this. You can use `c` to write a list of names and then apply it to the names of your data frame. The names are applied in the order they are written and any missing names are set to `NA`:
 
 ```{r}
 names(renamed) <- c("Q1", "Q2", "Q3")
@@ -246,7 +246,7 @@ rsurvey <- raw_data
 names(rsurvey) <- names(qnames)
 ```
 
-Let's check
+Let's check:
 
 ```{r}
 names(rsurvey[1:4])
@@ -260,7 +260,7 @@ Note also that we named the new data object "rsurvey". This is the beginning of 
 
 Let's make sure all the names are lowercase. This will make typing them in later analyses easier, as you don't ever need to remember what is capital and what is not. Install the `janitor` package:
 
-**Console**: `install.packages("janitor")`.
+`install.packages("janitor")`
 
 Run the following code:
 
@@ -285,7 +285,7 @@ There are many cool options, so please check `?janitor::clean_names`.
 
 ### Summary Stats - describe()
 
-The `psych` package offers a very useful funcion called `describe()`. This function gives you summary statistics about your data. In particular, it will give you:
+The `psych` package offers a very useful function called `describe()`. This function gives you summary statistics about your data. In particular, it will give you:
 
 * item name 
 * item number 
@@ -301,21 +301,21 @@ The `psych` package offers a very useful funcion called `describe()`. This funct
 * kurtosis
 * standard error
 
-Load the `psych` package at the top of your script using `library(psych)`. Then, you can execute this command.
+Install the `psych` package and load it at the top of your script using `library(psych)`.
 
-The following command describes the third variable (according to our `str()` function, that variable is numeric):
+The following command describes the first five variables. Note that summary statistics are only given for "qr_difficulty" because, according to `str(qr_difficulty)`, that variable is numeric. The others are categorical and thus are not summarized.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 describe(rsurvey[1:5])
 ```
 
-See more options using `?describe` in the **console**.
+See more options using `?describe`.
 
 ### Summary Stats - describeBy()
 
 The `psych` package also provides `describeBy` (note the capital "B") to break an integer variable down by some factor or category. For example, the survey provides "qyear_born", which we can use to calculate age. Then, we can see summary stats of age by experience) from "qr_experience".
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 #create an age variable
 rsurvey$age <- 2020-rsurvey$qyear_born
 
@@ -323,38 +323,44 @@ rsurvey$age <- 2020-rsurvey$qyear_born
 describeBy(rsurvey$age, group=rsurvey$qr_experience, mat=TRUE)
 ```
 
-What did we do?
-
-  * `rsurvey$age <-` - Assign whatever is after the `<-` to a new column, "age" in "rsurvey"
-  * `2020-rsurvey$qyear_born` - Subtract rsurvey$qyear_born from the current year, 2020.
-  * `describeBy(age$age,` - The numeric variable
-  * `group=age$qr_experience` - The grouping variable
-  * `mat=TRUE)` - Show a matrix in the output instead of a more complicated list
+> **What does the code mean?**
+>
+>  * `rsurvey$age <-` - Assign whatever is after the `<-` to a new column, "age" in "rsurvey"
+>  * `2020-rsurvey$qyear_born` - Subtract rsurvey$qyear_born from the current year, 2020.
+>  * `describeBy(age$age,` - The numeric variable
+>  * `group=age$qr_experience` - The grouping variable
+>  * `mat=TRUE)` - Show a matrix in the output instead of a more complicated list
   
 
 ### Summary Stats - summary()
 
-The `summary()` function will give similar statistics as `describe()`, though with less detail. For **factors**, it will produce a count per level (category). For **integers** it will produce min, max, quartiles, median, mean, and number of missing data.
+The `summary()` function will give similar statistics as `describe()`, though with less detail. For **factors**, it will produce a count per level (category). For **integers** it will produce min, max, quartiles, median, mean, and number of missing data points.
 
-The following `summary()` function calls columns 2 (a factor) and 3 (an integer)
+The following `summary()` function calls columns 2 and 3.
 
 ```{r}
 summary(rsurvey[2:3])
 ```
 
+Although both should be factors, "qr_experience" is treated simply as a character class and "qr_difficulty" is treated as numeric. To fix this, you can make changes to the data frame or simply run each variable like this:
+
+```{r}
+summary(as.factor(rsurvey$qr_experience))
+summary(as.factor(rsurvey$qr_difficulty))
+```
+
+
 ### Summary Stats - skim()
 
 `skim` is another function that produces summary statistics. It will also produce a small histogram to show the distribution of your data (for numeric/integers).
 
-First, install the `skimr` package in the **console** using:
-
-```install.packages("skimr")```
-
-Add ```library(skimr)``` to the top of your script after installation.
+First, install (`install.packages("skimr")`) `skimr`
 
 Then, we can use the `skim()` function like this:
 
 ```{r}
+library(skimr)
+
 skim(rsurvey[2:3])
 ```
 
@@ -369,16 +375,16 @@ We can use the code below to get a list of experience levels by country:
 table(rsurvey$qcountry, rsurvey$qr_experience)[1:5,]
 ```
 
-**A Note about `[ ]`
-
+> **A Note about `[ ]`**
+>
 >In the example above, [1:5,] was used. This tells R to take the crosstabs table and look at rows 1:5. Otherwise, there would have been nearly 100 rows of data printed. `[]` can be used to refer to a specific rows and columns. It specifies a column index. It is used like this:
-
-  * `data[1]` - gets the first column
-  * `data[1:5]` - gets columns 1 to 5
-  * `data[1,]` - gets the first row
-  * `data[1:5,]` - gets rows 1 to 5
-  * `data[1,1]` - gets the first row and first column
-  * `data[1:5,1:5]` - gets the first five rows and the first five columns
+>
+>  * `data[1]` - gets the first column
+>  * `data[1:5]` - gets columns 1 to 5
+>  * `data[1,]` - gets the first row
+>  * `data[1:5,]` - gets rows 1 to 5
+>  * `data[1,1]` - gets the first row and first column
+>  * `data[1:5,1:5]` - gets the first five rows and the first five columns
 
 
 ## Keeping and Dropping Variables
@@ -436,7 +442,7 @@ You can use any of the following functions to get frequencies of your data:
 
 Let's use the `jmv` package the get some frequencies:
 
-**Console**: `install.packages("jmv")`
+`install.packages("jmv")`
 
 We will use the `descriptives()` function. This will provide nice output. We will use the parameter `freq=TRUE` to get frequencies for factors.
 
@@ -472,7 +478,7 @@ From the results, we saw that the first 5 responses are invalid years.
 
 ## Modifying Data - mutate()
 
-We have a variable, "qr_year" with five invalid cases. They should be years, but are some other numbers. Let's change those to mising observations using `mutate()`. `mutate()` allows us to change and create variables (literally mutate the data).
+We have a variable, "qr_year" with five invalid cases. They should be years, but are some other numbers. Let's change those to mising observations using `mutate()` from the `tidyverse. `mutate()` allows us to change and create variables (literally mutate the data).
 
 ```{r}
 #run this to change the variable
@@ -486,21 +492,18 @@ rsurvey %>%
   head(n=10)
 ```
 
-What we did:
-
-* `rsurvey <-` means we will save our fixed data to the "rsurvey" data object. Essentially, we are overwriting the data object that already exists.
-* `rsurvey %>%` tells R to use "rsurvey" and...
-* `mutate(qr_year2` create a new variable, "qr_year2"
-* `=` which is equal to the following command
-* `ifelse(qr_year < 1977, NA, qr_year))` if qr_year is less than 1977, write NA, otherwise (`else`), write the year from qr_year
-
-`ifelse` is a conditional statement that says: `ifelse(if this condition is true, then do this, otherwise do this)`.
+> **What does the code mean?**
+>
+> * `rsurvey <-` means we will save our fixed data to the "rsurvey" data object. Essentially, we are overwriting the data object that already exists.
+> * `rsurvey %>%` tells R to use "rsurvey" and...
+> * `mutate(qr_year2` create a new variable, "qr_year2"
+> * `=` which is equal to the following command
+> * `ifelse(qr_year < 1977, NA, qr_year))` if qr_year is less than 1977, write NA, otherwise (`else`), write the year from qr_year
+>   + `ifelse` is a conditional statement that says: `ifelse(if this condition is true, then do this, otherwise do this)`.
 
 ## Reordering Categories - factor()
 
-Recode allows you to take a numeric value in a dataset and assign it a label, for example make 1 = "apple", or the opposite, for example, make "apple" = 1.
-
-Many of the factors (categories) in our R survey dataset have already been coded to a numeric value, automatically. However, this does not mean the mapping of the number to the factor is correct.
+Many of the factors (categories) in our R survey dataset have been coded to a numeric value, automatically. However, this does not mean the mapping of the number to the factor is correct.
 
 Let's run this code in the **console** to check. Since we are just checking, we don't really want to include this in our script, so we can do basic exploration in the console.
 
@@ -528,18 +531,18 @@ recoded %>% count(qr_experience2)
 
 Now our factors are in the correct order and if we wanted to do some statistical test, it would be much more accurate.
 
-What did we do?
-
-* `recoded <-` creates a new data object. We could have overwritten our previous object, but this is to show you the result of recoding.
-* `rsurvey %>%` tells R to use the "rsurvey" data object and...
-* `select(qr_experience) %>%` means we are only going to keep this variable in our data (to make demonstration easier), and 
-* `mutate(` means we are going to make a change
-* `qr_experience2 =` we will create a new variable "qr_experience2" equal to the next command
-  + Note: we could have done `mutate(qr_experience)` and overwritten our column, but if we create a new variable, we can compare them side by side (for demonstration purposes)
-* `factor(qr_experience,` make a factor from "qr_experience"
-* `levels=c("None","Beginner", "Intermediate", "Expert", NA ))` set the level names and orders to these.
-  + Note that `NA` refers to missing data and is **not** in quotes
-* `)` this final parentheses closes the `mutate` function. If you place your cursor after it, the corresponding opening parentheses will be highlighted. This is an easy way to check that you have closed all functions, useful for debugging problems.
+> **What does the code mean?**
+> 
+> * `recoded <-` creates a new data object. We could have overwritten our previous object, but this is to show you the result of recoding.
+> * `rsurvey %>%` tells R to use the "rsurvey" data object and...
+> * `select(qr_experience) %>%` means we are only going to keep this variable in our data (to make demonstration easier), and 
+> * `mutate(` means we are going to make a change
+> * `qr_experience2 =` we will create a new variable "qr_experience2" equal to the next command
+>  + Note: we could have done `mutate(qr_experience)` and overwritten our column, but if we create a new variable, we can compare them side by side (for demonstration purposes)
+> * `factor(qr_experience,` make a factor from "qr_experience"
+> * `levels=c("None","Beginner", "Intermediate", "Expert", NA ))` set the level names and orders to these.
+>  + Note that `NA` refers to missing data and is **not** in quotes
+> * `)` this final parentheses closes the `mutate` function. If you place your cursor after it, the corresponding opening parentheses will be highlighted. This is an easy way to check that you have closed all functions, useful for debugging problems.
   )
   
 This works, so lets apply it to the real data set:
@@ -558,10 +561,10 @@ On the Learning R survey, there was a question about what industry people were i
 ```{r}
 rsurvey %>%
   count(qindustry) %>%
-  slice(1:20)
+  slice(1:10)
 ```
 
-The `count()` function counts *unique* values. However, you will notice that many are repeated. That is likely due to random whitespace in or around the text entries. We can use several functions `str_trim()` from `tidyverse`'s `stringr` package to fix this.
+The `count()` function counts *unique* values. However, you will notice that many are repeated. That is likely due to random whitespace in or around the text entries. We can use several different functions from `tidyverse`'s `stringr` package to fix this.
 
 `stringr` is loaded when the `tidyverse` is loaded, so we don't need to load another library.
 
@@ -572,7 +575,7 @@ rsurvey <- rsurvey %>%
   mutate(qindustry = str_squish(tolower(qindustry)))
 ```
 
-Let's check. You can type this in the console. We will select only "qindustry" and "qindustry2" to compare them:
+Let's check. You can type this in the console.
 
 ```{r}
 rsurvey %>%
@@ -580,24 +583,26 @@ rsurvey %>%
   slice(1:10)
 ```
 
-Hmm. That reduced the number of unique values to 125. That is not ideal, but we have a few more tools we can use to fix this.
+This reduced the number of unique values to 125. That is not ideal, but we have a few more tools we can use to fix this.
 
-First, what did we do?
-
-  * `rsurvey <- ` - saves the following commands to the "rsurvey" data object
-  * `rsurvey %>%` - means to use the "rsurvey" data object "and then"
-  * `mutate(` - change the data
-  * `qindustry = ` - make the column "qindustry" equal to the following
-  * `str_squish(` - trim the whitespace in the following string
-  * `tolower(qindustry)))` - make the string lowercase and close all parentheses
+> **First, what does the code mean?**
+>
+>  * `rsurvey <- ` - saves the following commands to the "rsurvey" data object
+>  * `rsurvey %>%` - means to use the "rsurvey" data object "and then"
+>  * `mutate(` - change the data
+>  * `qindustry = ` - make the column "qindustry" equal to the following
+>  * `str_squish(` - trim the whitespace in the following string
+>  * `tolower(qindustry)))` - make the string lowercase and close all parentheses
   
-**A Note about Parentheses ( )**
 
+> **A Note about Parentheses ( )**
+>
 > In R, it can be easy to become lost with your open and closing parentheses. RStudio provides parenthesese highlighting. Place your cursor on the *right* side of any parentheses (open or close) and it will highlight to corresponding one. This is a quick way to debug a common problem.
 
 ## Combining Categories - case_when()
 
-Looking through the list of jobs, there are some clear categories that we can combine jobs into. For example, *agriculture*, *agriculture and anaimal science*, and *agrifood* can all be combine into an "agriculture" category. Here is what we will do. We will use three functions to do this:
+Looking through the list of jobs, there are some clear categories that we can combine jobs into. For example, *agriculture*, *agriculture and anaimal science*, and *agrifood* can all be combine into an "agriculture" category. We will use three functions to do this:
+
   * `mutate()` to change or create new variables
   * `case_when()` as a kind of if/else command
   * `str_detect()` to select specified text
@@ -609,26 +614,29 @@ rsurvey <- rsurvey %>%
     industry = case_when(
       str_detect(qindustry, "agri") ~ "agriculture",
       TRUE ~ qindustry
-    )
-  )
+    ))
 
-# and check total number - it should
+# and check total number
 rsurvey %>% 
   select(industry) %>%
-  distinct() %>% #remove duplicates
+  distinct() %>% #this line removes duplicates
   count()
 ```
+
 We now have 123 rows. Let's see what we did, and then expand it:
 
-  * `rsurvey <-` - assign to the "rsurvey" object
-  * `rsurvey %>%` - use "rsurvey" and then
-  * `mutate(` - change or create a variable
-  * `industry = case_when(` - create the variable "industry" when
-  * `str_detect(qindustry, "agri")` - R detects "agri" in the "qindustry" columns"
-  * `~ "agriculture",` - and rename them "agriculture"
-  * `TRUE ~ qindustry` - everything else is named the name they have in "qindustry"
+> **What does the code mean?**
+>
+>  * `rsurvey <-` - assign to the "rsurvey" object
+>  * `rsurvey %>%` - use "rsurvey" and then
+>  * `mutate(` - change or create a variable
+>  * `industry = case_when(` - create the variable "industry" when
+>  * `str_detect(qindustry, "agri")` - R detects "agri" in the "qindustry" columns"
+>  * `~ "agriculture",` - and rename them "agriculture"
+>  * `TRUE ~ qindustry` - everything else is named the name they have in "qindustry"
+> * `))` closes our functions
   
-Let's exand this to categorize as much as possible. To do this efficiently, We will run `rsurvey$industry` in the *console* and scroll through it as we create categories
+Let's expand this to categorize as much as possible. To do this efficiently, We will run `rsurvey$industry` in the *console* and scroll through it as we create categories
 
 ```{r}
 # combine into "agriculture"
@@ -652,15 +660,16 @@ rsurvey <- rsurvey %>%
 rsurvey %>% count(industry)
 ```
 
-This code got out data down to 9 categories. The categories are neither perfect nor exhaustive, but they are functional. This is a lesson in working with open-ended data on surveys. A question like this should really have limited options, otherwise, there is a lot to clean!
+This code got our data down to 9 categories. The categories are neither perfect nor exhaustive, but they are functional. This is a lesson in working with open-ended data on surveys. A question like this should really have limited options, otherwise, there is a lot to clean!
 
-**A Note About Spacing and Tabs**
-
+> **A Note About Spacing and Tabs**
+>
 >You may have noticed that in the code above, `mutate()` was on its own line and there were two parentheses also on their own line. You may have also noticed `mutate()` was indented as was `str_detect()`. These are not required for the code to function, but are useful to keep the code organized.
+>
+>It is recommend to start a new function after the %>% pipe operator on a new line. It is also recommended to create a new line after a parentheses if it will contain multiple or long arguments.
 
->It is recommend to start a new function after the %>% pipe operator on a new line. It is also recommended to create a new line after a parentheses( if it will contain multiple or long arguments.
+What did we do differently in the code above?
 
-What did we do differently?
   * `"law|legal"` - You will notice we used the | pipe symbol. This stands for "or". This command means to look for "law" or "legal".
   * `"envi|forest|geo|natural|wildlife|sustain"` - You will notice we did not use complete words. `str_detect()` looks for patterns of string and does not need the complete words unless there are many similar string.
     + This means "envi" could look for *environment*, *environments*, or *environmental*.
@@ -669,7 +678,7 @@ What did we do differently?
 
 ## Splitting variables with split()
 
-The Learning R survey contained a few check-all question types. Depending on the survey platform, these questions either create a new column for each choice or combine all choices in a single column. The Learning R survey did the latter. For example, the question "What applications do you use R for most? (check all that apply)" for the variable qused_for looks like this:
+The Learning R survey contained a few check-all question types. Depending on the survey platform, these questions either create a new column for each choice or combine all choices in a single column. The Learning R survey did the latter. For example, the question "What applications do you use R for most? (check all that apply)" for the variable "qused_for" looks like this:
 
 ```{r}
 head(rsurvey$qused_for)
@@ -697,13 +706,13 @@ rsurvey <- rsurvey %>%
 
 The original data object had 56 variables. The new data object now has 66. This means we have removed the "qused_for" variable and replaced it with 11 more.
 
-What did we do?
-
-  * `rsurvey <-` - assign the new resulting data to "rsurvey"
-  * `rsurvey %>%` - use "rsurvey" and then
-  * `separate(qused_for, sep = ",",` - separate "qused_for" by using the commas
-  * `into = paste0("use_", 1:11))` - into 11 columns, with the name "use_" pasted to each column, from 1 to (:) 11.
-    + Note: we could have written `into = c("use_1", "use_2"...)` but that would have taken a LONG time. Using `paste0()` is much faster.
+> **What does the code mean?**
+>
+>  * `rsurvey <-` - assign the new resulting data to "rsurvey"
+>  * `rsurvey %>%` - use "rsurvey" and then
+>  * `separate(qused_for, sep = ",",` - separate "qused_for" by using the commas
+>  * `into = paste0("use_", 1:11))` - into 11 columns, with the name "use_" pasted to each column, from 1 to (:) 11.
+ >   + Note: we could have written `into = c("use_1", "use_2"...)` but that would have taken a LONG time. Using `paste0()` from base `R` is much faster.
     
 Working with check-all data can be tricky because it requires a lot of columns. We really need to do more transformation of the data. We will revisit this variable in the section on pivoting data.
 
@@ -720,15 +729,13 @@ This is a simple function to allows you to find the mean of data. You can use it
 mean(rsurvey$age, na.rm = T)
 ```
 
-You should note that for both, what was returned was unexpected. For the base `R` sytnax, "NA" was returned. For the `tidyverse` syntax, an error was returned. Both of these occured because the column has `NA`s which cannot be calculated in the `mean()` function. We need to remove the `NA`s:
-
-**A Note About TRUE and FALSE**
-
+> **A Note About TRUE and FALSE**
+> 
 >There are many functions that require a logical argument. To save time, you can usually write T or F instead of the whole word.
 
 ### Median - median()
 
-You can do the same calculation with the `median()` function:
+You can do the same calculation with base `R`'s `median()` function:
 
 ```{r}
 median(rsurvey$age, na.rm = T)
@@ -736,7 +743,7 @@ median(rsurvey$age, na.rm = T)
 
 ### Using the summarize() function - summarize()
 
-We can use the `tidyverse`'s `summarize()` function to do multiple descriptives in one command. `summarize()` is similar to `mutate()` in that it create new columns. However, instead of appending a column to a data frame, it literally summarizes and condenses all data into the number of columns specififed. Here is an example:
+We can use the `tidyverse`'s `summarize()` function to do multiple descriptives in one command. `summarize()` is similar to `mutate()` in that it create new columns. However, instead of appending a column to a data frame, it literally summarizes and condenses all data into the number of columns specified. Here is an example:
 
 ```{r}
 rsurvey %>%
@@ -746,21 +753,22 @@ rsurvey %>%
             n = n())
 ```
 
-What did we do?
-
-  * `rsurvey %>%` - use "rsurvey" and then
-    + Note: We are not assigning this to anything because we are just exploring the data. There is no need to create a data object.
-  * `drop_na(age) %>% ` - rather than write `na.rm=T` for each function, we will just drop all `NA`s for "age" first and then
-  * `summarize(` - create a summary data frame
-  * `avg = mean(age)` - create a column "avg" with the mean of "age"
-  * `mid = median(age)` - create a column "mid" with the median of "age"
-  * `n = n()` - create a column "n" with the sample size of "age"
+> **What does the code mean?**
+>
+>  * `rsurvey %>%` - use "rsurvey" and then
+>    + Note: We are not assigning this to anything because we are just exploring the data. There is no need to create a data object.
+>  * `drop_na(age) %>% ` - rather than write `na.rm=T` for each function, we will just drop all `NA`s for "age" first and then
+>     + `drop_na()` is from `tidyr`, part of the `tidyverse`
+>  * `summarize(` - create a summary data frame
+>  * `avg = mean(age)` - create a column "avg" with the mean of "age"
+>  * `mid = median(age)` - create a column "mid" with the median of "age"
+>  * `n = n()` - create a column "n" with the sample size of "age"
   
 ### Analyzing Data by Groups - group_by()
 
-What if we want to view the proportion of ages in the data set, or the ages broken down by group? We can use the `group_by()` function:
+What if we want to view the proportion of ages in the data set, or the ages broken down by group? We can use the `group_by()` function from `dplyr` in the `tidyverse`:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 rsurvey %>%
   drop_na(age) %>%
   group_by(age) %>%
@@ -771,14 +779,14 @@ rsurvey %>%
   )
 ```
 
-Here is what we did:
-
-  * `rsurvey %>%` - use "rsurvey" and then
-  * `drop_na(age) %>%` - drop the `NA`s based on "age" and then
-  * `group_by(age) %>%` - group the data by "age" and then
-  * `summarize(n = n()) %>%` - create a summary data frame that counts the sample size for each group and then
-  * `ungroup() %>%` - ungroup the data and then
-  * `mutate(proportion = prop.table(n))` - create a new column, "proportion" that takes the proportion of each age based on the count of "n"
+> **What does the code mean?**
+>
+>  * `rsurvey %>%` - use "rsurvey" and then
+>  * `drop_na(age) %>%` - drop the `NA`s based on "age" and then
+>  * `group_by(age) %>%` - group the data by "age" and then
+>  * `summarize(n = n()) %>%` - create a summary data frame that counts the sample size for each group and then
+>  * `ungroup() %>%` - ungroup the data and then
+>  * `mutate(proportion = prop.table(n))` - create a new column, "proportion" that takes the proportion of each age based on the count of "n"
   
 ## Spotting Outliers
 
@@ -798,6 +806,8 @@ We could also use a boxplot:
 boxplot(rsurvey$age)
 ```
 
+*Note: for more information on graphing data, see the Data Visualization chapters.*
+
 The graphs above shows that there are four possible outliers. These outliers have ages over 100. We can search for them in the data to see what is going on with them:
 
 ```{r}
@@ -816,13 +826,14 @@ We can also see if a category contains any numeric outliers based on another var
 ```{r}
 plot(age ~ qr_experience, data=rsurvey)
 ```
+
 The graph above shows the four same extreme outliers. It also shows beginner, intermediate, and expert responses have some higher ages, but they don't suggest any surprising outliers, especially because each of the three have high ages.
 
-What did we do?
-
-  * `plot(` - make a plot
-  * `age ~ qr_experience,` - plot age by (~) experience
-  * `data=rsurvey)` - from the "rsurvey" data frame
+> **What does the code mean?**
+>
+>  * `plot(` - make a plot
+>  * `age ~ qr_experience,` - plot age by (~) experience
+>  * `data=rsurvey)` - from the "rsurvey" data frame
 
 
 
@@ -839,7 +850,7 @@ rsurvey$z_of_age <- (rsurvey$age - mean(rsurvey$age, na.rm=T))/sd(rsurvey$age, n
 summary(rsurvey$z_of_age)
 ```
 
-But, we could also load a package and use a function to do it quickly. For example, the `effectsize` package has a `standardize()` function.
+However, we could also load a package and use a function to do it quickly. For example, the `effectsize` package has a `standardize()` function.
 
 ```{r message=FALSE, warning=FALSE}
 # install package if needed
@@ -875,11 +886,11 @@ Let's look at the plot again:
 plot(rsurvey$age2)
 ```
 
-There are no clear outliers for the "age" variable.
+There are now no clear outliers for the "age" variable.
 
 #### Filtering
 
-Rather than transforming that data, you could simply use `filter()` to temporarily remove it for some function. For example:
+Rather than deleting that data, you could simply use `filter()` to temporarily remove it. For example:
 
 ```{r}
 rsurvey %>%
@@ -887,15 +898,15 @@ rsurvey %>%
   with(plot(age))
 ```
 
-In the formula above, `with()` is a base `R` function that uses the data from a `tidyverse` chain (functions with %>%). Using strictly base R would require more steps, including creating a new dataframe:
+In the formula above, `with()` is a base `R` function that uses the data from a `tidyverse` chain (functions with %>%). Using strictly base `R` would require more steps, including creating a new data frame:
 
 ```{r}
 filtered <- subset(rsurvey, age < 99)
 plot(filtered$age)
 ```
 
-**A Note about "Deleting" Values**
-
+> **A Note about "Deleting" Values**
+>
 >It is never a good idea to delete or overwrite your raw data. Recall that we have a "raw_data" data object that we have not transformed in any way. All transformations have been done in new data objects and, sometimes, in new variables. This is good practice so that we can assess our changes and revert our changes if necessary.
 
 #### Winsorizing
@@ -927,7 +938,7 @@ Normality can be visually assessed with a histogram. A quick histogram can be ma
 hist(rsurvey$age)
 ```
 
-More advanced histograms can be made with ggplot. See [Data Visualization with ggplot]
+For additional information on creating more detailed and advanced histograms, See [Data Visualization with `ggplot`]
 
 ### Density (Curve) Plots
 
@@ -947,7 +958,7 @@ qqnorm(rsurvey$age)
 
 ### Skewness and Kurtosis
 
-There are a number of ways to get skewness and kurtosis.
+There are a number of ways to get values for skewness and kurtosis.
 
 You can get the values alongside other stats with the `psych` package's `describe()`
 
@@ -977,7 +988,7 @@ See `?shapio.test` and `?ks.test` for more information.
 
 ### Transforming Variables
 
-If you wish to deal with non-normality by transforming variables, you can use these methods ([DataNovia, n.d.](https://www.datanovia.com/en/lessons/transform-data-to-normal-distribution-in-r/#transformation-methods)):
+The following as some of the many methods you can use if you wish to deal with non-normality by transforming variables ([DataNovia, n.d.](https://www.datanovia.com/en/lessons/transform-data-to-normal-distribution-in-r/#transformation-methods)):
 
   * Square Roots
     + `sqrt(x)` for positive skew
@@ -990,20 +1001,15 @@ If you wish to deal with non-normality by transforming variables, you can use th
     + `1/max(x+1)` for negative skew
 
 
-## Working with Missing Data
-
-Missing data in `R` is represented by `NA`.
-https://towardsdatascience.com/data-cleaning-with-r-and-the-tidyverse-detecting-missing-values-ea23c519bc62
-
 ## Identifying missing data
 
 There are a number of ways to identify missing data in R.
 
 ### Per Variable
 
-We have already seen a number of ways to view and summarize data [Viewing Data]. There are several other functions that can be useful.
+We have already seen a number of ways to view and summarize data [Viewing Your Data]. There are several other functions that can be useful.
 
-You can use `is.na` to look at `NA` values:
+You can use `is.na` to get the proportion of `NA` values:
 
 
 ```{r message=FALSE, warning=FALSE}
@@ -1011,7 +1017,7 @@ mean(is.na(rsurvey$age))
 ```
 
 
-This means that around 6% of the "age" variable is misisng.
+This means that around 6% of the "age" variable is missing.
 
 Conversely, you can also use `complete.cases` to see how many cases are *not* missing:
 
@@ -1024,30 +1030,31 @@ Conversely, you can also use `complete.cases` to see how many cases are *not* mi
 
 ### Entire Data Frame
 
-We can look at an entire data frame by using `summarize_all`, part of the `summarize` family of verbs in `dplyr` (part of `tidyverse`).
+We can look at an entire data frame by using `summarize_all`, part of the `summarize` family of functions in `dplyr` (part of `tidyverse`).
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 missing <- rsurvey %>%
   summarize_all(funs(mean(is.na(.))))
 ```
 
 This will produce a new data object where each column has 1 row, and that row is the percent missing. 
 
-What we did:
+> **What does the code mean?**
+>
+>  * `missing <- ` - assign everything to a new data frame (this step is optional and you could just explore everything in the console)
+>  * `rsurvey %>% ` - use "rsurvey" and
+>  * `summarize_all(` - summarize every column
+>  * `funs(` - use the following function ("funs") to summarize everything
+>  * `mean(is.na(.))))` - take the mean of missing data.
+>    + the `.` in parentheses means to use the entire data frame
+>    + We need to include it because `is.na` requires an argument
 
-  * `missing <- ` - assign everything to a new data frame (this step is optional and you could just explore everything in the console)
-  * `rsurvey %>% ` - use "rsurvey" and
-  * `summarize_all(` - summarize every column
-  * `funs(` - use the following function ("funs") to summarize everything
-  * `mean(is.na(.))))` - take the mean of missing data.
-    + the `.` means to use the entire data frame
-    + We need to include it because `is.na` requires an argument
-    
-**A Note on `summarize`**
+  
+> **A Note on `summarize`**
+>
+> `summarize` is a family of verbs in `dplyr` that includes `summarize`, `summarize_if`, `summarize_at` (for specific columns), and `summarize_all`. You may also see it spelled as `summarise` - this is the same function. Check out `?summarize_all` for more information.
 
-> `summarize` is a family of verbs in `dplyr` that includes `summarize`, `summarize_if`, `summarize_at` (for specific columns), and `summarize_all`. You may also see it spelled as `summarise` - this is the same function. Check out `?summarize_all`.
-
-Let's quickly view what that looks like using `glimpse()`. This will print the columns and first row veritcally in the console. Because there are 67 columns, we will just look at the first 10.
+Let's quickly view what this new missing object looks like using `glimpse()`. This will print the columns and first row vertically in the console. Because there are 67 columns, we will just look at the first 10.
 
 ```{r}
 glimpse(missing[1:10])
@@ -1066,24 +1073,27 @@ missing %>%
   geom_col()
 ```
 
-This code introduces some new concepts that will be covered later, so the following explanation will not go into detail, but here is what we did:
+This code introduces some new concepts that will be covered later, so the following explanation will not go into detail.
 
-  * `missing %>%` - use the "missing" data frame
-  * `pivot_longer(qtime:age2, names_to = "variable", values_to = "pct") %>%` - our "missing" data frame had 1 row and 67 columns. By using `pivot_longer`, we "flipped" our data frame so it had 2 columns ("variable" and "pct") and 67 rows. This is easier to visualize.
-  * `filter(pct > 0) %>%` - we removed any columns with no missing data
-  * `filter(!str_detect(variable, "use_")) %>%` we removed any columns that started with "use_" because those are check-all questions.
-    + note the `!` at the beginning means "is not" or "does not", so this says to filter any columns that does not start with "use_to"
-  * `ggplot(aes(x=reorder(variable, pct), y=pct)) +` - this line introduces a powerful visualization tool, `ggplot`, which will be covered later. It says to use "variable on the x-axis (and order it by "pct" so that it is in descending order) and use "pct" on the y-axis.
-    + Note that a quirk of `ggplot` is that it uses `+` instead of `%>%` despite being part of the `tidyverse`
-  *  `coord_flip() +` this will flip the visual to make the bar chart horizontal
-  * `geom_col()` - this means we will make a column (bar) chart
+> **What does the code mean?**
+>
+>  * `missing %>%` - use the "missing" data frame
+>  * `pivot_longer(qtime:age2, names_to = "variable", values_to = "pct") %>%` - our "missing" data frame had 1 row and 67 columns. By using `pivot_longer`, we "flipped" our data frame so it had 2 columns ("variable" and "pct") and 67 rows. This is easier to visualize.
+>  * `filter(pct > 0) %>%` - we removed any columns with no missing data
+>  * `filter(!str_detect(variable, "use_")) %>%` we removed any columns that started with "use_" because those are check-all questions.
+>    + note the `!` at the beginning means "is not" or "does not", so this says to filter any columns that does not start with "use_to"
+>  * `ggplot(aes(x=reorder(variable, pct), y=pct)) +` - this line introduces a powerful visualization tool, `ggplot`, which will be covered later. It says to use "variable on the x-axis (and order it by "pct" so that it is in descending order) and use "pct" on the y-axis.
+>    + Note that a quirk of `ggplot` is that it uses `+` instead of `%>%` despite being part of the `tidyverse`
+>  *  `coord_flip() +` this will flip the visual to make the bar chart horizontal
+>  * `geom_col()` - this means we will make a column (bar) chart
 
+*See [Data Visualization with `ggplot`] for more information.*
 
 ## Dropping missing data
 
 You can remove missing data by using `drop_na()`.
 
-If you use `drop_na()` without including columns in the `()`, it will drop rows that are missing values in any column. This will severely reduce your data frame. If we run the following code, it will drop everything and you will have 0 observations because every row has across has at least 1 missing value somewhere.
+If you use `drop_na()` without including columns in the `()`, it will drop rows that are missing values in any column. This will severely reduce your data frame. If we run the following code, it will drop everything and you will have 0 observations because every row has at least 1 missing value somewhere.
 
 ```{r}
 missing_dropped_all <- rsurvey %>%
@@ -1092,14 +1102,14 @@ missing_dropped_all <- rsurvey %>%
 head(missing_dropped_all[1:5])
 ```
 
-This is useful if you have selected (with `select()` or `subset()`) a single column or a small group of columns and you do want to drop any missing data, but in general, you may want to specify columns:
+This command is useful if you have selected (with `select()` or `subset()`) a single column or a small group of columns and you do want to drop any missing data, but in general, you may want to specify columns:
 
 ```{r}
 missing_dropped_some <- rsurvey %>%
   drop_na(age)
 ```
 
-This will remove all rows with misisng data in the age variable.
+This will remove all rows with missing data in the age variable.
 Compared "rsurvey" to "missing_dropped_some" and you will see less observations.
 
 ## Replacing missing data with 0s
@@ -1126,7 +1136,7 @@ mean(zero_ages$age)
 
 ## Mean imputation
 
-**If warranted**, we can easily replace missing data with means (or medians) like so:
+*If warranted*, we can easily replace missing data with means (or medians) like so:
 
 ```{r}
 mean_imputation <- rsurvey %>%

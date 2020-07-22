@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.Ruserdata
+_book/
+_bookdown_files
+rsconnect/
+learnr/
+*.html

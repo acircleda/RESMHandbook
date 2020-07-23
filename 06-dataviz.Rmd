@@ -1,4 +1,5 @@
 # Data Visualization in Base R
+
 As was indicated by the title of this section, none of the functions in this section of the document require any external packages in order to be run.
 
 We will begin this section by creating the data set that we will be working with. This data set will consist of a sample of 100 undergraduate students' math and reading test scores. The test scores are on a scale of 0 to 100. Each individual has also been assigned to either the Paper Test format or the Electronic Test format in the TestFormat condition and either the Classroom setting or Home setting in the TestLocation condition. Using this data we will explore scatter plots, bar graphs, histograms, and box plots. The following lines of code create the data set and set up the data frames we will need:
@@ -26,24 +27,29 @@ ElectronicTestClassroom<-Data[which(Data$TestFormat=="Electronic" & Data$TestLoc
 ```
 
 ##Scatter Plot
+
 The first data visualization we will be working with is the scatter plot.
 
 The following line of code creates a basic scatter plot using the ```plot()``` function.
+
 ```{r echo = T}
 plot(Data$MathGrade,Data$ReadingGrade)
 ```
 
 This is a very basic plot, and it is lacking a lot of the important details that most visualizations include. To make this a little nicer, lets begin with adding a title.
+
 ```{r echo = T}
 plot(Data$MathGrade,Data$ReadingGrade,main = "Title")
 ```
 
 We can also add a subtitle to the graph as well.
+
 ```{r echo = T}
 plot(Data$MathGrade,Data$ReadingGrade,main = "Title",sub = "Subtitle")
 ```
 
 Another adjustment we may want to make to the graph is changing the axis labels.  
+
 ```{r echo = T}
 plot(Data$MathGrade,Data$ReadingGrade,main = "Title",sub = "Subtitle",
 xlab = "x-axis", ylab = "y-axis")
@@ -58,6 +64,7 @@ xlab = "x-axis", ylab = "y-axis",xlim = c(0,100),ylim = c(0,100))
 ```
 
 Depending on how you intend on using the graph, you may also decide to remove the border around it.
+
 ```{r echo = T}
 plot(Data$MathGrade,Data$ReadingGrade,main = "Title",sub = "Subtitle",
 xlab = "x-axis", ylab = "y-axis",xlim = c(0,100),ylim = c(0,100),
@@ -65,6 +72,7 @@ frame.plot = F)
 ```
 
 And maybe the axis scales as well.
+
 ```{r echo = T}
 plot(Data$MathGrade,Data$ReadingGrade,main = "Title",sub = "Subtitle",
 xlab = "x-axis", ylab = "y-axis",xlim = c(0,100),ylim = c(0,100),
@@ -72,6 +80,7 @@ axes = F)
 ```
 
 Now, using everything we have gone over so far in context.
+
 ```{r echo = T}
 plot(Data$MathGrade,Data$ReadingGrade,main = "Math Grade VS Reading Grade",
 sub = "All conditions",xlab = "Math Grade", ylab = "Reading Grade",
@@ -79,33 +88,40 @@ xlim = c(0,100),ylim = c(0,100))
 ```
 
 We can also plot our data based on the different groups we created earlier. The following four plots show the math vs reading scartter plots for each of our four marginal groups: Paper Test, Electronc Test, Classroom location, and Home location.
+
 ```{r echo = T}
 plot(PaperTest$MathGrade,PaperTest$ReadingGrade,main = "Math Grade VS Reading Grade",
 sub = "Paper Test",xlab = "Math Grade", ylab = "Reading Grade",
 xlim = c(0,100),ylim = c(0,100))
 ```
+
 ```{r echo = T}
 plot(ElectronicTest$MathGrade,ElectronicTest$ReadingGrade,
 main = "Math Grade VS Reading Grade",sub = "Electronic Test",xlab = "Math Grade", 
 ylab = "Reading Grade",xlim = c(0,100),ylim = c(0,100))
 ```
+
 ```{r echo = T}
 plot(Classroom$MathGrade,Classroom$ReadingGrade,main = "Math Grade VS Reading Grade",
 sub = "Classroom",xlab = "Math Grade", ylab = "Reading Grade",
 xlim = c(0,100),ylim = c(0,100))
 ```
+
 ```{r echo = T}
 plot(Home$MathGrade,Home$ReadingGrade,main = "Math Grade VS Reading Grade",sub = "Home",
 xlab = "Math Grade", ylab = "Reading Grade",xlim = c(0,100),ylim = c(0,100))
 ```
 
 We can plot the opposing graphs (Paper and Electronc; Classroom and Home) side by side by setting the number of plots on the screen using the following code:
+
 ```{r echo = T}
 par(mfrow=c(1,2))
 ```
+
 The first number sets the number of rows of graphs to be displayed and the second sets the number of columns.
 
 Once you have set the number of graphs you want to appear at a time, you can create the graphs.
+
 ```{r echo = T}
 par(mfrow=c(1,2))
 plot(PaperTest$MathGrade,PaperTest$ReadingGrade,main = "Math Grade VS Reading Grade",
@@ -115,6 +131,7 @@ plot(ElectronicTest$MathGrade,ElectronicTest$ReadingGrade,
 main = "Math Grade VS Reading Grade",sub = "Electronic Test",xlab = "Math Grade",
 ylab = "Reading Grade",xlim = c(0,100),ylim = c(0,100))
 ```
+
 ```{r echo = T}
 par(mfrow=c(1,2))
 plot(Classroom$MathGrade,Classroom$ReadingGrade,main = "Math Grade VS Reading Grade",
@@ -126,12 +143,14 @@ xlim = c(0,100),ylim = c(0,100))
 ```
 
 Running either of the next two lines resets the plots back to one per screen.
+
 ```{r echo = T}
 par(mfrow=c(1,1))
 dev.off()
 ```
 
 We can also plot different conditions on the same graph using the points function ```col=``` can be used to change the points colors and ```pch=``` can be used to change their shapes.
+
 ```{r echo = T}
 plot(PaperTest$MathGrade,PaperTest$ReadingGrade,main = "Math Grade VS Reading Grade",
 sub = "Test Types",xlab = "Math Grade", ylab = "Reading Grade",
@@ -144,7 +163,8 @@ xlim = c(0,100),ylim = c(0,100))
 points(Home$MathGrade,Home$ReadingGrade,col="blue",pch=2)
 ```
 
-Now that we are including multiple conditions on one plot, we might want to add a legend so we can ideantify which groups the colors and/or shapes indicate. This can be done using the legend function. The legend's position can be changed by writing different locations such as: topleft, topright, bottomleft, and bottomright
+Now that we are including multiple conditions on one plot, we might want to add a legend so we can ideantify which groups the colors and/or shapes indicate. This can be done using the legend function. The legend's position can be changed by writing different locations such as: topleft, topright, bottomleft, and bottomright.
+
 ```{r echo = T}
 plot(PaperTest$MathGrade,PaperTest$ReadingGrade,main = "Math Grade VS Reading Grade",
      sub = "Test Types",xlab = "Math Grade", ylab = "Reading Grade",
@@ -161,6 +181,7 @@ legend("bottomleft",legend=c("Classroom","Home"),col=c("Black","Blue"),pch=c(1,2
 ```
 
 Finally, we can plot our four different condition combinations as seperate graphs.
+
 ```{r echo = T} 
 par(mfrow=c(2,2))
 plot(ElectronicTestClassroom$MathGrade,ElectronicTestClassroom$ReadingGrade,
@@ -179,6 +200,7 @@ par(mfrow=c(1,1))
 ```
 
 Or all on one graph with different point colors and shapes.
+
 ```{r echo = T}
 plot(ElectronicTestClassroom$MathGrade,ElectronicTestClassroom$ReadingGrade,
      main = "Math Grade VS Reading Grade",sub = "Test Locations",xlab = "Math Grade", 
@@ -193,6 +215,7 @@ legend("bottomleft",legend=c("Electronic/Classroom","Electronic/Home","Paper/Cla
 We can also add lines and text to any plot, which we will explore in the Histogram section.
 
 ## Bar Graph
+
 The next data visualization we will play with is the bar graph. However, before we can begin working with the barplot function and its arguments, we have to calculate the group means and create a new variable containing the group names to use when labeling our bars within the graphs. We will only be using the means for the math grades for these examples, but the same rules apply for the reading grade means as well.
 
 ```{r echo=T}
@@ -209,17 +232,20 @@ typelocationnames<-c("Electronic Test","Electronic Test","Paper Test","Paper Tes
 ```
 
 The following line of code creates a basic bar graph using the ```barplot()``` function.
+
 ```{r echo = T}
 barplot(mathmeanstypelocation,names.arg = typelocationnameslong)
 ```
 
 The default bar color is just white. We can change this using the `col=` arguement.
+
 ```{r echo=T}
 barplot(mathmeanstypelocation,names.arg = typelocationnameslong,
         col = c("Blue","Red","Blue","Red"))
 ```
 
 We should also add some labels to make it more clear what our graph is displaying.
+
 ```{r echo = T}
 barplot(mathmeanstypelocation,names.arg = typelocationnameslong,
         col = c("Blue","Red","Blue","Red"),main ="Math Grade Means",xlab ="Condition",
@@ -227,6 +253,7 @@ barplot(mathmeanstypelocation,names.arg = typelocationnameslong,
 ```
 
 Sometimes a legend might also help. We have added one to the next graphy to help shorten the condition names.
+
 ```{r echo = T}
 barplot(mathmeanstypelocation,names.arg = typelocationnames,
         col = c("Blue","Red","Blue","Red"),main ="Math Grade Means",xlab ="Condition",
@@ -234,13 +261,15 @@ barplot(mathmeanstypelocation,names.arg = typelocationnames,
 ```
 
 Unfortunately our new legend is covering some of our bar visuals. This can be fixed by changing the display window size or  the y-axis limits. 
+
 ```{r echo = T}
 barplot(mathmeanstypelocation,names.arg = typelocationnames,ylim=c(0,100),
         col = c("Blue","Red","Blue","Red"),main ="Math Grade Means",xlab ="Condition",
         ylab ="Mean Grade",legend=c("Classroom","Home"))
 ```
 
-In some situations, you may want to change the orientation of the bar labels. Using the `las=` aregument you can keep the horizontal with `las=1` or make them vertical with `las=2`
+In some situations, you may want to change the orientation of the bar labels. Using the `las=` aregument you can keep the horizontal with `las=1` or make them vertical with `las=2`.
+
 ```{r echo = T}
 barplot(mathmeanstypelocation,names.arg = typelocationnames,ylim=c(0,100),las=2,
         col = c("Blue","Red","Blue","Red"),main ="Math Grade Means",xlab ="Condition",
@@ -248,6 +277,7 @@ barplot(mathmeanstypelocation,names.arg = typelocationnames,ylim=c(0,100),las=2,
 ```
 
 Finally we can change the spacing of the bars to make them closer together. Each of the numbers indicates how much space should be between that bar and the one to its right. The value of the first number does not impact the spacing because there is no bar to the left of the first bar. The spacing also increases very quickly, so begin with values below 1 and increase them by 0.1 units at a time.
+
 ```{r echo = T}
 barplot(mathmeanstypelocation,names.arg = typelocationnames,ylim=c(0,100),las=1,
         col = c("Blue","Red","Blue","Red"),main ="Math Grade Means",xlab ="Condition",
@@ -255,25 +285,30 @@ barplot(mathmeanstypelocation,names.arg = typelocationnames,ylim=c(0,100),las=1,
 ```
 
 ## Histogram
+
 Next we will work with the `hist()` function and its arguments to create histograms.
 
 Here is a basic histogram of the math grades.
+
 ```{r echo =T}
 hist(Data$MathGrade)
 ```
 
-Just as we did in the bar graphs, we can also color in the bars and change the colors of the boarder around the bars
+Just as we did in the bar graphs, we can also color in the bars and change the colors of the boarder around the bars.
+
 ```{r echo = T}
 hist(Data$MathGrade,col = "Blue",border = "orange")
 ```
 
 Similarly, like all other plots we can also add a title and labels.
+
 ```{r echo = T}
 hist(Data$MathGrade,main = "Distribution of Math Grades",xlab = "Grades",
      ylab = "Count")
 ```
 
-And we can add limits to the two axes
+And we can add limits to the two axes.
+
 ```{r echo =T}
 hist(Data$MathGrade,main = "Distribution of Math Grades",xlab = "Grades",
      ylab = "Count",xlim = c(0,100),ylim = c(0,25))
@@ -305,47 +340,55 @@ text(x=28,y=15,labels = "Sometimes the lines and text are pointless",
 Once lines and text have been added to a plot, they cannot be removed. Luckily, simply rerunning the function to create the original plot will create a new clean version.
 
 ## Box Plot
+
 The final data visualization we will cover in this section is the box plot. We can make box plots for the math grades and reading grades using the `boxplot()` function.
+
 ```{r echo = T}
 boxplot(Data$MathGrade)
 boxplot(Data$ReadingGrade)
 ```
 
 By including both data sets, we can plot both grade distributions at once.
+
 ```{r echo=T}
 boxplot(Data$MathGrade,Data$ReadingGrade)
 ```
 
 We can also give the plot a title using `main=`.
+
 ```{r echo = T}
 boxplot(Data$MathGrade,Data$ReadingGrade,main="Box Plots")
 ```
 
 Each of the groups can also be given a label.
+
 ```{r echo = T}
 boxplot(Data$MathGrade,Data$ReadingGrade,main="Box Plots",
         names = c("Math Grade","Reading Grade"))
 ```
 
 You can also notch the plots around their medians. The notches provide a rough guide for determining if there is a significance of difference of medians.
+
 ```{r echo = T}
 boxplot(Data$MathGrade,Data$ReadingGrade,main="Box Plots",
         names = c("Math Grade","Reading Grade"),notch = T)
 ```
 
 The box plot function can also remove points which it has indicated as outliers.
+
 ```{r echo = T}
 boxplot(Data$MathGrade,Data$ReadingGrade,main="Box Plots",
         names = c("Math Grade","Reading Grade"),outline = F)
 ```
 
 Just like the box plots, we can add color to the box plots as well.
+
 ```{r echo = T}
 boxplot(Data$MathGrade,Data$ReadingGrade,main="Box Plots",
         names = c("Math Grade","Reading Grade"),col = c("Red","Blue"))
 ```
 
-Finally,box plots also provide the option to turn the graph horizontally.
+Finally, box plots also provide the option to turn the graph horizontally.
 ```{r echo = T}
 boxplot(Data$MathGrade,Data$ReadingGrade,main="Box Plots",
         names = c("Math Grade","Reading Grade"),horizontal = T)

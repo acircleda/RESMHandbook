@@ -26,7 +26,7 @@ ElectronicTestHome<-Data[which(Data$TestFormat=="Electronic" & Data$TestLocation
 ElectronicTestClassroom<-Data[which(Data$TestFormat=="Electronic" & Data$TestLocation=="Classroom"),]
 ```
 
-##Scatter Plot
+## Scatter Plot
 
 The first data visualization we will be working with is the scatter plot.
 
@@ -58,6 +58,7 @@ xlab = "x-axis", ylab = "y-axis")
 These can also be left blank by just putting ```xlab=""``` and ```lab=""```.
 
 It may also be a good idea to change the axis ranges as well.
+
 ```{r echo = T}
 plot(Data$MathGrade,Data$ReadingGrade,main = "Title",sub = "Subtitle",
 xlab = "x-axis", ylab = "y-axis",xlim = c(0,100),ylim = c(0,100))
@@ -389,6 +390,7 @@ boxplot(Data$MathGrade,Data$ReadingGrade,main="Box Plots",
 ```
 
 Finally, box plots also provide the option to turn the graph horizontally.
+
 ```{r echo = T}
 boxplot(Data$MathGrade,Data$ReadingGrade,main="Box Plots",
         names = c("Math Grade","Reading Grade"),horizontal = T)

@@ -1,16 +1,26 @@
 --- 
-title: <span style="color:#FF8200">R Handbook for ESM Students</span>
-author: "Evaluation, Statistics, and Measurement - University of Tennessee, Knoxville"
+title: <span style="color:#FF8200">R Software Handbook</span>
+author: "Evaluation, Statistics, and Methodology - University of Tennessee, Knoxville"
 date: "Last Updated `r Sys.Date()`"
 site: bookdown::bookdown_site
-# output: word_document
-output: bookdown::gitbook
+output:
+  word_document:
+    reference_docx: "template.docx"
+    toc: yes
+#output: bookdown::gitbook
 documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: acircleda/RESMHandbook
-description: "This is a handbook to help UTK Evaluation, Statistics, and Measruement students master R."
+description: "This is a handbook to help UTK Evaluation, Statistics, and Methodology students learn important R skills."
+
+# use this to render
+# bookdown::render_book("index.Rmd")
+
+# use this to publish
+# bookdown::publish_book(name = "RESMHandbook", account = "aschmi11", server = NULL, render = c("none", "local", "server"))
+
 ---
 
 
@@ -20,12 +30,16 @@ p {
 }
 ```
 
-![](cover_image.jpg)
+![](https://raw.githubusercontent.com/acircleda/RESMHandbook/master/cover_image.jpg)
 
-# Introduction {-}
+# Online Version {-}
+
+To view the online, interactive version of this handbook, please visit [https://bookdown.org/aschmi11/RESMHandbook/](https://bookdown.org/aschmi11/RESMHandbook/).
+
+# Introduction^[Originally created by Anthony Schmidt and Austin Boyd, ESM Doctoral Students] {-}
 
 
-Welcome to the R Handbook for ESM Students. This handbook is a hands-on guide to help you learn R. It will take you from installation, to set up, from data cleaning to analysis, visualizing, and reporting.
+Welcome to the R Handbook for ESM Students. This handbook is a hands-on guide to help you learn R. It will take you from installation and set up, to data cleaning, analysis, visualization, and reporting.
 
 <!-- Might modify this part if we include different data sets -->
 
@@ -33,7 +47,7 @@ This guide uses real data to help you practice with R. Specifically, it uses sur
 
 ## What is R? {-}
 
-**R** is a free, open-source programming language for statistics and data visualization. It is used in a variety of fields (e.g. science, business, education) and is considiered an in-demand skill to learn ([Muenchen, 2020](https://web.archive.org/web/20200416222014/https://r4stats.com/articles/popularity/)). As of June, 2020, R is also among the [top-10 most popular programming languages](https://www.tiobe.com/tiobe-index/).
+**R** is a free, open-source programming language for statistics and data visualization. It is used in a variety of fields (e.g. science, business, education) and is considered an in-demand skill to learn ([Muenchen, 2020](https://web.archive.org/web/20200416222014/https://r4stats.com/articles/popularity/)). As of June, 2020, R is also among the [top-10 most popular programming languages](https://www.tiobe.com/tiobe-index/).
 
 R is useful not only because it is popular, but because it facilitates a reproducible workflow where one can easily reproduce cleaning and analyses operations with minimal effort. Furthermore, because it is open-source, it allows users contribute to and expand its base functions, giving it the power to do things other statistical software packages cannot.
 

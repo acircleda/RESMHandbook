@@ -1,5 +1,9 @@
 # Data Visualization with `ggplot`
 
+> A great resource for data visualuation in `R` is the [**R Graph Gallery**](http://r-graph-gallery.com/). The examples and information below is a small sample of `R` data visualization basics.
+
+## `ggplot`
+
 `ggplot2` (referred to as `ggplot`) is a powerful graphics package that can be used to make very impressive data visualizations (see [contributions to #TidyTueday on Twitter](https://nsgrantham.shinyapps.io/tidytuesdayrocks/), for example). The following examples will make use of the Learning R Survey data, which has been partially processed (Chapters 2 and 3) and the `palmerpenguins` data set, as well as several of datasets included with `R` to show the basic principles of using `ggplot`. Then, we will put these basics together to make several beautiful visualizations.
 
 ```{r package_setup_viz, message=FALSE, warning=FALSE}
@@ -90,7 +94,6 @@ library(patchwork) # for combining two plots
 
 Geometries are the different shapes one can make using `ggplot`. They all start with `geom_` and can be stacked together by simply using `+`. The first `geom` is always first layer and any additional layers are stacked on top of it. (See [Lollipop Charts][Lollipop Charts] for an example.)
 
-> If you want to see more examples of geometries and their customizations, please check out the [_R Graph Gallery_](http://r-graph-gallery.com/).
 
 ### Bar Charts
 
@@ -115,7 +118,7 @@ ggplot(penguins)+
 
 Compare: 
 
-```{r message=FALSE, warning=FALSE}
+```{r fig.width=7.5, message=FALSE, warning=FALSE}
 (ggplot(penguins)+
   geom_bar(aes(x=species, y=bill_length_mm),
             stat = "identity")+
@@ -165,6 +168,7 @@ ggplot()+ # ggplot
                fill=sex), # separate by sex
             stat = "summary")
 ```
+
 #### 100% Stacked Bar Chart
 
 To make a **100% stacked** bar chart, include `fill=` and `position="fill"` after `aes()`
@@ -270,7 +274,7 @@ ggplot(penguins)+
 ggplot(penguins)+
   geom_point(aes(x=bill_length_mm, y=flipper_length_mm,
                  color=species,
-                 size=flipper_length_mm))+
+                 size=flipper_length_mm), alpha=.6)+
   labs(title="Color and size based on data")
 ```
 
@@ -283,15 +287,19 @@ ggplot(penguins)+
   geom_point(aes(x=bill_length_mm, 
                  y=flipper_length_mm,
                  shape=sex,
-                 color=sex), size=5)+
-  labs(title="Shape and color controlled by data, size set outside aesthetics")
+                 color=sex), size=5, alpha=.5)+
+  labs(title="Shape and color controlled by data \nSize set outside aesthetics")
 
 ggplot(penguins)+
   geom_point(aes(x=bill_length_mm, y=flipper_length_mm,
                  color=species),
              size=4, shape=3)+
-  labs(title="Color controlled by data, size and shape set outside aesthetics")
+  labs(title="Color controlled by data \nSize and shape set outside aesthetics")
 ```
+
+> **A note on `alpha=`
+>
+>`alpha` is called after `aes()` to set the transparency of overlapping shapes. An alpha of `0` is complete transparency while an alpha of `1` is no transparency. An alpha of `.5`, set above, is 50% transparency.
 
 #### Scatterplots for Categorical Variables
 
@@ -299,15 +307,17 @@ If you want to make a scatterplot for categorical variables, you will simply get
 
 Compare:
 
-```{r message=FALSE, warning=FALSE}
+```{r fig.width=7.5, message=FALSE, warning=FALSE}
 (ggplot(penguins)+
   geom_point(aes(x=bill_length_mm, y=species,
                  color=species))+
-  labs(title="Using geom_point()"))+
+  labs(title="Using geom_point()")+
+   theme(legend.position = "none"))+
   (ggplot(penguins)+
   geom_jitter(aes(x=bill_length_mm, y=species,
                  color=species))+
-  labs(title="Using geom_jitter()"))
+  labs(title="Using geom_jitter()")+
+    theme(legend.position = "none"))
 ```
 
 You can also use `position_jitter(width = NULL, height = NULL, seed = NA)` inside of `geom_point()` to achieve a similar effect.
@@ -395,7 +405,7 @@ penguins %>%
            fill="blue")
 ```
 
-See __ for a list of R color names.
+> See [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) for a list of R color names.
 
 You can also use other color palettes by installing `viridis` or `hrbrmst themes`
 
@@ -409,7 +419,7 @@ ggplot(rsurvey)+
   geom_bar(aes(x= qr_experience, fill=qr_experience))+
   geom_text(aes(x= qr_experience,
                 label=..count..),
-            stat='count')+
+            stat='count', color="black")+
   labs(title="Using geom_text")
 
 ggplot(rsurvey)+       
@@ -428,7 +438,7 @@ ggplot(rsurvey)+
 
 You can break a graphic into multiple plots (or facets) using `facet_wrap(~variable)`. Here is an example:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 ggplot(airpassengers)+
   geom_line(aes(x=year, y=AirPassengers, group=month))+
   facet_wrap(~month)
@@ -438,7 +448,7 @@ ggplot(airpassengers)+
 
 You can control the **number of rows/columns** use `nrow=` or `ncol=`:
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 airpassengers %>%
   mutate(month = factor(month, levels=c(
     "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Oct",
@@ -451,7 +461,7 @@ ggplot()+
 ```
 
 
-#### `pathwork`
+#### `patchwork`
 
 You can also use the `patchwork` package to connect different plots using `+`, `/`, and `|`.
 
@@ -505,7 +515,7 @@ p1 + p2 + p3 + p4 +
   plot_layout(widths = c(2, 1))
 ```
 
-See [https://github.com/thomasp85/patchwork](https://github.com/thomasp85/patchwork) for more information.
+> See [https://github.com/thomasp85/patchwork](https://github.com/thomasp85/patchwork) for more information.
 
 ### Themes
 
@@ -533,7 +543,7 @@ ggplot(mtcars) +
 ggplot(mtcars) + 
   geom_point(aes(mpg, disp)) + 
   theme_minimal()+
-  ggtitle('Plot 1')
+  ggtitle('theme_minimal()')
 ```
 
 #### `ggthemes` and other theme packages
@@ -545,18 +555,19 @@ ggplot(mtcars) +
 ```{r}
 library(ggthemes)
 
+
 ggplot(mtcars) + 
   geom_point(aes(mpg, disp)) +
   theme_wsj()+
-  ggtitle('Wall Street Journal: theme_wsj()')
+  ggtitle('theme_wsj()')
 
 ggplot(mtcars) + 
   geom_point(aes(mpg, disp)) +
   theme_tufte()+
-  ggtitle('Edward Tufte: theme_tufte()')
+  ggtitle('theme_tufte()')
 ```
 
-See all themes and more at [https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/)
+> See all themes and more at [https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/)
 
 ##### `hrbrthemes`
 
@@ -569,7 +580,7 @@ ggplot(mtcars) +
   ggtitle('theme_modern_rc()')
 ```
 
-See more themes are color scales here: [https://github.com/hrbrmstr/hrbrthemes](https://github.com/hrbrmstr/hrbrthemes)
+> See more themes are color scales here: [https://github.com/hrbrmstr/hrbrthemes](https://github.com/hrbrmstr/hrbrthemes)
 
 #### Controlling theme elements
 
@@ -591,8 +602,4 @@ ggplot(mtcars) +
   )
 ```
 
-There are a lot of ways you can customize a theme. See [https://ggplot2.tidyverse.org/reference/theme.html](https://ggplot2.tidyverse.org/reference/theme.html).
-
-### Making Beautiful Plots
-
-(give an example of a nice plot, then break down each element)
+> There are a lot of ways you can customize a theme. See [https://ggplot2.tidyverse.org/reference/theme.html](https://ggplot2.tidyverse.org/reference/theme.html).

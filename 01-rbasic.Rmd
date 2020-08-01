@@ -29,22 +29,22 @@ Download and install **RStudio Desktop**, which is free. RStudio is also availab
 
 The RStudio environment is organized into four panes:
 
-1. **Source** - The source is where you will write and execute your code. This is your script or syntax.
+  1. **Source** - The source is where you will write and execute your code. This is your script or syntax.
 
-2. **Console** - The console displays output, warnings, and more.
+  2. **Console** - The console displays output, warnings, and more.
       + The console is where you will see the output of your code. For example, if you run a script to calculate a mean in the source, the mean will appear in the console.
       + The console will also show any error messages or warnings. These will appear in red.
       + In general, any packages that you will install should be written here, not in your script. This is because you will only install a package once. If it is in your script and you run all of your script, it will try to install the packages multiple times.
         + Note: You can also include the install command in your script (at the top) and use a `#` sign to comment it out so that it doesn't run when the script us run. This is useful if you are sharing a script and the other user may need to install the packages or if you may need to install them in the future.
         + Whether you write it in the script or the console is a personal choice.
   
-3. **Environment** - The environment is mainly used to show the data frames and other files you have loaded. It will tell you the datafile name, how many rows (*obs.*) and how many columns (*variables*).
+  3. **Environment** - The environment is mainly used to show the data frames and other files you have loaded. It will tell you the datafile name, how many rows (*obs.*) and how many columns (*variables*).
 
-1. **Files, Plots, Packages, Help, and Viewer**
-      + The Files tab will show local files in your current working directory (or R Project base directory).
-      + The Plots tab will show any visualizations you have created.
-      + The Packages tab will allow you to see, load, and unload any packages you have installed. You can also install packages through this tab.
-        + We will usually install packages using the `install.packages()` function and  load packages using the `library()` function.
+  1. **Files, Plots, Packages, Help, and Viewer**
+    + The Files tab will show local files in your current working directory (or R Project base directory).
+    + The Plots tab will show any visualizations you have created.
+    + The Packages tab will allow you to see, load, and unload any packages you have installed. You can also install packages through this tab.
+      + We will usually install packages using the `install.packages()` function and  load packages using the `library()` function.
       + The Help tab will show explanations and examples of functions.
         + We can ask for help in the console by using `?`. For example, `?mean` will give additional information about the `mean()` function.
           + You may also use `help(mean)`.

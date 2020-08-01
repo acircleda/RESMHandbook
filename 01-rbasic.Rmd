@@ -89,7 +89,9 @@ R Projects are very important to utilize. Without creating an R Project, you wil
 
 To set a working directory, you would write the following in your **source** pane, inside the R script. You would then highlight the code or place your cursor somewhere inside the code and click **Run** at the top right of the **Source** pane, or Click *Ctrl+Enter* (or on a Mac, *Cmd+Enter*).
 
-`setwd("C:/path/to/your/directory")`
+```
+setwd("C:/path/to/your/directory")
+```
 
 *Quotes, correct capitalization, and forward slashes are important here.*
 
@@ -99,7 +101,7 @@ You can also set a working directory through RStudio by going to **Session > Set
 
 R Projects avoid all of this. Any file that is in the same folder as the .Rproj file is automatically linked to the R Script. That means you can create a folder with your project, move that folder anywhere or give it to anyone, and when they double-click the .Rproj file, it will work!
 
-Any subdirectories will still need to use a short path name, i.e., `read_csv("subfolder/file.csv")`, but this is much simpler than utilizing the long path name.
+Any subdirectories will still need to use a short path name, i.e., ```read_csv("subfolder/file.csv")```, but this is much simpler than utilizing the long path name.
 
 To create an R Project, simply go to **File > New Project...**. You will see the following screen:
 
@@ -163,7 +165,6 @@ load("my_work_space.RData")
 
 R Markdown combines R and document or webpage authoring in a single file. R Markdown is useful if you want to write code and a report, render that report to a Word file, a PDF, or publish it online at [RPubs](http://www.rpubs.com). However, it is beyond the scope of this handbook. Please see the [free, online R Markdown book, *R Markdown: The Definitive Guide*](https://bookdown.org/yihui/rmarkdown/).
 
------
 
 ## R Data Structures
 
@@ -232,7 +233,9 @@ CRAN is the official R package repository. To install a CRAN package, you simply
 
 Enter the following into the **console** and hit **enter**:
 
-`install.packages("tidyverse)`
+```
+install.packages("tidyverse)
+```
 
 You can also use R Studio to search for and install packages by clicking on the "Packages" tab and clicking "Install". 
 
@@ -245,12 +248,17 @@ If you wish to install a package from Github, first, you'll need to install the 
 
 Enter the following into the **console** and hit **enter**:
 
-`install.packages("devtools")`
+```
+install.packages("devtools")
+```
 
 After installation, you can begin installing packages from Github:
 
-Enter the following into the **console** and hit **enter**"
-`devtools::install_github("waffle")`
+Enter the following into the **console** and hit **enter**:
+
+```
+devtools::install_github("waffle")
+```
 
 > **A note on `::`**
 >
@@ -290,12 +298,14 @@ To load a .csv file, we will use the `read.csv()` base R command.
 
 Download the following CSV file and save it within your *data* folder in your **"R ESM Handbook Practice"** R Project. 
 
-*[Download the "2019 English R Community Survey Responses.csv" file.](/data/2019 English R Community Survey Responses.csv)*
+*[Download the "2019 English R Community Survey Responses.csv" file.](https://raw.githubusercontent.com/acircleda/RESMHandbook/master/data/2019%20English%20R%20Community%20Survey%20Responses.csv)*
 
 
 Use the following command in your script and run it:
 
-`read.csv("data/2019 English R Community Survey Responses.csv")`
+```
+read.csv("data/2019 English R Community Survey Responses.csv")
+```
 
 If you noticed, you got a lot of text output in your console. That's not very useful, is it?
 
@@ -303,7 +313,9 @@ We need to save this information to a data object in the environment. To do that
 
 Try this again:
 
-`rsurvey_csv <- read.csv("data/2019 English R Community Survey Responses.csv")`
+```
+rsurvey_csv <- read.csv("data/2019 English R Community Survey Responses.csv")
+```
 
 Now you will see the data was saved to the environment. It should say: rsurvey_csv and have 1838 obs. (rows or individual cases) and 52 variables (columns).
 
@@ -317,27 +329,35 @@ For more information, use the `?read.csv` help command.
 
 Download the following Excel file and save it within your *data* forlder in your **"R ESM Handbook Practice"** R Project. 
 
-*[Download the "2019 English R Community Survey Responses.xlsx" file.](/data/2019 English R Community Survey Responses.xlsx)*
+*[Download the "2019 English R Community Survey Responses.xlsx" file.](https://github.com/acircleda/RESMHandbook/blob/master/data/2019%20English%20R%20Community%20Survey%20Responses.xlsx?raw=true)*
 
 To read in an Excel file, we need to first download and install the `readxl` package.
 
 In the **console**, use the following command:
 
-`install.packages("readxl")`
+```
+install.packages("readxl")
+```
 
 After it downloads and installs, we can use the `library()` function to **load** the `readxl` package.
 
 Write and run:
 
-`library(readxl)`
+```
+library(readxl)
+```
 
 Now we can load the Excel file with the `read_excel()` function:
 
-`rsurvey_excel <- read_excel("data/2019 English R Community Survey Responses.xlsx")`
+```
+rsurvey_excel <- read_excel("data/2019 English R Community Survey Responses.xlsx")
+```
 
 If your Excel file has a number of different worksheets, we could also specify which sheet you want to load with:
 
-`rsurvey_excel <- read_excel("data/2019 English R Community Survey Responses.xlsx", sheet="Form Responses 1")`
+```
+rsurvey_excel <- read_excel("data/2019 English R Community Survey Responses.xlsx", sheet="Form Responses 1")
+```
 
 Note that the quotation marks are around the file path name and the sheet name.
 
@@ -347,17 +367,21 @@ For more information, use the `?read_excel` help command.
 
 Download the following SPSS file and save it within your *data* folder in your **"R ESM Handbook Practice"** R Project. 
 
-**[Download the "2019 English R Community Survey Responses.sav" file.](/data/2019 English R Community Survey Responses.sav)**
+**[Download the "2019 English R Community Survey Responses.sav" file.](https://github.com/acircleda/RESMHandbook/blob/master/data/2019%20English%20R%20Community%20Survey%20Responses.sav?raw=true)**
 
 SPSS .sav files can be read into R using the `haven` package.
 
 Install `haven` in the **console**, using the following command:
 
-`install.packages("haven")`
+```
+install.packages("haven")
+```
 
 After it downloads and installs, use the `library()` function to load the package. Add this line near the top of your script:
 
-`library(haven)`
+```
+library(haven)
+```
 
 Now we can load the SPSS file with the `read_sav()` function:
 
@@ -369,7 +393,7 @@ You can also import SAS and Stata files, too. For more information, use the `?ha
 
 ### Importing Files from the Internet
 
-You can load data directly from the internet using the same functions as listed above. Just use a web address instead of the file path.
+You can load data directly from the internet using the same functions as listed above (except for Excel files). Just use a web address instead of the file path.
 
 For example, to load a .csv file, do this:
 

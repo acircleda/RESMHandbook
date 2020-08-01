@@ -15,11 +15,11 @@ link-citations: yes
 github-repo: acircleda/RESMHandbook
 description: "This is a handbook to help UTK Evaluation, Statistics, and Methodology students learn important R skills."
 
-# use this to render
-# bookdown::render_book("index.Rmd")
+#### use this to render
+  ###### bookdown::render_book("index.Rmd")
 
-# use this to publish
-# bookdown::publish_book(name = "RESMHandbook", account = "aschmi11", server = NULL, render = c("none", "local", "server"))
+#### use this to publish
+#### bookdown::publish_book(name = "RESMHandbook", account = "aschmi11", server = NULL, render = c("none", "local", "server"))
 
 ---
 
@@ -32,9 +32,11 @@ p {
 
 ![](https://raw.githubusercontent.com/acircleda/RESMHandbook/master/cover_image.jpg)
 
-# Online Version {-}
+<!-- Uncomment when producing word file: -->
 
-To view the online, interactive version of this handbook, please visit [https://bookdown.org/aschmi11/RESMHandbook/](https://bookdown.org/aschmi11/RESMHandbook/).
+<!-- # Online Version {-} -->
+
+<!-- To view the online, interactive version of this handbook, please visit [https://bookdown.org/aschmi11/RESMHandbook/](https://bookdown.org/aschmi11/RESMHandbook/). -->
 
 # Introduction^[Originally created by Anthony Schmidt and Austin Boyd, ESM Doctoral Students] {-}
 
@@ -43,7 +45,7 @@ Welcome to the R Handbook for ESM Students. This handbook is a hands-on guide to
 
 <!-- Might modify this part if we include different data sets -->
 
-This guide uses real data to help you practice with R. Specifically, it uses survey data from the [RStudio Learning R Survey](https://github.com/rstudio/learning-r-survey).
+This guide uses real data to help you practice with R. Specifically, it uses survey data from the [RStudio Learning R Survey](https://github.com/rstudio/learning-r-survey). It also includes data from built-in `R` data sets and simulated data.
 
 ## What is R? {-}
 

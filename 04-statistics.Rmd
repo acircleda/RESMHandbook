@@ -110,7 +110,7 @@ subjects <- c("math","science","reading")
 
 Before continuing with this section, the `pwr` package must be installed and loaded in order to successfully run all of the functions listed.
 
-```{r package_setup, echo=T, message=FALSE, warning=FALSE}
+```{r echo=T, message=FALSE, warning=FALSE}
 library(pwr)
 ```
 

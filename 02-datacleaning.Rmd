@@ -970,8 +970,8 @@ You can also use `skewness()` and `kurtosis()` functions from the `moments` pack
 
 library(moments)
 
-skewness(rsurvey$age, na.rm = T)
-kurtosis(rsurvey$age, na.rm = T)
+skewness(rsurvey$age)
+kurtosis(rsurvey$age)
 ```
 
 ### Tests of Normality

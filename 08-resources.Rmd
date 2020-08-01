@@ -15,7 +15,7 @@
 
   * [**R Graph Gallery**](http://r-graph-gallery.com/).
   
-# Troubleshooting
+## Troubleshooting
 
   * [**Working with `rtools`**](https://www.r-bloggers.com/common-r-programming-errors-faced-by-beginners/)
 

@@ -161,6 +161,69 @@ pwr.chisq.test(phi, N, df, sig.level=.05, power=NULL)
 This shows us our Phi is .495 and the power is 94%. Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ### Chi Square Test of Independence
+The Chi Square Test of Independence is used to test frequency data obtained from a sample to evaluate the relationship between two variables in the population (*Cite Gravetter and Wallnau*).
+
+For this section, we will be creating a fake data set to work with. In this scenario, We asked 100 chemistry students if they had ever taken a biology course (yes, no) and if they had ever taken a statistics course (yes, no). The results showed that 38 students had taken both a biology and statistics course, 13 had only taken biology, 3 had only taken statsitics, and 46 had not taken either. The following code creates this data.
+
+```{r}
+classes <- matrix(c(38,13,3,46), nrow=2, ncol=2, byrow=TRUE)
+dimnames(classes) <-list(c("Biology Yes", "Biology No"), c("Statistics Yes", "Statistics No"))
+classes
+```
+Before continuing with this section, the `pwr` package must be installed and loaded in order to successfully run all of the functions listed.
+
+```{r package_setup, echo=T, message=FALSE, warning=FALSE}
+library(pwr)
+```
+#### Assumptions
+
+There are four assumptions that must be checked prior to conducting a goodness of fit test:
+  
+* Indepenence of observations
+* Mutually exculisive response categories
+* At least 5 expected frequencies in each group
+
+The first two assumptions can be checked simply by looking at our data. No observation influences another and no observation exsits in more than one group within a variable. The final assumption can be checked by calculating the expected values for the groups using the following code.
+
+```{r}
+# Total N
+N<-100
+
+# Degrees of freedom
+V1<- ncol(sweets) -1
+V2<- nrow(sweets) -1
+
+df<- V1 * V2
+
+# Expected counts
+Expected1 <- as.numeric((rowSums(classes)[1]/N) * colSums(classes)[1])
+Expected2 <- as.numeric((rowSums(classes)[1]/N) * colSums(classes)[2])
+Expected3 <- as.numeric((rowSums(classes)[2]/N) * colSums(classes)[1])
+Expected4 <- as.numeric((rowSums(classes)[2]/N) * colSums(classes)[2])
+```
+Here we can see that the expected value for each group is 20.09 or greater.
+
+**Note about expected values**
+  
+Expected values often have decimals which are not possible when observing count data. This is to be expected, and will not impact the results of the Chi Square test. 
+
+#### Test Statistic
+In order to compute the Chi Square Test of Independence, we can use the `chisq.test()` function from the `stats` package.
+
+```{r}
+chisq.test(sweets,correct=FALSE)
+mychi<-chisq.test(sweets,correct=FALSE)
+```
+In this output we can see that the Chi Square statistic is 48.315, and our p value is less than .001, meaning we have a significant result.
+
+Once we have calulated the Chi Square and p value, we can then calculate the effect size, or Phi coefficient, and the power for the test. These can be done using the following code:
+
+```{r}
+phi<- sqrt((as.numeric(mychi[1])/N))
+phi  
+pwr.chisq.test(phi, N, df, sig.level=.05, power=NULL)
+```
+This shows us our Phi is .69 and the power is 99%. Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ## Regression
 

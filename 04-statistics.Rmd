@@ -141,7 +141,7 @@ Here we can see that the expected value for each group is 33.33.
 Expected values often have decimals which are not possible when observing count data. This is to be expected, and will not impact the results of the Chi Square test. 
 
 #### Test Statistic
-In order to compute the Chi Square Goodness of Fit test, we can use the `chisq.test()` function from the `pwr` package.
+In order to compute the Chi Square Goodness of Fit test, we can use the `chisq.test()` function from the `stats` package.
 
 ```{r echo = T}
 mychi<-chisq.test(counts)

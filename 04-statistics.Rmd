@@ -389,6 +389,92 @@ pairwise.t.test(Data$Grades, Data$TestSubject, "bonferroni")
 
 This test indicates that group 1 was significantly different from groups 2 and 3, and group 2 was significantly different from group 3. Once you have finished these steps, you can move on to writing up and reporting your results.
 
+## Factorial Between Subjects ANOVA
+Define Factorial BS ANOVA (*Cite Gravetter and Wallnau*)
+
+For the Factorial Between Subjects ANOVA in this section, we will be using a fake data set of a sample of 100 undergraduate students' math test scores. The test scores are on a scale of 0 to 100. Each individual has also been assigned to either the Paper Test format or the Electronic Test format in the TestFormat condition and either the Classroom setting or Home setting in the TestLocation condition. The following lines of code create our data set and set up the data frame we will need.
+```{r}
+set.seed(1000)
+Grade<-rnorm(n = 100, mean = 65, sd = 13)
+
+TestLocation<-c(rep("Classroom",50),rep("Home",50))
+TestFormat<-c(rep("Paper",25),rep("Electronic",25),rep("Paper",25),rep("Electronic",25))
+
+Data<-data.frame(Grade, TestLocation, TestFormat)
+```
+We will also want our data set stored in short form for some of our analyses along the way.
+
+```{r}
+DataShort <- data.frame("Home.Paper"=(Data$Grade[which(Data$TestLocation=="Home" 
+                                                       & Data$TestFormat=="Paper")]),
+                        "Home.Electronic"=(Data$Grade[which(Data$TestLocation=="Home" 
+                                                            & Data$TestFormat=="Electronic")]),
+                        "Classroom.Paper"=(Data$Grade[which(Data$TestLocation=="Classroom" 
+                                                            & Data$TestFormat=="Paper")]),
+                        "Classroom.Electronic"=(Data$Grade[which(Data$TestLocation=="Classroom" 
+                                                                 & Data$TestFormat=="Electronic")]))
+```
+
+Before continuing with this section, the following package must be installed a loaded in order to successfully run all of the functions listed.
+```{r, echo=T, message=FALSE, warning=FALSE}
+library(car)
+```
+
+#### Assumptions
+There are four assumptions that we should meet in order to conduct this ANOVA:
+
+* Independence of errors
+* Normality of sampling distribution
+* Normality of dependent variable
+* Homogeneity of variance
+
+The first assumption can be checked simply by looking at our data and seeing the samples are independent. The next two assumptions on normality can be checked using the Shapiro-Wilk test on the dependent variable as a whole and for each group. 
+# Use the short form of the data (DataShort) and the shapiro.test() function to check the normality 
+# Must be run for each of the four groups (cells)
+```{r}
+shapiro.test(DataShort$Home.Paper)
+shapiro.test(DataShort$Home.Electronic)
+shapiro.test(DataShort$Classroom.Paper)
+shapiro.test(DataShort$Classroom.Electronic)
+shapiro.test(Data$Grade)
+```
+Notice that we used the short form to check the inidvidual groups and the long form to check it all at once. As we can see here, the p-value for the Shapiro-Wilk tests were all greater than .05, which indicates no violation of the assumptions.
+
+The homogeneity of variance assumption can be tested using the Levene's test for homogeneity of variance. 
+```{r echo = T}
+leveneTest(Grade ~ TestLocation * TestFormat, dat=Data)
+```
+As we can see here, the p-value for both the Levene's test was greater than .05, which indicates no violation of the assumption.
+
+#### Test Statistic
+We have two options to compute the ANOVA. We can use the `anova()` and `lm()` functions or the `aov()` and `summary()` functions together. Within the `lm()` and `aov()` functions, type the dependent variable first and then the first independent variable * the second independent variable.
+```{r echo = T}
+anova(lm(Grade~ TestLocation * TestFormat, dat=Data))
+summary(aov(Grade ~ TestLocation * TestFormat, dat=Data))
+```
+
+In both outputs we can see that the F value is 3.04, and our p value is greater than .05, meaning there is no significant result.
+
+
+Even though we failed to find a significant result, for the sake of the example, we will continue with calculating the effect size, or partial R squared, using the following code:
+```{r echo = T}
+SS<-as.data.frame(anova(myanova)["Sum Sq"])
+SSTestLocation<-SS[1,1]
+SSTestFormat<-SS[2,1]
+SSInteraction<-SS[3,1]
+SSResidual<-SS[4,1]
+
+# Effect Size - Time format
+SSTestLocation / ( SSTestLocation + SSResidual) 
+
+# Effect Size - Test format
+SSTestFormat / ( SSTestFormat + SSResidual) 
+
+# Effect Size - Interaction
+SSInteraction / ( SSInteraction + SSResidual)
+```
+
+Our partial R squared values for the location, format, and interaction effect were 0.03, 0.006, and 0.0002, respoectively. Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ## Multivariate Analysis of Variance (MANOVA)
 

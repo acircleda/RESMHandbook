@@ -271,7 +271,7 @@ shapiro.test(Data$Grades[which(Data$TestNumber==3)])
 
 As we can see here, the p-value for the Shapiro-Wilk tests were 0.535, 0.79, and 0.178, which indicates no violation of the assumption.
 
-The homogeneity of variance assumption can be tests using either Levene's test for homogeneity of variance or Bartlett's test. Notice that in the code for the Levene's test we used as.factor. This is because our data is set up as contrast codes, but Levene's test needs groups!
+The homogeneity of variance assumption can be tested using either Levene's test for homogeneity of variance or Bartlett's test. Notice that in the code for the Levene's test we used as.factor. This is because our data is set up as contrast codes, but Levene's test needs groups!
 ```{r echo = T}
 leveneTest(Data$Grades,as.factor(Data$TestNumber))
 bartlett.test(Data$Grades,Data$TestNumber)
@@ -311,6 +311,84 @@ This test indicates that there are no significant differences between any of the
 Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ### One-Way Within Subjects ANOVA
+Define One-Way WS ANOVA (*Cite Gravetter and Wallnau*)
+
+For the One-way Within Subjects ANOVA in this section, we will be using a fake data set of a sample of 100 undergraduate students' math, reading, and science test scores. The test scores are on a scale of 0 to 100. Each subject has also been assigned to either test 1 (math), 2 (reading), or 3 (science) the TestSubject condition. The following code will create our data set.
+
+```{r}
+set.seed(100)
+Math<-rnorm(n = 100, mean = 70, sd = 10)
+set.seed(1000)
+Reading<-rnorm(n = 100, mean = 65, sd = 13)
+set.seed(10000)
+Science<-rnorm(n = 100, mean = 90, sd = 2)
+
+Grades<-c(Math,Reading,Science)
+TestSubject<-c(rep(1,100),rep(2,100),rep(3,100))
+Student<-c(1:100,1:100,1:100)
+
+Data<-data.frame(Grades, TestSubject, Student)
+```
+
+We will also create subsets of factor level groupings to get group summaries of our data and check assumptions.
+
+```{r}
+#Slides Only subset
+MathGrades <- subset(Data, TestSubject == 1)
+
+##Both Slides and Lecture subset
+ReadingGrades <- subset(Data, TestSubject == 2)
+
+###Lecture Only subset
+ScienceGrades <- subset(Data, TestSubject == 3)
+```
+
+Before continuing with this section, the following package must be installed a loaded in order to successfully run all of the functions listed.
+```{r, echo=T, message=FALSE, warning=FALSE}
+library(car)
+```
+
+#### Assumptions
+There are four assumptions that we should meet in order to conduct this ANOVA:
+
+* Normality of sampling distributions
+* Normality of dependent variable
+* Homogeneity of variance
+* Sphericity
+
+The normality of sampling distributions assumptions is a theorectical idea that is typically viewed as met if the degrees of freedom is greater or equal to 20 when there is only one IV. The next assumption, normality of the dependent variable, can be checked using the Shapiro-Wilk test on each group. 
+```{r echo=T}
+shapiro.test(MathGrades$Grades)
+shapiro.test(ReadingGrades$Grades)
+shapiro.test(ScienceGrades$Grades)
+```
+
+As we can see here, the p-value for the Shapiro-Wilk tests were 0.535, 0.79, and 0.178, which indicates no violation of the assumption.
+
+The homogeneity of variance assumption can be tested using the Levene's test for homogeneity of variance. Notice that in the code for the Levene's test we used as.factor. This is because our data is set up as contrast codes, but Levene's test needs groups!
+```{r echo = T}
+leveneTest(Grades ~ as.factor(TestSubject), dat=Data)
+```
+As we can see here, the p-value for the Levene's test was less than .001, which indicates a violation of the assumption. However, for the sake of the example, we will continue with conducting the analysis.
+
+#### Test Statistic
+In order to compute the ANOVA, we will use the `aov()` and `summary()` functions. Within the `aov()` function, type the dependent variable first and then the independent variable + the error adjustement.
+```{r echo = T}
+rmaov <-aov(Grades ~ TestSubject+Error(Student/TestSubject),data=Data)
+rmaov
+summary(rmaov)
+```
+
+In this output we can see that the F value is 29.54, and our p value is less than .001, meaning we have a significant result.
+
+#### Post Hoc Test
+Finally, because our ANOVA was significant, we need to conduct post hoc tests to determine which groups were significantly different from each other. This can be done using t-test with the Bonferroni correction.
+```{r}
+pairwise.t.test(Data$Grades, Data$TestSubject, "bonferroni")
+```
+
+This test indicates that group 1 was significantly different from groups 2 and 3, and group 2 was significantly different from group 3. Once you have finished these steps, you can move on to writing up and reporting your results.
+
 
 ## Multivariate Analysis of Variance (MANOVA)
 

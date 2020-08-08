@@ -3,7 +3,7 @@
 ## T-Tests
 
 ### Independent Means T-Test
-The independent t test is used to test for differences in the mean of two seperate groups of individuals (*Cite Gravetter and Wallnau*).
+The independent t test is used to test for differences in the mean of two seperate groups of individuals (Gravetter & Wallnau, 2019).
 
 For the Independent Means T-Test in this section, we will be using a fake data set of a sample of 200 undergraduate students' math test scores. The test scores are on a scale of 0 to 100, and each individual has been assigned to either the Paper Test format or the Electronic Test format in the TestFormat condition, where 1=paper test and -1=electronic test.The following lines of code create our data set and set up the data frames we will need.
 ```{r echo = T}
@@ -95,7 +95,7 @@ Once you have finished these steps, you can move on to writing up and reporting 
 Chi Square tests are non-parametric, or distribution free, tests that compare the proportions observed in our sample verses the proportions expected. There are two different Chi Square tests: the Goodness of Fit test and the Test of Independence.
 
 ### Chi Square Goodness of Fit
-The Chi Square Goodness of Fit test is used to test the proportions obtained from a sample against the null hypothesis about the corresponding proportions in the population (*Cite Gravetter and Wallnau*).
+The Chi Square Goodness of Fit test is used to test the proportions obtained from a sample against the null hypothesis about the corresponding proportions in the population (Gravetter & Wallnau, 2019).
 
 For this section, we will be creating a fake data set to work with. In this scenario, We asked 100 students if their favorite subject is math, science,  or reading. Each student was only allowed to pick one favorite and it had to be one of these three. This resulted in 55 students choosing math, 15 chosing science, and remaining 30 selecting reading. The following code creates this data.
 
@@ -122,13 +122,9 @@ The first three assumptions can be checked simply by looking at our data. There 
 
 ```{r echo = T}
 N <-sum(counts)
-N
 k <- length(counts)
-k
 df<-k-1
-df
 Expected <- N/k
-Expected
 ```
 Here we can see that the expected value for each group is 33.33.
 
@@ -157,7 +153,7 @@ pwr.chisq.test(phi, N, df, sig.level=.05, power=NULL)
 This shows us our Phi is .495 and the power is 94%. Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ### Chi Square Test of Independence
-The Chi Square Test of Independence is used to test frequency data obtained from a sample to evaluate the relationship between two variables in the population (*Cite Gravetter and Wallnau*).
+The Chi Square Test of Independence is used to test frequency data obtained from a sample to evaluate the relationship between two variables in the population (Gravetter & Wallnau, 2019).
 
 For this section, we will be creating a fake data set to work with. In this scenario, We asked 100 chemistry students if they had ever taken a biology course (yes, no) and if they had ever taken a statistics course (yes, no). The results showed that 38 students had taken both a biology and statistics course, 13 had only taken biology, 3 had only taken statsitics, and 46 had not taken either. The following code creates this data.
 
@@ -182,7 +178,6 @@ There are four assumptions that must be checked prior to conducting a goodness o
 The first two assumptions can be checked simply by looking at our data. No observation influences another and no observation exsits in more than one group within a variable. The final assumption can be checked by calculating the expected values for the groups using the following code.
 
 ```{r}
-# Total N
 N<-100
 
 # Degrees of freedom
@@ -224,7 +219,7 @@ This shows us our Phi is .69 and the power is 99%. Once you have finished these 
 ## Analysis of Variance (ANOVA)
 
 ### One-Way Between Subjects ANOVA
-The One-Way Between Subjects Analysis of variance (ANOVA) is used to test for differences in the means of two or more groups (*Cite Gravetter and Wallnau*).
+The One-Way Between Subjects Analysis of variance (ANOVA) is used to test for differences in the means of two or more groups (Gravetter & Wallnau, 2019).
 
 For the One-way Between Subjects ANOVA in this section, we will be using a fake data set of a sample of 300 undergraduate students' math test scores. The test scores are on a scale of 0 to 100. Each individual has also been assigned to either test 1, 2, or 3 the TestNumber condition. The following lines of code create our data set and set up the data frame we will need.
 ```{r}
@@ -303,7 +298,7 @@ This test indicates that there are no significant differences between any of the
 Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ### One-Way Within Subjects ANOVA
-The One-Way Within Subjects Analysis of variance (ANOVA) is used to test for mean differences between two or more groups that contain the same individuals  (*Cite Gravetter and Wallnau*).
+The One-Way Within Subjects Analysis of variance (ANOVA) is used to test for mean differences between two or more groups that contain the same individuals  (Gravetter & Wallnau, 2019).
 
 For the One-way Within Subjects ANOVA in this section, we will be using a fake data set of a sample of 100 undergraduate students' math, reading, and science test scores. The test scores are on a scale of 0 to 100. Each subject has also been assigned to either test 1 (math), 2 (reading), or 3 (science) the TestSubject condition. The following code will create our data set.
 
@@ -382,7 +377,7 @@ pairwise.t.test(Data$Grades, Data$TestSubject, "bonferroni")
 This test indicates that group 1 was significantly different from groups 2 and 3, and group 2 was significantly different from group 3. Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ## Factorial Between Subjects ANOVA
-The Factorial Between Subjects Analysis of variance (ANOVA) is used to test for differences in the means of two or more groups across two or more independent variables at once (*Cite Gravetter and Wallnau*). This allows us to determine main effects for each independent variable as well as the interaction effects for the combination of independent variables.
+The Factorial Between Subjects Analysis of variance (ANOVA) is used to test for differences in the means of two or more groups across two or more independent variables at once (Gravetter & Wallnau, 2019). This allows us to determine main effects for each independent variable as well as the interaction effects for the combination of independent variables.
 
 For the Factorial Between Subjects ANOVA in this section, we will be using a fake data set of a sample of 100 undergraduate students' math test scores. The test scores are on a scale of 0 to 100. Each individual has also been assigned to either the Paper Test format or the Electronic Test format in the TestFormat condition and either the Classroom setting or Home setting in the TestLocation condition. The following lines of code create our data set and set up the data frame we will need.
 ```{r}

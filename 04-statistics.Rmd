@@ -429,8 +429,6 @@ There are four assumptions that we should meet in order to conduct this ANOVA:
 * Homogeneity of variance
 
 The first assumption can be checked simply by looking at our data and seeing the samples are independent. The next two assumptions on normality can be checked using the Shapiro-Wilk test on the dependent variable as a whole and for each group. 
-# Use the short form of the data (DataShort) and the shapiro.test() function to check the normality 
-# Must be run for each of the four groups (cells)
 ```{r}
 shapiro.test(DataShort$Home.Paper)
 shapiro.test(DataShort$Home.Electronic)

@@ -1,6 +1,6 @@
 # Data Preparation and Cleaning in R
 
-```{r package_setup, echo=FALSE, message=FALSE, warning=FALSE}
+```{r package_setup_1, echo=FALSE, message=FALSE, warning=FALSE}
 library(psych)
 library(tidyverse)
 library(skimr)

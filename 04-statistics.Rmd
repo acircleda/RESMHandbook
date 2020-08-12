@@ -167,6 +167,7 @@ Before continuing with this section, the `pwr` package must be installed and loa
 ```{r package_setup, echo=T, message=FALSE, warning=FALSE}
 library(pwr)
 ```
+
 #### Assumptions
 
 There are four assumptions that must be checked prior to conducting a goodness of fit test:
@@ -181,8 +182,8 @@ The first two assumptions can be checked simply by looking at our data. No obser
 N<-100
 
 # Degrees of freedom
-V1<- ncol(sweets) -1
-V2<- nrow(sweets) -1
+V1<- ncol(classes) -1
+V2<- nrow(classes) -1
 
 df<- V1 * V2
 
@@ -202,8 +203,8 @@ Expected values often have decimals which are not possible when observing count 
 In order to compute the Chi Square Test of Independence, we can use the `chisq.test()` function from the `stats` package.
 
 ```{r}
-chisq.test(sweets,correct=FALSE)
-mychi<-chisq.test(sweets,correct=FALSE)
+chisq.test(classes,correct=FALSE)
+mychi<-chisq.test(classes,correct=FALSE)
 ```
 In this output we can see that the Chi Square statistic is 48.315, and our p value is less than .001, meaning we have a significant result.
 
@@ -443,7 +444,7 @@ In both outputs we can see that the F value is 3.04, and our p value is greater 
 
 Even though we failed to find a significant result, for the sake of the example, we will continue with calculating the effect size, or partial R squared, using the following code:
 ```{r echo = T}
-SS<-as.data.frame(anova(myanova)["Sum Sq"])
+SS<-as.data.frame(anova(lm(Grade~ TestLocation * TestFormat, dat=Data))["Sum Sq"])
 SSTestLocation<-SS[1,1]
 SSTestFormat<-SS[2,1]
 SSInteraction<-SS[3,1]
@@ -460,3 +461,9 @@ SSInteraction / ( SSInteraction + SSResidual)
 ```
 
 Our partial R squared values for the location, format, and interaction effect were 0.03, 0.006, and 0.0002, respoectively. Once you have finished these steps, you can move on to writing up and reporting your results.
+
+-----------------------
+
+**References**
+
+Gravetter, F. J., & Wallnau, L. B. (2019). Statistics for the behavioral sciences (10th ed.). Cengage Learning Asia Pte Ltd.

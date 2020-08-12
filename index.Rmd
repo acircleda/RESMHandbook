@@ -34,9 +34,9 @@ p {
 
 <!-- Uncomment when producing word file: -->
 
-<!-- # Online Version {-} -->
+# Online Version {-}
 
-<!-- To view the online, interactive version of this handbook, please visit [https://bookdown.org/aschmi11/RESMHandbook/](https://bookdown.org/aschmi11/RESMHandbook/). -->
+To view the online, interactive version of this handbook, please visit [https://bookdown.org/aschmi11/RESMHandbook/](https://bookdown.org/aschmi11/RESMHandbook/).
 
 # Introduction^[Originally created by Anthony Schmidt and Austin Boyd, ESM Doctoral Students] {-}
 

@@ -1,10 +1,9 @@
 # Statistics in R
   
 ## T-Tests
-INTRO STATEMENT ON T-TESTS HERE
 
 ### Independent Means T-Test
-Define Independent Means T-Test (*Cite Gravetter and Wallnau*)
+The independent t test is used to test for differences in the mean of two seperate groups of individuals (Gravetter & Wallnau, 2019). 
 
 For the Independent Means T-Test in this section, we will be using a fake data set of a sample of 200 undergraduate students' math test scores. The test scores are on a scale of 0 to 100, and each individual has been assigned to either the Paper Test format or the Electronic Test format in the TestFormat condition, where 1=paper test and -1=electronic test.The following lines of code create our data set and set up the data frames we will need.
 ```{r echo = T}
@@ -92,14 +91,11 @@ As well as the `type=` argument, which indicates whether you are using a `"two.s
 
 Once you have finished these steps, you can move on to writing up and reporting your results.
 
-### Depenednt Means T-Test
-Define Dependent Means T-Test (*Cite Gravetter and Wallnau*)
-
 ## Chi Square
 Chi Square tests are non-parametric, or distribution free, tests that compare the proportions observed in our sample verses the proportions expected. There are two different Chi Square tests: the Goodness of Fit test and the Test of Independence.
 
 ### Chi Square Goodness of Fit
-The Chi Square Goodness of Fit test is used to test the proportions obtained from a sample against the null hypothesis about the corresponding proportions in the population (*Cite Gravetter and Wallnau*).
+The Chi Square Goodness of Fit test is used to test the proportions obtained from a sample against the null hypothesis about the corresponding proportions in the population (Gravetter & Wallnau, 2019).
 
 For this section, we will be creating a fake data set to work with. In this scenario, We asked 100 students if their favorite subject is math, science,  or reading. Each student was only allowed to pick one favorite and it had to be one of these three. This resulted in 55 students choosing math, 15 chosing science, and remaining 30 selecting reading. The following code creates this data.
 
@@ -126,13 +122,9 @@ The first three assumptions can be checked simply by looking at our data. There 
 
 ```{r echo = T}
 N <-sum(counts)
-N
 k <- length(counts)
-k
 df<-k-1
-df
 Expected <- N/k
-Expected
 ```
 Here we can see that the expected value for each group is 33.33.
 
@@ -141,7 +133,7 @@ Here we can see that the expected value for each group is 33.33.
 Expected values often have decimals which are not possible when observing count data. This is to be expected, and will not impact the results of the Chi Square test. 
 
 #### Test Statistic
-In order to compute the Chi Square Goodness of Fit test, we can use the `chisq.test()` function from the `pwr` package.
+In order to compute the Chi Square Goodness of Fit test, we can use the `chisq.test()` function from the `stats` package.
 
 ```{r echo = T}
 mychi<-chisq.test(counts)
@@ -161,15 +153,73 @@ pwr.chisq.test(phi, N, df, sig.level=.05, power=NULL)
 This shows us our Phi is .495 and the power is 94%. Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ### Chi Square Test of Independence
+The Chi Square Test of Independence is used to test frequency data obtained from a sample to evaluate the relationship between two variables in the population (Gravetter & Wallnau, 2019).
 
-## Regression
+For this section, we will be creating a fake data set to work with. In this scenario, We asked 100 chemistry students if they had ever taken a biology course (yes, no) and if they had ever taken a statistics course (yes, no). The results showed that 38 students had taken both a biology and statistics course, 13 had only taken biology, 3 had only taken statsitics, and 46 had not taken either. The following code creates this data.
+
+```{r}
+classes <- matrix(c(38,13,3,46), nrow=2, ncol=2, byrow=TRUE)
+dimnames(classes) <-list(c("Biology Yes", "Biology No"), c("Statistics Yes", "Statistics No"))
+classes
+```
+Before continuing with this section, the `pwr` package must be installed and loaded in order to successfully run all of the functions listed.
+
+```{r package_setup, echo=T, message=FALSE, warning=FALSE}
+library(pwr)
+```
+#### Assumptions
+
+There are four assumptions that must be checked prior to conducting a goodness of fit test:
+  
+* Indepenence of observations
+* Mutually exculisive response categories
+* At least 5 expected frequencies in each group
+
+The first two assumptions can be checked simply by looking at our data. No observation influences another and no observation exsits in more than one group within a variable. The final assumption can be checked by calculating the expected values for the groups using the following code.
+
+```{r}
+N<-100
+
+# Degrees of freedom
+V1<- ncol(sweets) -1
+V2<- nrow(sweets) -1
+
+df<- V1 * V2
+
+# Expected counts
+Expected1 <- as.numeric((rowSums(classes)[1]/N) * colSums(classes)[1])
+Expected2 <- as.numeric((rowSums(classes)[1]/N) * colSums(classes)[2])
+Expected3 <- as.numeric((rowSums(classes)[2]/N) * colSums(classes)[1])
+Expected4 <- as.numeric((rowSums(classes)[2]/N) * colSums(classes)[2])
+```
+Here we can see that the expected value for each group is 20.09 or greater.
+
+**Note about expected values**
+  
+Expected values often have decimals which are not possible when observing count data. This is to be expected, and will not impact the results of the Chi Square test. 
+
+#### Test Statistic
+In order to compute the Chi Square Test of Independence, we can use the `chisq.test()` function from the `stats` package.
+
+```{r}
+chisq.test(sweets,correct=FALSE)
+mychi<-chisq.test(sweets,correct=FALSE)
+```
+In this output we can see that the Chi Square statistic is 48.315, and our p value is less than .001, meaning we have a significant result.
+
+Once we have calulated the Chi Square and p value, we can then calculate the effect size, or Phi coefficient, and the power for the test. These can be done using the following code:
+
+```{r}
+phi<- sqrt((as.numeric(mychi[1])/N))
+phi  
+pwr.chisq.test(phi, N, df, sig.level=.05, power=NULL)
+```
+This shows us our Phi is .69 and the power is 99%. Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ## Analysis of Variance (ANOVA)
-INTRO STATEMENT ON ANOVAs HERE
 
 ### One-Way Between Subjects ANOVA
-
-Define One-Way BS ANOVA (*Cite Gravetter and Wallnau*)
+The One-Way Between Subjects Analysis of variance (ANOVA) is used to test for differences in the means of two or more groups (Gravetter & Wallnau, 2019).
 
 For the One-way Between Subjects ANOVA in this section, we will be using a fake data set of a sample of 300 undergraduate students' math test scores. The test scores are on a scale of 0 to 100. Each individual has also been assigned to either test 1, 2, or 3 the TestNumber condition. The following lines of code create our data set and set up the data frame we will need.
 ```{r}
@@ -208,7 +258,7 @@ shapiro.test(Data$Grades[which(Data$TestNumber==3)])
 
 As we can see here, the p-value for the Shapiro-Wilk tests were 0.535, 0.79, and 0.178, which indicates no violation of the assumption.
 
-The homogeneity of variance assumption can be tests using either Levene's test for homogeneity of variance or Bartlett's test. Notice that in the code for the Levene's test we used as.factor. This is because our data is set up as contrast codes, but Levene's test needs groups!
+The homogeneity of variance assumption can be tested using either Levene's test for homogeneity of variance or Bartlett's test. Notice that in the code for the Levene's test we used as.factor. This is because our data is set up as contrast codes, but Levene's test needs groups!
 ```{r echo = T}
 leveneTest(Data$Grades,as.factor(Data$TestNumber))
 bartlett.test(Data$Grades,Data$TestNumber)
@@ -248,13 +298,165 @@ This test indicates that there are no significant differences between any of the
 Once you have finished these steps, you can move on to writing up and reporting your results.
 
 ### One-Way Within Subjects ANOVA
+The One-Way Within Subjects Analysis of variance (ANOVA) is used to test for mean differences between two or more groups that contain the same individuals  (Gravetter & Wallnau, 2019).
 
-## Multivariate Analysis of Variance (MANOVA)
+For the One-way Within Subjects ANOVA in this section, we will be using a fake data set of a sample of 100 undergraduate students' math, reading, and science test scores. The test scores are on a scale of 0 to 100. Each subject has also been assigned to either test 1 (math), 2 (reading), or 3 (science) the TestSubject condition. The following code will create our data set.
 
-## Analysis of Covariance (ANCOVA)
+```{r}
+set.seed(100)
+Math<-rnorm(n = 100, mean = 70, sd = 10)
+set.seed(1000)
+Reading<-rnorm(n = 100, mean = 65, sd = 13)
+set.seed(10000)
+Science<-rnorm(n = 100, mean = 90, sd = 2)
 
-## Logistic Regression
+Grades<-c(Math,Reading,Science)
+TestSubject<-c(rep(1,100),rep(2,100),rep(3,100))
+Student<-c(1:100,1:100,1:100)
 
-## Factor Analysis
+Data<-data.frame(Grades, TestSubject, Student)
+```
 
-## Power Analysis
+We will also create subsets of factor level groupings to get group summaries of our data and check assumptions.
+
+```{r}
+#Slides Only subset
+MathGrades <- subset(Data, TestSubject == 1)
+
+##Both Slides and Lecture subset
+ReadingGrades <- subset(Data, TestSubject == 2)
+
+###Lecture Only subset
+ScienceGrades <- subset(Data, TestSubject == 3)
+```
+
+Before continuing with this section, the following package must be installed a loaded in order to successfully run all of the functions listed.
+```{r, echo=T, message=FALSE, warning=FALSE}
+library(car)
+```
+
+#### Assumptions
+There are four assumptions that we should meet in order to conduct this ANOVA:
+
+* Normality of sampling distributions
+* Normality of dependent variable
+* Homogeneity of variance
+* Sphericity
+
+The normality of sampling distributions assumptions is a theorectical idea that is typically viewed as met if the degrees of freedom is greater or equal to 20 when there is only one IV. The next assumption, normality of the dependent variable, can be checked using the Shapiro-Wilk test on each group. 
+```{r echo=T}
+shapiro.test(MathGrades$Grades)
+shapiro.test(ReadingGrades$Grades)
+shapiro.test(ScienceGrades$Grades)
+```
+
+As we can see here, the p-value for the Shapiro-Wilk tests were 0.535, 0.79, and 0.178, which indicates no violation of the assumption.
+
+The homogeneity of variance assumption can be tested using the Levene's test for homogeneity of variance. Notice that in the code for the Levene's test we used as.factor. This is because our data is set up as contrast codes, but Levene's test needs groups!
+```{r echo = T}
+leveneTest(Grades ~ as.factor(TestSubject), dat=Data)
+```
+As we can see here, the p-value for the Levene's test was less than .001, which indicates a violation of the assumption. However, for the sake of the example, we will continue with conducting the analysis.
+
+#### Test Statistic
+In order to compute the ANOVA, we will use the `aov()` and `summary()` functions. Within the `aov()` function, type the dependent variable first and then the independent variable + the error adjustement.
+```{r echo = T}
+rmaov <-aov(Grades ~ TestSubject+Error(Student/TestSubject),data=Data)
+rmaov
+summary(rmaov)
+```
+
+In this output we can see that the F value is 29.54, and our p value is less than .001, meaning we have a significant result.
+
+#### Post Hoc Test
+Finally, because our ANOVA was significant, we need to conduct post hoc tests to determine which groups were significantly different from each other. This can be done using t-test with the Bonferroni correction.
+```{r}
+pairwise.t.test(Data$Grades, Data$TestSubject, "bonferroni")
+```
+
+This test indicates that group 1 was significantly different from groups 2 and 3, and group 2 was significantly different from group 3. Once you have finished these steps, you can move on to writing up and reporting your results.
+
+## Factorial Between Subjects ANOVA
+The Factorial Between Subjects Analysis of variance (ANOVA) is used to test for differences in the means of two or more groups across two or more independent variables at once (Gravetter & Wallnau, 2019). This allows us to determine main effects for each independent variable as well as the interaction effects for the combination of independent variables.
+
+For the Factorial Between Subjects ANOVA in this section, we will be using a fake data set of a sample of 100 undergraduate students' math test scores. The test scores are on a scale of 0 to 100. Each individual has also been assigned to either the Paper Test format or the Electronic Test format in the TestFormat condition and either the Classroom setting or Home setting in the TestLocation condition. The following lines of code create our data set and set up the data frame we will need.
+```{r}
+set.seed(1000)
+Grade<-rnorm(n = 100, mean = 65, sd = 13)
+
+TestLocation<-c(rep("Classroom",50),rep("Home",50))
+TestFormat<-c(rep("Paper",25),rep("Electronic",25),rep("Paper",25),rep("Electronic",25))
+
+Data<-data.frame(Grade, TestLocation, TestFormat)
+```
+We will also want our data set stored in short form for some of our analyses along the way.
+
+```{r}
+DataShort <- data.frame("Home.Paper"=(Data$Grade[which(Data$TestLocation=="Home" 
+                                                       & Data$TestFormat=="Paper")]),
+                        "Home.Electronic"=(Data$Grade[which(Data$TestLocation=="Home" 
+                                                            & Data$TestFormat=="Electronic")]),
+                        "Classroom.Paper"=(Data$Grade[which(Data$TestLocation=="Classroom" 
+                                                            & Data$TestFormat=="Paper")]),
+                        "Classroom.Electronic"=(Data$Grade[which(Data$TestLocation=="Classroom" 
+                                                                 & Data$TestFormat=="Electronic")]))
+```
+
+Before continuing with this section, the following package must be installed a loaded in order to successfully run all of the functions listed.
+```{r, echo=T, message=FALSE, warning=FALSE}
+library(car)
+```
+
+#### Assumptions
+There are four assumptions that we should meet in order to conduct this ANOVA:
+
+* Independence of errors
+* Normality of sampling distribution
+* Normality of dependent variable
+* Homogeneity of variance
+
+The first assumption can be checked simply by looking at our data and seeing the samples are independent. The next two assumptions on normality can be checked using the Shapiro-Wilk test on the dependent variable as a whole and for each group. 
+```{r}
+shapiro.test(DataShort$Home.Paper)
+shapiro.test(DataShort$Home.Electronic)
+shapiro.test(DataShort$Classroom.Paper)
+shapiro.test(DataShort$Classroom.Electronic)
+shapiro.test(Data$Grade)
+```
+Notice that we used the short form to check the inidvidual groups and the long form to check it all at once. As we can see here, the p-value for the Shapiro-Wilk tests were all greater than .05, which indicates no violation of the assumptions.
+
+The homogeneity of variance assumption can be tested using the Levene's test for homogeneity of variance. 
+```{r echo = T}
+leveneTest(Grade ~ TestLocation * TestFormat, dat=Data)
+```
+As we can see here, the p-value for both the Levene's test was greater than .05, which indicates no violation of the assumption.
+
+#### Test Statistic
+We have two options to compute the ANOVA. We can use the `anova()` and `lm()` functions or the `aov()` and `summary()` functions together. Within the `lm()` and `aov()` functions, type the dependent variable first and then the first independent variable * the second independent variable.
+```{r echo = T}
+anova(lm(Grade~ TestLocation * TestFormat, dat=Data))
+summary(aov(Grade ~ TestLocation * TestFormat, dat=Data))
+```
+
+In both outputs we can see that the F value is 3.04, and our p value is greater than .05, meaning there is no significant result.
+
+
+Even though we failed to find a significant result, for the sake of the example, we will continue with calculating the effect size, or partial R squared, using the following code:
+```{r echo = T}
+SS<-as.data.frame(anova(myanova)["Sum Sq"])
+SSTestLocation<-SS[1,1]
+SSTestFormat<-SS[2,1]
+SSInteraction<-SS[3,1]
+SSResidual<-SS[4,1]
+
+# Effect Size - Time format
+SSTestLocation / ( SSTestLocation + SSResidual) 
+
+# Effect Size - Test format
+SSTestFormat / ( SSTestFormat + SSResidual) 
+
+# Effect Size - Interaction
+SSInteraction / ( SSInteraction + SSResidual)
+```
+
+Our partial R squared values for the location, format, and interaction effect were 0.03, 0.006, and 0.0002, respoectively. Once you have finished these steps, you can move on to writing up and reporting your results.

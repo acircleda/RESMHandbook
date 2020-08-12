@@ -3,7 +3,7 @@
 ## T-Tests
 
 ### Independent Means T-Test
-The independent t test is used to test for differences in the mean of two seperate groups of individuals (Gravetter & Wallnau, 2019).
+The independent t test is used to test for differences in the mean of two seperate groups of individuals (Gravetter & Wallnau, 2019). 
 
 For the Independent Means T-Test in this section, we will be using a fake data set of a sample of 200 undergraduate students' math test scores. The test scores are on a scale of 0 to 100, and each individual has been assigned to either the Paper Test format or the Electronic Test format in the TestFormat condition, where 1=paper test and -1=electronic test.The following lines of code create our data set and set up the data frames we will need.
 ```{r echo = T}
